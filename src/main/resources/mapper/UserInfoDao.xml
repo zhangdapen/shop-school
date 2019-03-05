@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zzu.dao.UserInfoDao">
+
+    <select id="selectUserInfo" parameterType="cn.zzu.entity.UserInfo" resultType="cn.zzu.entity.UserInfo">
+        select *
+        from user_info
+        where user_name=#{userName} and user_password=#{userPassword}
+    </select>
+
+    <insert id="insertUserInfo" parameterType="cn.zzu.entity.UserInfo" useGeneratedKeys="true" keyProperty="userId">
+        insert into user_info(user_name,user_password,school_id,user_date)
+        values (#{userName},#{userPassword},#{schoolId},#{userDate})
+    </insert>
+
+    <update id="updateUserInfo" parameterType="cn.zzu.entity.UserInfo" useGeneratedKeys="true" keyProperty="userId">
+        update user_info
+        set
+        user_password=#{userPassword},
+        user_nickname=#{userNickname},
+        user_image=#{userImage}
+        where
+        user_id=#{userId}
+
+    </update>
+
+    <select id="selectUserInfoAll" parameterType="cn.zzu.entity.UserInfo" resultType="cn.zzu.entity.UserInfo">
+        select *
+        from user_info
+        where user_id=#{userId}
+    </select>
+</mapper>
