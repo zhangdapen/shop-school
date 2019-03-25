@@ -1,6 +1,7 @@
 package cn.zzu.service.impl;
 
 import cn.zzu.dao.UserInfoDao;
+import cn.zzu.entity.PermissionInfo;
 import cn.zzu.entity.UserInfo;
 import cn.zzu.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +63,25 @@ public class UserInfoServiceimpl implements UserInfoService {
     @Override
     public UserInfo getSelectUserInfoAll(UserInfo userInfo) {
         return userInfoDao.selectUserInfoAll(userInfo);
+    }
+
+
+    /**
+     * 用户申请权限service实现
+     * @param permissionInfo
+     * @return
+     */
+    @Override
+    public int setInsertPermissionInfo(PermissionInfo permissionInfo) {
+        return userInfoDao.insertPermissionInfo(permissionInfo);
+    }
+
+    @Override
+    public int setUpdateForgetPassword(UserInfo userInfo) {
+        UserInfo user = userInfoDao.selectUserInfoAnswer(userInfo);
+        if(user!=null){
+            return userInfoDao.updateUserInfoPassword(userInfo);
+        }
+        return 0;
     }
 }

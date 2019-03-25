@@ -1,7 +1,9 @@
 package cn.zzu.controller;
 
+import cn.zzu.entity.PermissionInfo;
 import cn.zzu.entity.UserInfo;
 import cn.zzu.service.UserInfoService;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +37,7 @@ public class UserInfoController {
      * @return
      */
     @RequestMapping(value="/login",method = RequestMethod.POST)
+    @ResponseBody
     public String login(UserInfo userInfo, HttpSession session){
         UserInfo user = userInfoService.getSelectUserInfo(userInfo);
         if(user==null){
@@ -54,6 +57,7 @@ public class UserInfoController {
      * @return 地址字符串
      */
     @RequestMapping(value="/register",method=RequestMethod.POST)
+    @ResponseBody
     public String register(UserInfo userInfo){
         int result = userInfoService.setInsertUserInfo(userInfo);
         if(result>0){
@@ -64,7 +68,7 @@ public class UserInfoController {
     }
 
     /**
-     * 修改用户controller实现
+     * 修改用户信息controller实现
      * @param userInfo  用户信息类
      * @param request   request
      * @param response  response
@@ -72,6 +76,7 @@ public class UserInfoController {
      * @throws UnsupportedEncodingException 字符编码
      */
     @RequestMapping(value="/change",method = RequestMethod.POST)
+    @ResponseBody
     public String change(UserInfo userInfo, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
@@ -93,16 +98,37 @@ public class UserInfoController {
     }
 
     /**
-     * 获取用户信息dao层
+     * 获取用户信息controller层
      * @param userInfo 用户类
      * @return
      */
     @RequestMapping(value="select",method=RequestMethod.GET)
     @ResponseBody
-    public UserInfo select(UserInfo userInfo){
+    public String select(UserInfo userInfo){
         UserInfo user = userInfoService.getSelectUserInfoAll(userInfo);
-        return user;
+        //把java对象转化成json字符串
+        String s = JSONObject.toJSONString(userInfo);
+        return s;
     }
 
+    @RequestMapping(value="permiss",method=RequestMethod.POST)
+    public String changePermission(PermissionInfo permissionInfo){
+        int i = userInfoService.setInsertPermissionInfo(permissionInfo);
+        if(i==1){
+            return "已经提交申请";
+        }else{
+            return "请重试";
+        }
+    }
 
+    @RequestMapping(value="forget",method=RequestMethod.POST)
+    @ResponseBody
+    public String changeAndForgetPass(UserInfo userInfo){
+        int i = userInfoService.setUpdateForgetPassword(userInfo);
+        if(i>0){
+            return "修改成功";
+        }else{
+            return "修改失败";
+        }
+    }
 }

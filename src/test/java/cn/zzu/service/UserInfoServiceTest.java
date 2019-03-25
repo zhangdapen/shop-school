@@ -1,6 +1,7 @@
 package cn.zzu.service;
 
 import cn.zzu.base.BaseTest;
+import cn.zzu.entity.PermissionInfo;
 import cn.zzu.entity.UserInfo;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -53,6 +54,7 @@ public class UserInfoServiceTest extends BaseTest {
     }
 
     @Test
+    @Ignore
     public void testGetSelectUserInfoAll(){
         UserInfo userInfo=new UserInfo();
         userInfo.setUserId(1);
@@ -60,4 +62,29 @@ public class UserInfoServiceTest extends BaseTest {
         System.out.println(user);
     }
 
+
+    @Test
+    public void testSetInsertPermissionInfo(){
+        UserInfo userInfo=new UserInfo();
+        userInfo.setUserId(1);
+        PermissionInfo permissionInfo=new PermissionInfo();
+        permissionInfo.setApplicaId(userInfo.getUserId());
+        permissionInfo.setApplicaDes("俺想要称为管理员");
+        permissionInfo.setApplicaState("0");
+        permissionInfo.setApplicaType("0");
+        permissionInfo.setCreateTime(new Date());
+        int result = userInfoService.setInsertPermissionInfo(permissionInfo);
+        System.out.println(result);
+    }
+
+    @Test
+    public void testSetUpdateForgetPassword(){
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(5);
+        userInfo.setUserQuestion("你的父亲的名字");
+        userInfo.setUserAnswer("罗大锤");
+        userInfo.setUserPassword("ilch");
+        int i = userInfoService.setUpdateForgetPassword(userInfo);
+        System.out.println(i);
+    }
 }

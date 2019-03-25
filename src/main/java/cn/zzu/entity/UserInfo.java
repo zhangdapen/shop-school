@@ -21,7 +21,11 @@ public class UserInfo {
 
     private Date userDate;
 
-    public UserInfo(Integer userId, String userName, String userPassword, Integer schoolId, String userNickname, String userImage, Integer userType, Integer userState,Date userDate) {
+    private String userQuestion;
+
+    private String userAnswer;
+
+    public UserInfo(Integer userId, String userName, String userPassword, Integer schoolId, String userNickname, String userImage, Integer userType, Integer userState, Date userDate, String userQuestion, String userAnswer) {
         this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;
@@ -30,7 +34,9 @@ public class UserInfo {
         this.userImage = userImage;
         this.userType = userType;
         this.userState = userState;
-        this.userDate=userDate;
+        this.userDate = userDate;
+        this.userQuestion = userQuestion;
+        this.userAnswer = userAnswer;
     }
 
     public UserInfo() {
@@ -109,6 +115,22 @@ public class UserInfo {
         this.userDate = userDate;
     }
 
+    public String getUserQuestion() {
+        return userQuestion;
+    }
+
+    public void setUserQuestion(String userQuestion) {
+        this.userQuestion = userQuestion;
+    }
+
+    public String getUserAnswer() {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
+    }
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -121,6 +143,8 @@ public class UserInfo {
                 ", userType=" + userType +
                 ", userState=" + userState +
                 ", userDate=" + userDate +
+                ", userQuestion='" + userQuestion + '\'' +
+                ", userAnswer='" + userAnswer + '\'' +
                 '}';
     }
 }

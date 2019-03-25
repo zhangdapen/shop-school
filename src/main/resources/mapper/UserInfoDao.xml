@@ -9,8 +9,8 @@
     </select>
 
     <insert id="insertUserInfo" parameterType="cn.zzu.entity.UserInfo" useGeneratedKeys="true" keyProperty="userId">
-        insert into user_info(user_name,user_password,school_id,user_date)
-        values (#{userName},#{userPassword},#{schoolId},#{userDate})
+        insert into user_info(user_name,user_password,school_id,user_date,user_question,user_answer)
+        values (#{userName},#{userPassword},#{schoolId},#{userDate},#{userQuestion},#{userAnswer})
     </insert>
 
     <update id="updateUserInfo" parameterType="cn.zzu.entity.UserInfo" useGeneratedKeys="true" keyProperty="userId">
@@ -28,5 +28,26 @@
         select *
         from user_info
         where user_id=#{userId}
+    </select>
+
+    <insert id="insertPermissionInfo" parameterType="cn.zzu.entity.PermissionInfo" useGeneratedKeys="true" keyProperty="permissionId">
+        insert into permission_info(applica_id,applica_type,applica_des,applica_state,create_time)
+        values (#{applicaId},#{applicaType},#{applicaDes},#{applicaState},#{createTime})
+    </insert>
+
+    <update id="updateUserInfoPassword" parameterType="cn.zzu.entity.UserInfo" useGeneratedKeys="true" keyProperty="userId">
+        update user_info
+        set
+        user_password=#{userPassword}
+        where
+        user_id=#{userId}
+    </update>
+
+    <select id="selectUserInfoAnswer" parameterType="cn.zzu.entity.UserInfo" resultType="cn.zzu.entity.UserInfo">
+        select *
+        from user_info
+        where user_question=#{userQuestion}
+        AND user_answer=#{userAnswer}
+        AND user_id=#{userId}
     </select>
 </mapper>

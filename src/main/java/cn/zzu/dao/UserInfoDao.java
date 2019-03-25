@@ -1,6 +1,7 @@
 package cn.zzu.dao;
 
 
+import cn.zzu.entity.PermissionInfo;
 import cn.zzu.entity.UserInfo;
 
 
@@ -35,5 +36,27 @@ public interface UserInfoDao {
      */
     UserInfo selectUserInfoAll(UserInfo userInfo);
 
+    /**
+     *
+     * 用户申请权限
+     * 向权限列表中插入信息
+     * @param permissionInfo  权限信息
+     * @return
+     */
+    int insertPermissionInfo(PermissionInfo permissionInfo);
 
+
+    /**
+     * 忘记密码
+     * @param userInfo 用户信息
+     * @return
+     */
+    int updateUserInfoPassword(UserInfo userInfo);
+
+    /**
+     * 查询问题的回答是否正确
+     * @param userInfo 用户信息
+     * @return
+     */
+    UserInfo selectUserInfoAnswer(UserInfo userInfo);
 }
