@@ -13,12 +13,15 @@ public class UserCart {
 
     private Date updateTime;
 
-    public UserCart(Integer cartId, Integer userId, Integer goodsId, Date createTime, Date updateTime) {
+    private Integer cartState;
+
+    public UserCart(Integer cartId, Integer userId, Integer goodsId, Date createTime, Date updateTime, Integer cartState) {
         this.cartId = cartId;
         this.userId = userId;
         this.goodsId = goodsId;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.cartState = cartState;
     }
 
     public UserCart() {
@@ -63,5 +66,13 @@ public class UserCart {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getCartState() {
+        return cartState;
+    }
+
+    public void setCartState(Integer cartState) {
+        this.cartState = cartState;
     }
 }

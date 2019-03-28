@@ -20,4 +20,6 @@ public interface GoodsInfoDao {
      * @return
      */
     int insertGoodsInfo(GoodsInfo goodsInfo);
+
+
 }
