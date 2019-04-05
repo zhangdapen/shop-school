@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zzu.dao.GoodsInfoDao">
+    <insert id="insertPermissionGoodsInfo" parameterType="cn.zzu.entity.PermissionInfo" useGeneratedKeys="true" keyProperty="permissionId">
+        insert into permission_info(applica_id,applica_type,applica_des,applica_state,create_time)
+        values (#{applicaId},#{applicaType},#{applicaDes},#{applicaState},#{createTime})
+    </insert>
+
+    <insert id="insertGoodsInfo" parameterType="cn.zzu.entity.GoodsInfo" useGeneratedKeys="true" keyProperty="goodsId">
+        insert into goods_info(goods_name,goods_des,goods_image,user_id,goods_price,category_id,school_id,goods_state,create_time)
+        values (#{goodsName},#{goodsDes},#{goodsImage},#{userId},#{goodsPrice},#{categoryId},#{schoolId},#{goodsState},#{createTime})
+    </insert>
+
+    <select id="selectGoodsInfoPrice" resultType="Double">
+        select goods_price
+        from goods_info
+        where goods_id=#{goodsId}
+    </select>
+</mapper>
