@@ -13,6 +13,8 @@ import cn.zzu.service.UserCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 /**
  * 购物车service实现类
  */
@@ -55,4 +57,17 @@ public class UserCartServiceImpl implements UserCartService {
     public int setDeleteUserCartInfoAll(UserCart userCart) {
         return userCartDao.deleteUserCartInfoAll(userCart);
     }
+
+
+    /**
+     * 获取用户购物车中的商品信息
+     * @param userId
+     * @return
+     */
+    @Override
+    public Map<Integer, UserCart> getSelectUserCarInfo(Integer userId) {
+        return userCartDao.selectUserCarInfo(userId);
+    }
+
+
 }

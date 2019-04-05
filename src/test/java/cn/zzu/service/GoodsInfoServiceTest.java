@@ -23,6 +23,7 @@ public class GoodsInfoServiceTest extends BaseTest {
 
 
     @Test
+    @Ignore
     public void testSetInsertGoodsInfo(){
         GoodsInfo goodsInfo = new GoodsInfo();
         goodsInfo.setGoodsName("乐事");
@@ -45,5 +46,12 @@ public class GoodsInfoServiceTest extends BaseTest {
         int j = goodsInfoService.setInsertPermissionGoodsInfo(permissionInfo);
         System.out.println("i="+i);
         System.out.println("j="+j);
+    }
+
+
+    @Test
+    public void testGetSelectGoodsInfoPrice(){
+        Double price = goodsInfoService.getSelectGoodsInfoPrice(11);
+        System.out.println(price);
     }
 }

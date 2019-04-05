@@ -3,6 +3,7 @@ package cn.zzu.dao;
 import cn.zzu.base.BaseTest;
 import cn.zzu.entity.GoodsInfo;
 import cn.zzu.entity.PermissionInfo;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,6 +22,7 @@ public class GoodsInfoDaoTest extends BaseTest {
 
 
     @Test
+    @Ignore
     public void testInsertGoodsInfo(){
         GoodsInfo goodsInfo = new GoodsInfo();
         goodsInfo.setGoodsName("肥仔快乐水");
@@ -43,5 +45,13 @@ public class GoodsInfoDaoTest extends BaseTest {
         System.out.println("i="+i);
         System.out.println("j="+j);
     }
+
+
+    @Test
+    public void testSelectGoodsInfoPrice(){
+        Double d = goodsInfoDao.selectGoodsInfoPrice(10);
+        System.out.println(d);
+    }
+
 
 }

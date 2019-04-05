@@ -20,4 +20,12 @@ public interface GoodsInfoService {
      * @return
      */
     int setInsertPermissionGoodsInfo(PermissionInfo permissionInfo);
+
+
+    /**
+     * 获取商品价格
+     * @param goodsId
+     * @return
+     */
+    Double getSelectGoodsInfoPrice(Integer goodsId);
 }

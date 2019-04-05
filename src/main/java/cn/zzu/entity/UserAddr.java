@@ -13,12 +13,24 @@ public class UserAddr {
 
     private Date updateTime;
 
-    public UserAddr(Integer addrId, Integer userId, String addrDesc, Date createTime, Date updateTime) {
+    private Integer addrState;
+
+
+    public UserAddr(Integer addrId, Integer userId, String addrDesc, Date createTime, Date updateTime, Integer addrState) {
         this.addrId = addrId;
         this.userId = userId;
         this.addrDesc = addrDesc;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.addrState = addrState;
+    }
+
+    public Integer getAddrState() {
+        return addrState;
+    }
+
+    public void setAddrState(Integer addrState) {
+        this.addrState = addrState;
     }
 
     public UserAddr() {

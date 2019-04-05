@@ -1,5 +1,7 @@
 package cn.zzu.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class UserInfo {
@@ -35,6 +37,14 @@ public class UserInfo {
         this.userType = userType;
         this.userState = userState;
         this.userDate = userDate;
+        this.userQuestion = userQuestion;
+        this.userAnswer = userAnswer;
+    }
+
+    public UserInfo( String userName, String userPassword, Integer schoolId,  String userQuestion, String userAnswer) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.schoolId = schoolId;
         this.userQuestion = userQuestion;
         this.userAnswer = userAnswer;
     }

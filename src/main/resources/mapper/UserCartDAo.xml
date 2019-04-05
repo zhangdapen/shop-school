@@ -23,4 +23,10 @@
         user_id=#{userId}
     </update>
 
+    <select id="selectUserCarInfo"  resultType="cn.zzu.entity.UserCart">
+        select *
+        from user_cart
+        where user_id=#{userId}
+    </select>
+
 </mapper>

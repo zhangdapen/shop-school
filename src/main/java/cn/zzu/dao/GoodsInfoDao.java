@@ -22,4 +22,10 @@ public interface GoodsInfoDao {
     int insertGoodsInfo(GoodsInfo goodsInfo);
 
 
+    /**
+     * 获取商品的价格
+     * @param goodsId
+     * @return
+     */
+    Double selectGoodsInfoPrice(Integer goodsId);
 }

@@ -75,4 +75,16 @@ public class UserCart {
     public void setCartState(Integer cartState) {
         this.cartState = cartState;
     }
+
+    @Override
+    public String toString() {
+        return "UserCart{" +
+                "cartId=" + cartId +
+                ", userId=" + userId +
+                ", goodsId=" + goodsId +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", cartState=" + cartState +
+                '}';
+    }
 }

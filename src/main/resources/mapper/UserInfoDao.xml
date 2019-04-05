@@ -9,8 +9,8 @@
     </select>
 
     <insert id="insertUserInfo" parameterType="cn.zzu.entity.UserInfo" useGeneratedKeys="true" keyProperty="userId">
-        insert into user_info(user_name,user_password,school_id,user_date,user_question,user_answer)
-        values (#{userName},#{userPassword},#{schoolId},#{userDate},#{userQuestion},#{userAnswer})
+        insert into user_info(user_name,user_password,school_id,user_question,user_answer)
+        values (#{userName},#{userPassword},#{schoolId},#{userQuestion},#{userAnswer})
     </insert>
 
     <update id="updateUserInfo" parameterType="cn.zzu.entity.UserInfo" useGeneratedKeys="true" keyProperty="userId">

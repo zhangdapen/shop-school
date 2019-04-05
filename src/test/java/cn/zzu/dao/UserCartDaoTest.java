@@ -9,6 +9,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 购物车测试类
@@ -49,6 +52,7 @@ public class UserCartDaoTest extends BaseTest {
     }
 
     @Test
+    @Ignore
     public void testDeleteUserCartInfoAll(){
         UserInfo userInfo = new UserInfo();
         UserCart userCart= new UserCart();
@@ -57,5 +61,16 @@ public class UserCartDaoTest extends BaseTest {
         userCart.setUpdateTime(new Date());
         int i = userCartDao.deleteUserCartInfoAll(userCart);
         System.out.println(i);
+    }
+
+
+    @Test
+    public void testSelectUserCarInfo(){
+        Map<Integer, UserCart> userCartMap = userCartDao.selectUserCarInfo(1);
+        Set<Integer> integers = userCartMap.keySet();
+        Iterator<Integer> iterator = integers.iterator();
+        while(iterator.hasNext()){
+            System.out.println(userCartMap.get(iterator.next()).toString());
+        }
     }
 }

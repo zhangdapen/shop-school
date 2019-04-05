@@ -2,6 +2,9 @@ package cn.zzu.service;
 
 import cn.zzu.entity.UserCart;
 
+import javax.jnlp.IntegrationService;
+import java.util.Map;
+
 /**
  * 购物车service
  */
@@ -27,4 +30,11 @@ public interface UserCartService {
      * @return
      */
     int setDeleteUserCartInfoAll(UserCart userCart);
+
+    /**
+     * 获取用户购物车中的所有商品
+     * @param userId
+     * @return
+     */
+    Map<Integer,UserCart> getSelectUserCarInfo(Integer userId);
 }

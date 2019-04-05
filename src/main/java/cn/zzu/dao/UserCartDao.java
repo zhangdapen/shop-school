@@ -1,6 +1,9 @@
 package cn.zzu.dao;
 
 import cn.zzu.entity.UserCart;
+import org.apache.ibatis.annotations.MapKey;
+
+import java.util.Map;
 
 /**
  * 购物车
@@ -27,4 +30,13 @@ public interface UserCartDao {
      * @return
      */
     int deleteUserCartInfoAll(UserCart userCart);
+
+
+    /**
+     * 查询用户购物车中的所有商品
+     * @param userId
+     * @return
+     */
+    @MapKey("cartId")
+    Map<Integer,UserCart> selectUserCarInfo(Integer userId);
 }
