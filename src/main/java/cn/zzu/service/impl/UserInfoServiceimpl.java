@@ -3,9 +3,11 @@ package cn.zzu.service.impl;
 import cn.zzu.dao.UserInfoDao;
 import cn.zzu.entity.PermissionInfo;
 import cn.zzu.entity.UserInfo;
+import cn.zzu.execption.MyExecption;
 import cn.zzu.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 /**
  * UserInfo的service实现类
@@ -38,8 +40,28 @@ public class UserInfoServiceimpl implements UserInfoService {
      */
 
     @Override
-    public int setInsertUserInfo(UserInfo userInfo) {
-        return userInfoDao.insertUserInfo(userInfo);
+    public int insertUserInfo(UserInfo userInfo) {
+        if(StringUtils.isEmpty(userInfo.getUserName())){
+            new MyExecption("用户名不能为空");
+        }
+        if(StringUtils.isEmpty(userInfo.getUserPassword())){
+            new MyExecption("密码不能为空");
+        }
+        if(StringUtils.isEmpty(userInfo.getUserQuestion())){
+            new MyExecption("密保问题不能为空");
+        }
+        if(StringUtils.isEmpty(userInfo.getUserAnswer())){
+            new MyExecption("密保回答不能为空");
+        }
+        if(StringUtils.isEmpty(userInfo.getSchoolId())){
+            new MyExecption("学校不能为空");
+        }
+        int result=userInfoDao.insertUserInfo(userInfo);
+
+        if(result<=0){
+            new MyExecption("注册失败");
+        }
+        return result;
     }
 
 

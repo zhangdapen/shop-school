@@ -39,7 +39,7 @@ public class UserInfoServiceTest extends BaseTest {
         userInfo.setUserPassword("zhw@19970607");
         userInfo.setSchoolId(2);
         userInfo.setUserDate(new Date());
-        int i = userInfoService.setInsertUserInfo(userInfo);
+        int i = userInfoService.insertUserInfo(userInfo);
         System.out.println(i);
     }
 

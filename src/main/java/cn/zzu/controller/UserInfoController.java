@@ -1,10 +1,16 @@
 package cn.zzu.controller;
 
+import ch.qos.logback.classic.Logger;
 import cn.zzu.entity.PermissionInfo;
 import cn.zzu.entity.User;
 import cn.zzu.entity.UserInfo;
 import cn.zzu.service.UserInfoService;
+import cn.zzu.util.BeanUtil;
+import cn.zzu.util.JsonUtils;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.support.hsf.HSFJSONUtils;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 登录的Controller
@@ -25,6 +35,7 @@ import java.io.UnsupportedEncodingException;
 @RequestMapping(value="admin")
 public class UserInfoController {
 
+    Logger logger = (Logger) LoggerFactory.getLogger(UserInfoController.class);
 
     @Autowired
     private UserInfoService userInfoService;
@@ -52,32 +63,27 @@ public class UserInfoController {
 
     /**
      * 注册controller实现
-     * @param userInfo 用户信息类
      * @return 地址字符串
      */
     @RequestMapping(value="/register",produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String register(UserInfo userInfo,@RequestParam String userName,
-    @RequestParam  String userPassword,@RequestParam  Integer schoolId,@RequestParam  String userQuestion,
-                           @RequestParam  String userAnswer
-    ){
-        System.out.println("我是controller");
-        System.out.println(userInfo.toString());
-        int result = userInfoService.setInsertUserInfo(userInfo);
-        if(result>0){
-            return "login";
-        }else{
-            return "register";
+    public String register(@RequestBody Map<String,Object> params){
+        logger.debug("后台传来数据"+params);
+        if(params == null){
+            return "admin/register";
         }
+        UserInfo userInfo =new UserInfo();
+        UserInfo user = BeanUtil.map2Bean(params, userInfo.getClass());
+        user.setUserDate(new Date());
+        System.out.println(user.toString());
+        int i = userInfoService.insertUserInfo(user);
+        logger.debug("结果"+i);
+        Map body = new HashMap();
+        body.put("result",i);
+        return JsonUtils.map2json(body);
     }
 
-    @RequestMapping(value="/register1997")
-    @ResponseBody
-    public String register1997(@RequestBody User user){
-        System.out.println("我是controller");
-        System.out.println(user.getUserName()+"===="+user.getPassword());
-        return  "register";
-    }
+
 
     /**
      * 修改用户信息controller实现

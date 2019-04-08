@@ -17,7 +17,7 @@ public interface UserInfoService {
      * @param userInfo 用户信息类
      * @return
      */
-    int setInsertUserInfo(UserInfo userInfo);
+    int insertUserInfo(UserInfo userInfo);
 
 
     /**

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
 </head>
 <body ontouchstart>
+<form method="post">
 <!-- 输入框 -->
 <div class="weui-cells weui-cells_form">
     <div class="weui-cell">
@@ -24,6 +25,16 @@
         <div class="weui-cell__hd"><label class="weui-label">密码</label></div>
         <div class="weui-cell__bd">
             <input class="weui-input" id="password" type="password" placeholder="请输入密码">
+        </div>
+    </div>
+</div>
+
+<!--密码 -->
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">确认密码</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="doublepassword" type="password" placeholder="请再次输入密码">
         </div>
     </div>
 </div>
@@ -85,10 +96,10 @@
         </div>
     </div>
 </div>
-
+    </form>
 <div class="weui-cells">
     <!--注册按钮 -->
-    <a href="../admin/register" id="register" class="weui-btn weui-btn_primary">注册</a>
+    <input type="submit" href="../admin/register" id="register" class="weui-btn weui-btn_primary" value="注册"></input>
 </div>
 
 <div class="weui-cells">
@@ -111,37 +122,31 @@
 
     $(document).ready(function(){
      $("#register").click(function () {
-         alert(typeof $("#school").val());
-         var i = new Number($("#school").val());
-         alert(typeof i);
-         alert(i);
          var userInfo={
              userName:$("#username").val(),
              userPassword:$("#password").val(),
-             schoolId:i,
+             schoolId:$("#school").val(),
              userQuestion:$("#question").val(),
              userAnswer:$("#answer").val()
-         }
-         // userInfo.userName=$("#username").val();
-         // userInfo.userPassword=$("#password").val();
-         // userInfo.schoolId=$("#school").val();
-         // userInfo.userQuestion=$("#question").val();
-         // userInfo.userAnswer=$("#answer").val();
-         // alert(userInfo.userName);
-         $ajax({
-                url:"/admin/register",
-                type:"POST",
-                dataType:"json",
-                data:JSON.stringify(userInfo),
-             contentType:'application/json;charset=UTF-8',
-                success:function (result) {
-                    console.log(result);
-                },
-                error:function () {
-                    alert("失败");
-                }
-            });
+         };
+         $.ajax({
+             type: "post",
+             contentType: "application/json; charset=utf-8",
+             dataType: "json",
+             async:false,
+             url : "/school_war_exploded/admin/register",
+             data :JSON.stringify(userInfo),
+             success: function (data) {
+                 if(data.result==1){
+                     window.location.href='/school_war_exploded/manager/login';
+                 }
+             },
+             error : function() {
+
+             }
+
+         });
      });
-     });
+    });
 </script>
 </html>

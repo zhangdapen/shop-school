@@ -22,4 +22,14 @@ public class ManagerController {
     public String login(){
         return "login";
     }
+
+    @RequestMapping(value="/new")
+    public String zzz(){
+        return "zzz";
+    }
+
+    @RequestMapping(value="/test")
+    public String test(){
+        return "test";
+    }
 }
