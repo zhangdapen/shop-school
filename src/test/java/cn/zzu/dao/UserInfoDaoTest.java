@@ -99,8 +99,10 @@ public class UserInfoDaoTest extends BaseTest {
     @Test
     public void testUpdateUserInfoPassword(){
         UserInfo userInfo=new UserInfo();
-        userInfo.setUserId(1);
-        userInfo.setUserPassword("zhw@19970607");
+        userInfo.setUserName("zzz");
+        userInfo.setUserPassword("123455677");
+        userInfo.setUserQuestion("我的父亲叫什么名字");
+        userInfo.setUserAnswer("zzz");
         int i = userInfoDao.updateUserInfoPassword(userInfo);
         System.out.println(i);
 

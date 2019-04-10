@@ -84,7 +84,7 @@ public class UserInfoServiceTest extends BaseTest {
         userInfo.setUserQuestion("你的父亲的名字");
         userInfo.setUserAnswer("罗大锤");
         userInfo.setUserPassword("ilch");
-        int i = userInfoService.setUpdateForgetPassword(userInfo);
+        int i = userInfoService.updateForgetPassword(userInfo);
         System.out.println(i);
     }
 }

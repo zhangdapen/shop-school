@@ -48,5 +48,5 @@ public interface UserInfoService {
      * @param userInfo
      * @return
      */
-    int setUpdateForgetPassword(UserInfo userInfo);
+    int updateForgetPassword(UserInfo userInfo);
 }

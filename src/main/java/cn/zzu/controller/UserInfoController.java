@@ -75,7 +75,6 @@ public class UserInfoController {
         UserInfo userInfo =new UserInfo();
         UserInfo user = BeanUtil.map2Bean(params, userInfo.getClass());
         user.setUserDate(new Date());
-        System.out.println(user.toString());
         int i = userInfoService.insertUserInfo(user);
         logger.debug("结果"+i);
         Map body = new HashMap();
@@ -139,14 +138,15 @@ public class UserInfoController {
         }
     }
 
-    @RequestMapping(value="forget",method=RequestMethod.POST)
+
+
+    @RequestMapping("value=/password")
     @ResponseBody
-    public String changeAndForgetPass(UserInfo userInfo){
-        int i = userInfoService.setUpdateForgetPassword(userInfo);
-        if(i>0){
-            return "修改成功";
-        }else{
-            return "修改失败";
+    public String password(@RequestBody Map<String,Object> params){
+        logger.debug("后台传来的数据"+params);
+        if(params == null){
+            return "admin/password";
         }
+        return null;
     }
 }

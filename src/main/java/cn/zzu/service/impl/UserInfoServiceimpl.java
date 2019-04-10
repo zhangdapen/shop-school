@@ -99,11 +99,25 @@ public class UserInfoServiceimpl implements UserInfoService {
     }
 
     @Override
-    public int setUpdateForgetPassword(UserInfo userInfo) {
-        UserInfo user = userInfoDao.selectUserInfoAnswer(userInfo);
-        if(user!=null){
-            return userInfoDao.updateUserInfoPassword(userInfo);
+    public int updateForgetPassword(UserInfo userInfo) {
+        if(StringUtils.isEmpty(userInfo.getUserName())){
+            new MyExecption("用户名不能为空");
         }
-        return 0;
+        if(StringUtils.isEmpty(userInfo.getUserPassword())){
+            new MyExecption("密码不能为空");
+        }
+        if(StringUtils.isEmpty(userInfo.getUserQuestion())){
+            new MyExecption("密保问题不能为空");
+        }
+        if(StringUtils.isEmpty(userInfo.getUserAnswer())){
+            new MyExecption("密保回答不能为空");
+        }
+
+        UserInfo user = userInfoDao.selectUserInfoAnswer(userInfo);
+        if(user == null){
+            return 0;
+        }
+        return userInfoDao.updateUserInfoPassword(userInfo);
+
     }
 }

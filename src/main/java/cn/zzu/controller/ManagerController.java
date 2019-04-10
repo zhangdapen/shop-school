@@ -23,9 +23,9 @@ public class ManagerController {
         return "login";
     }
 
-    @RequestMapping(value="/new")
-    public String zzz(){
-        return "zzz";
+    @RequestMapping(value="/password")
+    public String password(){
+        return "password";
     }
 
     @RequestMapping(value="/test")
