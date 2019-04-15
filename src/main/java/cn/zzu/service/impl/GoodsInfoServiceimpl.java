@@ -1,17 +1,11 @@
 package cn.zzu.service.impl;
 
 import cn.zzu.dao.GoodsInfoDao;
-import cn.zzu.dao.UserInfoDao;
 import cn.zzu.entity.GoodsInfo;
 import cn.zzu.entity.PermissionInfo;
-import cn.zzu.entity.UserInfo;
 import cn.zzu.service.GoodsInfoService;
-import cn.zzu.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * GoodsInfo的service实现类

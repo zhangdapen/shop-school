@@ -16,5 +16,5 @@
         <!--配置注解-->
             <tx:annotation-driven transaction-manager="transactionManager"/>
         <!--扫描service-->
-            <context:component-scan base-package="cn.zzu.service"/>
+            <context:component-scan base-package="cn.zzu.service,cn.zzu.core"/>
 </beans>

@@ -6,7 +6,6 @@ import cn.zzu.entity.UserInfo;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
@@ -19,8 +18,7 @@ import java.util.Date;
 public class UserInfoDaoTest extends BaseTest {
 
 
-    @Autowired
-    private UserInfoDao userInfoDao;
+    public UserInfoDao userInfoDao;
 
 
     @Test

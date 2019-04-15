@@ -1,7 +1,5 @@
 package cn.zzu.entity;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 public class UserInfo {
@@ -26,6 +24,13 @@ public class UserInfo {
     private String userQuestion;
 
     private String userAnswer;
+
+    private String salt;
+
+    /** 创建时间 */
+    private Long createdAt;
+    /** 更新时间 */
+    private Long updatedAt;
 
     public UserInfo(Integer userId, String userName, String userPassword, Integer schoolId, String userNickname, String userImage, Integer userType, Integer userState, Date userDate, String userQuestion, String userAnswer) {
         this.userId = userId;
@@ -156,5 +161,29 @@ public class UserInfo {
                 ", userQuestion='" + userQuestion + '\'' +
                 ", userAnswer='" + userAnswer + '\'' +
                 '}';
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public Long getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Long createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Long getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Long updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

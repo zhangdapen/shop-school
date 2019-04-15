@@ -4,6 +4,8 @@ package cn.zzu.dao;
 import cn.zzu.entity.PermissionInfo;
 import cn.zzu.entity.UserInfo;
 
+import java.util.List;
+
 
 public interface UserInfoDao {
 
@@ -59,4 +61,7 @@ public interface UserInfoDao {
      * @return
      */
     UserInfo selectUserInfoAnswer(UserInfo userInfo);
+
+    List<UserInfo> getUserInfoByUserName(String userName);
+
 }

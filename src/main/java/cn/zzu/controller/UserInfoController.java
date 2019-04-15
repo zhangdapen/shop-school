@@ -2,27 +2,27 @@ package cn.zzu.controller;
 
 import ch.qos.logback.classic.Logger;
 import cn.zzu.entity.PermissionInfo;
-import cn.zzu.entity.User;
 import cn.zzu.entity.UserInfo;
+import cn.zzu.execption.MyExecption;
 import cn.zzu.service.UserInfoService;
+import cn.zzu.service.user.UserService;
 import cn.zzu.util.BeanUtil;
 import cn.zzu.util.JsonUtils;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.support.hsf.HSFJSONUtils;
-import com.fasterxml.jackson.annotation.JsonAlias;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * 登录的Controller
@@ -39,6 +39,8 @@ public class UserInfoController {
 
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private UserService userService;
 
     /**
      * 登录   controller实现
@@ -48,8 +50,11 @@ public class UserInfoController {
      */
     @RequestMapping(value="/login",method = RequestMethod.POST)
     @ResponseBody
-    public String login(UserInfo userInfo, HttpSession session){
-        UserInfo user = userInfoService.getSelectUserInfo(userInfo);
+    //public String login(UserInfo userInfo, HttpSession session) throws MyExecption{
+    public String login(@RequestBody Map<String,Object> params) throws MyExecption{
+        logger.debug("[login params]"+params);
+
+        /*UserInfo user = userInfoService.getSelectUserInfo(userInfo);
         if(user==null){
             //登录失败
             return null;
@@ -57,7 +62,17 @@ public class UserInfoController {
             //登录成功
             session.setAttribute("userInfo",user);
             return null;
+        }*/
+        if(params == null){
+            throw new MyExecption("参数有误");
         }
+        String userName = params.get("userName").toString();
+        String password = params.get("userPassword").toString();
+        if(StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)){
+            throw new MyExecption("用户名或密码不正确");
+        }
+        Map<String,Object> restut = userService.login(userName,password);
+        return JsonUtils.map2json(restut);
     }
 
 
@@ -67,19 +82,30 @@ public class UserInfoController {
      */
     @RequestMapping(value="/register",produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String register(@RequestBody Map<String,Object> params){
+    public String register(@RequestBody Map<String,Object> params)throws MyExecption{
         logger.debug("后台传来数据"+params);
         if(params == null){
             return "admin/register";
         }
         UserInfo userInfo =new UserInfo();
         UserInfo user = BeanUtil.map2Bean(params, userInfo.getClass());
-        user.setUserDate(new Date());
-        int i = userInfoService.insertUserInfo(user);
-        logger.debug("结果"+i);
-        Map body = new HashMap();
-        body.put("result",i);
-        return JsonUtils.map2json(body);
+        if(StringUtils.isEmpty(userInfo.getUserName())){
+            new MyExecption("用户名不能为空");
+        }
+        if(StringUtils.isEmpty(userInfo.getUserPassword())){
+            new MyExecption("密码不能为空");
+        }
+        if(StringUtils.isEmpty(userInfo.getUserQuestion())){
+            new MyExecption("密保问题不能为空");
+        }
+        if(StringUtils.isEmpty(userInfo.getUserAnswer())){
+            new MyExecption("密保回答不能为空");
+        }
+        if(StringUtils.isEmpty(userInfo.getSchoolId())){
+            new MyExecption("学校不能为空");
+        }
+        Map<String,Object> restut = userService.register(user);
+        return JsonUtils.map2json(restut);
     }
 
 

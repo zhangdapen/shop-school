@@ -7,7 +7,11 @@ import cn.zzu.execption.MyExecption;
 import cn.zzu.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * UserInfo的service实现类
@@ -41,26 +45,10 @@ public class UserInfoServiceimpl implements UserInfoService {
 
     @Override
     public int insertUserInfo(UserInfo userInfo) {
-        if(StringUtils.isEmpty(userInfo.getUserName())){
-            new MyExecption("用户名不能为空");
-        }
-        if(StringUtils.isEmpty(userInfo.getUserPassword())){
-            new MyExecption("密码不能为空");
-        }
-        if(StringUtils.isEmpty(userInfo.getUserQuestion())){
-            new MyExecption("密保问题不能为空");
-        }
-        if(StringUtils.isEmpty(userInfo.getUserAnswer())){
-            new MyExecption("密保回答不能为空");
-        }
-        if(StringUtils.isEmpty(userInfo.getSchoolId())){
-            new MyExecption("学校不能为空");
-        }
+        userInfo.setUserDate(new Date());
+        userInfo.setCreatedAt(System.currentTimeMillis()/1000L);
+        userInfo.setUpdatedAt(0L);
         int result=userInfoDao.insertUserInfo(userInfo);
-
-        if(result<=0){
-            new MyExecption("注册失败");
-        }
         return result;
     }
 
@@ -119,5 +107,11 @@ public class UserInfoServiceimpl implements UserInfoService {
         }
         return userInfoDao.updateUserInfoPassword(userInfo);
 
+    }
+
+    @Override
+    public UserInfo getUserInfoByUserName(String userName) {
+        List<UserInfo> list = userInfoDao.getUserInfoByUserName(userName);
+        return CollectionUtils.isEmpty(list) ? null : list.get(0);
     }
 }

@@ -49,4 +49,6 @@ public interface UserInfoService {
      * @return
      */
     int updateForgetPassword(UserInfo userInfo);
+
+    UserInfo getUserInfoByUserName(String userName);
 }
