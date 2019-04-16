@@ -1,6 +1,6 @@
 package cn.zzu.service.user.impl;
 
-import cn.zzu.Utils.RandomUtils;
+import cn.zzu.util.RandomUtils;
 import cn.zzu.core.TokenService;
 import cn.zzu.entity.UserInfo;
 import cn.zzu.execption.MyExecption;

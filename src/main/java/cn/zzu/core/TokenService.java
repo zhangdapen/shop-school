@@ -1,6 +1,6 @@
 package cn.zzu.core;
 
-import cn.zzu.Utils.RandomUtils;
+import cn.zzu.util.RandomUtils;
 import org.springframework.stereotype.Service;
 
 /**
