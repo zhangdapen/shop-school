@@ -32,22 +32,44 @@ public class UserServiceimpl implements UserService{
     @Override
     public Map<String, Object> login(String userName, String password) throws MyExecption {
         boolean checkLong = this.checkLogin(userName,password);
+        Map<String,Object> map = new HashMap<>();
         if(checkLong){
             UserInfo userInfo = userInfoService.getUserInfoByUserName(userName);
             long token = tokenService.createToken();
-            Map<String,Object> map = new HashMap<>();
             map.put("userName",userInfo.getUserName());
             map.put("userId",userInfo.getUserId());
             map.put("token",token);
             map.put("expireTime",expireTime);//登录失效时间可配置
-
+            map.put("msg",1);
             //TODO:保存token信息,以后的每次请求都需要校验token是否有效
             return map;
-
         }
-        return null;
+        map.put("msg",0);
+        return map;
+    }
+    //检查是否登录成功
+    private boolean checkLogin(String userName, String password) throws MyExecption {
+        UserInfo userInfo = userInfoService.getUserInfoByUserName(userName);
+        if(userInfo == null){
+            return false;
+        }
+        String salt = userInfo.getSalt();//获取用户的salt
+        logger.debug("[salt]" + salt);
+        String signPwd = DigestUtils.md5Hex(password + salt);
+        if(signPwd.equals(userInfo.getUserPassword())){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
+    /**
+     * 注册
+     * @param userInfo
+     * @return
+     * @throws MyExecption
+     */
     @Override
     public Map<String, Object> register(UserInfo userInfo) throws MyExecption {
         logger.debug("register start");
@@ -63,28 +85,78 @@ public class UserServiceimpl implements UserService{
         userInfo.setSalt(salt);
         logger.debug("[pwd]" + userInfo.getUserPassword());
 
-        userInfoService.insertUserInfo(userInfo);
-        return null;
+        int i = userInfoService.insertUserInfo(userInfo);
+        Map<String,Object> result = new HashMap<>();
+        result.put("result",i);
+        return result;
     }
 
-    private boolean checkLogin(String userName, String password) throws MyExecption {
+    /**
+     *验证用户名是否重复
+     * @param username 用户名
+     * @return  map信息集合
+     * @throws MyExecption
+     */
+    @Override
+    public Map<String, Object> isRepeat(String username) throws MyExecption {
+        logger.debug("用户名验证开始");
+        Map<String,Object> result = new HashMap<>();
+        UserInfo user = userInfoService.getUserInfoByUserName(username);
+        System.out.println(user);
+        if(user == null){
+            result.put("result","0");
+            return result;
+        }
+        result.put("result","1");
+        return result;
+    }
+
+
+    /**
+     * 密保问题的回答是否正确
+     * @param userName
+     * @param userAnswer
+     * @return
+     * @throws MyExecption
+     */
+    @Override
+    public Map<String, Object> isAnswer(String userName,String userAnswer,String userQuestion) throws MyExecption {
+        logger.debug("密保验证开始");
         UserInfo userInfo = userInfoService.getUserInfoByUserName(userName);
-        if(userInfo == null){
-            throw new MyExecption("用户不存在");
+        logger.debug("根据用户名查找的数据"+userInfo);
+        Map<String,Object> result = new HashMap<>();
+        if (userInfo == null){
+            result.put("msg",0);
+            return  result;
         }
-        String salt = userInfo.getSalt();//获取用户的salt
-        logger.debug("[salt]" + salt);
-        String signPwd = DigestUtils.md5Hex(password + salt);
-
-        if(signPwd.equals(userInfo.getUserPassword())){
-            return true;
-        }else{
-            throw new MyExecption("密码错误");
+        if ( userInfo.getUserQuestion().equals(userQuestion) && userInfo.getUserAnswer().equals(userAnswer)){
+            result.put("msg",1);
+            return  result;
         }
-
+        result.put("msg",0);
+        return  result;
     }
 
 
+    /**
+     * 找回密码
+     * @param userName
+     * @param userPassword
+     * @return
+     * @throws MyExecption
+     */
+    @Override
+    public Map<String, Object> findPassword(String userName, String userPassword) throws MyExecption {
+        logger.debug("开始找回密码");
+        UserInfo userInfo = userInfoService.getUserInfoByUserName(userName);
+        String salt = userInfo.getSalt();
+        userPassword=DigestUtils.md5Hex(userPassword+salt);
+        int userInfoServicePassword = userInfoService.findPassword(userName, userPassword);
+        logger.debug("后台返回的信息"+userInfoServicePassword);
+        Map<String,Object> result = new HashMap<>();
+        result.put("msg",userInfoServicePassword);
+        return result;
+    }
 
 
 }

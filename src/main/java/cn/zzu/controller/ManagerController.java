@@ -32,4 +32,12 @@ public class ManagerController {
     public String test(){
         return "test";
     }
+
+
+    @RequestMapping(value="/menu")
+    public String menu(){
+        return "menu";
+    }
+
+
 }

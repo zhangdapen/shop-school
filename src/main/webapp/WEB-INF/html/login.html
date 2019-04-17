@@ -50,16 +50,32 @@
 
     $(document).ready(function(){
         $("#login").click(function () {
-            var userInfo={userName:$("#username").val(),userPassword:$("password").val()};
-            $ajax({
-                url:"/admin/login",
+            //判断用户名和密码不能为空
+            var username=$("#username").val();
+            var password=$("#password").val();
+            if(username.length == 0){
+                $.toptip("用户名不能为空","error");
+                return;
+            }
+            if(password.length == 0){
+                $.toptip("密码不能为空","error");
+                return;
+            }
+            var userInfo={userName:username,userPassword:password};
+            $.ajax({
+                url:"/school_war_exploded/admin/login",
                 type:"POST",
                 dataType:"json",
+                async: false,
                 data:JSON.stringify(userInfo),
                 contentType:'application/json;charset=UTF-8',
-                success:function () {
-                },
-                error:function () {
+                success:function (data) {
+                    if(data.msg == 1){
+                        $.toast("登录成功",20000);
+                        window.location.href='/school_war_exploded/manager/menu';
+                    }else{
+                        $.toast("登录失败","cancel");
+                    }
                 }
             });
         });

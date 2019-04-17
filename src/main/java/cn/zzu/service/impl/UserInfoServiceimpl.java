@@ -86,32 +86,31 @@ public class UserInfoServiceimpl implements UserInfoService {
         return userInfoDao.insertPermissionInfo(permissionInfo);
     }
 
+
+    /**
+     * 找回密码
+     * @param userName
+     * @param userPassword
+     * @return
+     */
     @Override
-    public int updateForgetPassword(UserInfo userInfo) {
-        if(StringUtils.isEmpty(userInfo.getUserName())){
-            new MyExecption("用户名不能为空");
-        }
-        if(StringUtils.isEmpty(userInfo.getUserPassword())){
-            new MyExecption("密码不能为空");
-        }
-        if(StringUtils.isEmpty(userInfo.getUserQuestion())){
-            new MyExecption("密保问题不能为空");
-        }
-        if(StringUtils.isEmpty(userInfo.getUserAnswer())){
-            new MyExecption("密保回答不能为空");
-        }
-
-        UserInfo user = userInfoDao.selectUserInfoAnswer(userInfo);
-        if(user == null){
-            return 0;
-        }
+    public int findPassword(String userName, String userPassword) {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserName(userName);
+        userInfo.setUserPassword(userPassword);
         return userInfoDao.updateUserInfoPassword(userInfo);
-
     }
 
+
+    /**
+     * 根据用户名查找用户信息
+     * @param userName
+     * @return
+     */
     @Override
     public UserInfo getUserInfoByUserName(String userName) {
         List<UserInfo> list = userInfoDao.getUserInfoByUserName(userName);
         return CollectionUtils.isEmpty(list) ? null : list.get(0);
     }
+
 }

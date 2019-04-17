@@ -24,7 +24,7 @@
     <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">密码</label></div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="password" type="password" placeholder="请输入密码">
+            <input class="weui-input" id="password" type="password" placeholder="请输入6到18位字母和数字组合密码">
         </div>
     </div>
 </div>
@@ -99,15 +99,15 @@
     </form>
 <div class="weui-cells">
     <!--注册按钮 -->
-    <input type="submit" href="../admin/register" id="register" class="weui-btn weui-btn_primary" value="注册"></input>
+    <input type="submit" href="../admin/register" id="register" class="weui-btn weui-btn_primary" value="注册" ></input>
 </div>
 
 <div class="weui-cells">
     <!--相关条款 -->
     <label  class="weui-agree">
-        <input type="checkbox" class="weui-agree__checkbox">
+        <input type="checkbox" id="checktext" class="weui-agree__checkbox">
         <span class="weui-agree__text">
-        阅读并同意<a href="#">《相关条款》</a>
+        阅读并同意<a href="agreement.html">《相关条款》</a>
     </span>
     </label>
     <!--页脚 -->
@@ -121,31 +121,113 @@
 <script>
 
     $(document).ready(function(){
+
+
+        //用户名验证
+        $("#username").blur(function () {
+            var username=$("#username").val();
+            var userInfo={userName:username};
+            $.ajax({
+                type: "post",
+                async:false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url : "/school_war_exploded/admin/isRepeat",
+                data :JSON.stringify(userInfo),
+                success: function (data) {
+                    if(data.result==1){
+                        $.toptip("用户名重复","error");
+                    }
+                }
+            });
+        });
+
+
+        //密码强度验证
+        $("#password").blur(function () {
+            var password = $("#password").val();
+            var patten =/^[a-zA-Z]\w{5,17}$/;
+            var b = patten.test(password);
+            if(b==false){
+                $.toptip("请输入6到18位字母和数字组合密码","error");
+            }
+        });
+
+
+        //密码是否一致验证
+        $("#doublepassword").blur(function(){
+            var password = $("#password").val();
+            var doublepassword = $("#doublepassword").val();
+            if(password != doublepassword){
+                $.toptip("密码不一致","error");
+                return;
+            }
+        });
+
+        //回答长度检验
+        $("#answer").blur(function () {
+            var answer = $("#answer").val();
+            if(answer.length>15){
+                $.toptip("答案太长");
+            }
+        });
+
+        //注册操作
      $("#register").click(function () {
-         var userInfo={
-             userName:$("#username").val(),
-             userPassword:$("#password").val(),
-             schoolId:$("#school").val(),
-             userQuestion:$("#question").val(),
-             userAnswer:$("#answer").val()
-         };
-         $.ajax({
-             type: "post",
-             contentType: "application/json; charset=utf-8",
-             dataType: "json",
-             async:false,
-             url : "/school_war_exploded/admin/register",
-             data :JSON.stringify(userInfo),
-             success: function (data) {
-                 if(data.result==1){
-                     window.location.href='/school_war_exploded/manager/login';
-                 }
-             },
-             error : function() {
 
+
+
+         if($("#username").val().length == 0){
+             $.toptip("用户名不能为空");
+             return;
+         }
+
+
+         if($("#password").val().length == 0){
+             $.toptip("密码不能为空");
+             return;
+         }
+
+
+         if($("#answer").val().length == 0){
+             $.toptip("回答不能为空");
+             return;
+         }
+
+         //判断条款是否同意
+         if(!document.getElementById("checktext").checked){
+             $.toptip("条款未同意");
+             return;
+         }
+
+             var userInfo = {
+                 userName: $("#username").val(),
+                 userPassword: $("#password").val(),
+                 schoolId: $("#school").val(),
+                 userQuestion: $("#question").val(),
+                 userAnswer: $("#answer").val()
+             };
+             var password = $("#password").val();
+             var dpassword = $("#doublepassword").val();
+             if (password != dpassword) {
+                 $.toptip("密码不一致", 2000, "error");
              }
+             $.ajax({
+                 type: "post",
+                 contentType: "application/json; charset=utf-8",
+                 dataType: "json",
+                 async: false,
+                 url: "/school_war_exploded/admin/register",
+                 data: JSON.stringify(userInfo),
+                 success: function (data) {
+                     if (data.result == 1) {
+                         window.location.href = '/school_war_exploded/manager/login';
+                     }
+                 },
+                 error: function () {
 
-         });
+                 }
+             });
      });
     });
 </script>

@@ -35,16 +35,14 @@
         values (#{applicaId},#{applicaType},#{applicaDes},#{applicaState},#{createTime})
     </insert>
 
+
+    <!--找回密码 -->
     <update id="updateUserInfoPassword" parameterType="cn.zzu.entity.UserInfo" useGeneratedKeys="true" keyProperty="userId">
         update user_info
         set
         user_password=#{userPassword}
         where
         user_name=#{userName}
-        and
-        user_question=#{userQuestion}
-        and
-        user_answer=#{userAnswer}
     </update>
 
     <select id="selectUserInfoAnswer" parameterType="cn.zzu.entity.UserInfo" resultType="cn.zzu.entity.UserInfo">
@@ -60,4 +58,7 @@
         from user_info
         where user_name =#{userName}
     </select>
+
+
+
 </mapper>

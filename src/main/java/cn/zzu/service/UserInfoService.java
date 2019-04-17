@@ -45,10 +45,16 @@ public interface UserInfoService {
 
     /**
      * 根据题目的问题忘记密码操作
-     * @param userInfo
+     *
      * @return
      */
-    int updateForgetPassword(UserInfo userInfo);
-
+    int findPassword(String userName,String userPassword);
+    /**
+     * 根据名字查找信息
+     * @param userName
+     * @return
+     */
     UserInfo getUserInfoByUserName(String userName);
+
+
 }

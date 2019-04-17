@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -42,10 +43,9 @@ public class UserInfoController {
     @Autowired
     private UserService userService;
 
+
     /**
      * 登录   controller实现
-     * @param userInfo 用户信息
-     * @param session session
      * @return
      */
     @RequestMapping(value="/login",method = RequestMethod.POST)
@@ -53,7 +53,7 @@ public class UserInfoController {
     //public String login(UserInfo userInfo, HttpSession session) throws MyExecption{
     public String login(@RequestBody Map<String,Object> params) throws MyExecption{
         logger.debug("[login params]"+params);
-
+        Map<String,Object> result = new HashMap<>();
         /*UserInfo user = userInfoService.getSelectUserInfo(userInfo);
         if(user==null){
             //登录失败
@@ -64,15 +64,17 @@ public class UserInfoController {
             return null;
         }*/
         if(params == null){
-            throw new MyExecption("参数有误");
+            result.put("msg",0);
+            return JsonUtils.map2json(result);
         }
         String userName = params.get("userName").toString();
         String password = params.get("userPassword").toString();
         if(StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)){
-            throw new MyExecption("用户名或密码不正确");
+            result.put("msg",0);
+            return JsonUtils.map2json(result);
         }
-        Map<String,Object> restut = userService.login(userName,password);
-        return JsonUtils.map2json(restut);
+        Map<String,Object> loginResult = userService.login(userName,password);
+        return JsonUtils.map2json(loginResult);
     }
 
 
@@ -104,8 +106,9 @@ public class UserInfoController {
         if(StringUtils.isEmpty(userInfo.getSchoolId())){
             new MyExecption("学校不能为空");
         }
-        Map<String,Object> restut = userService.register(user);
-        return JsonUtils.map2json(restut);
+        Map<String,Object> result = userService.register(user);
+        System.out.println(result.toString());
+        return JsonUtils.map2json(result);
     }
 
 
@@ -166,13 +169,64 @@ public class UserInfoController {
 
 
 
-    @RequestMapping("value=/password")
+    @RequestMapping(value="/findPassword",method = RequestMethod.POST)
     @ResponseBody
-    public String password(@RequestBody Map<String,Object> params){
-        logger.debug("后台传来的数据"+params);
+    public String password(@RequestBody Map<String,Object> params) throws MyExecption{
+        logger.debug("前端传来找回密码信息"+params);
+        Map<String,Object> result = new HashMap<>();
         if(params == null){
-            return "admin/password";
+            result.put("msg",0);
+            return  JsonUtils.map2json(result);
         }
-        return null;
+        String userName = params.get("userName").toString();
+        String userPassword = params.get("userPassword").toString();
+        Map<String, Object> userServicePassword = userService.findPassword(userName, userPassword);
+        return JsonUtils.map2json(userServicePassword);
     }
+
+    /**
+     * 验证注册的时候用户名是否重复
+     * @param params
+     * @return
+     * @throws MyExecption
+     */
+    @RequestMapping(value="/isRepeat",method = RequestMethod.POST)
+    @ResponseBody
+    public String isRepeat(@RequestBody Map<String,Object> params)throws MyExecption {
+        logger.debug("前台传来的数据"+params);
+        Map<String,Object> result = new HashMap<>();
+        if(params == null){
+            return JsonUtils.map2json(result);
+        }
+        String userName = params.get("userName").toString();
+        System.out.println(userName);
+        Map<String, Object> userServiceRepeat = userService.isRepeat(userName);
+        logger.debug("后台验证用户名的数据"+userServiceRepeat);
+        return JsonUtils.map2json(userServiceRepeat);
+    }
+
+    /**
+     * 验证修改密码时的密保问题
+     * @param params
+     * @return
+     * @throws MyExecption
+     */
+    @RequestMapping(value="/isAnswer",method = RequestMethod.POST)
+    @ResponseBody
+    public String isAnswer(@RequestBody Map<String,Object> params)throws MyExecption {
+        logger.debug("密保问题传来的数据"+params);
+        Map<String,Object> result = new HashMap<>();
+        if(params == null){
+            result.put("msg",0);
+            return  JsonUtils.map2json(result);
+        }
+        String userName = params.get("userName").toString();
+        String userAnswer = params.get("userAnswer").toString();
+        String userQuestion = params.get("userQuestion").toString();
+        Map<String, Object> userServiceAnswer = userService.isAnswer(userName, userAnswer,userQuestion);
+        logger.debug("密保问题验证后台传来的数据"+userServiceAnswer.toString());
+        return JsonUtils.map2json(userServiceAnswer);
+
+    }
+
 }
