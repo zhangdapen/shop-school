@@ -1,7 +1,11 @@
 package cn.zzu.service.impl;
 
+import cn.zzu.dao.SchoolInfoDao;
+import cn.zzu.dao.UserAddrDao;
 import cn.zzu.dao.UserInfoDao;
 import cn.zzu.entity.PermissionInfo;
+import cn.zzu.entity.SchoolInfo;
+import cn.zzu.entity.UserAddr;
 import cn.zzu.entity.UserInfo;
 import cn.zzu.execption.MyExecption;
 import cn.zzu.service.UserInfoService;
@@ -25,6 +29,11 @@ public class UserInfoServiceimpl implements UserInfoService {
     @Autowired
     private UserInfoDao userInfoDao;
 
+    @Autowired
+    private UserAddrDao userAddrDao;
+
+    @Autowired
+    private SchoolInfoDao schoolInfoDao;
     /**
      * 登录service实现类
      *
@@ -112,5 +121,38 @@ public class UserInfoServiceimpl implements UserInfoService {
         List<UserInfo> list = userInfoDao.getUserInfoByUserName(userName);
         return CollectionUtils.isEmpty(list) ? null : list.get(0);
     }
+
+
+    /**
+     * 根据userId查找地址信息
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<UserAddr> getUserAddrByUserId(Integer userId) {
+        return userAddrDao.getUserAddrByUserId(userId);
+    }
+
+
+    /**
+     * 根据学校id查询学校信息
+     * @param schoolId
+     * @return
+     */
+    @Override
+    public SchoolInfo getSchoolInfoBySchoolId(Integer schoolId){
+        return schoolInfoDao.getSchoolInfoBySchoolId(schoolId);
+    }
+
+    /**
+     * 根据用户id查询用户信息
+     * @param userId
+     * @return
+     */
+    @Override
+    public UserInfo getUserinfoByUserId(Integer userId) {
+        return userInfoDao.getUserInfoByUserId(userId);
+    }
+
 
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zzu.dao.UserAddrDao">
+
+
+    <select id="getUserAddrByUserId" parameterType="Integer" resultType="cn.zzu.entity.UserAddr">
+        select *
+        from user_addr
+        where user_id =#{userId}
+    </select>
+
+    <insert id="setUserAddrByUserId" parameterType="cn.zzu.entity.UserAddr">
+        insert into user_addr(user_id,addr_desc,create_time,addr_state)
+        values (#{userId},#{addrDesc},#{createTime},#{addrState})
+    </insert>
+
+</mapper>

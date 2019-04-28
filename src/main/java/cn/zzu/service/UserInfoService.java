@@ -1,7 +1,11 @@
 package cn.zzu.service;
 
 import cn.zzu.entity.PermissionInfo;
+import cn.zzu.entity.SchoolInfo;
+import cn.zzu.entity.UserAddr;
 import cn.zzu.entity.UserInfo;
+
+import java.util.List;
 
 public interface UserInfoService {
 
@@ -57,4 +61,25 @@ public interface UserInfoService {
     UserInfo getUserInfoByUserName(String userName);
 
 
+    /**
+     * 根据userId查找地址信息
+     * @param userId
+     * @return
+     */
+    List<UserAddr> getUserAddrByUserId(Integer userId);
+
+
+    /**
+     * 根据schoolId查询学校信息
+     * @param schoolId
+     * @return
+     */
+    SchoolInfo getSchoolInfoBySchoolId(Integer schoolId);
+
+    /**
+     * 根据userid查询用户信息
+     * @param userId
+     * @return
+     */
+    UserInfo getUserinfoByUserId(Integer userId);
 }

@@ -1,8 +1,11 @@
 package cn.zzu.service.user.impl;
 
+import cn.zzu.entity.*;
+import cn.zzu.service.NewService;
+import cn.zzu.service.PermissionInfoService;
+import cn.zzu.service.UserAddrService;
 import cn.zzu.util.RandomUtils;
 import cn.zzu.core.TokenService;
-import cn.zzu.entity.UserInfo;
 import cn.zzu.execption.MyExecption;
 import cn.zzu.service.UserInfoService;
 import cn.zzu.service.user.UserService;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -26,7 +30,12 @@ public class UserServiceimpl implements UserService{
     private UserInfoService userInfoService;
     @Autowired
     private TokenService tokenService;
-
+    @Autowired
+    private PermissionInfoService permissionInfoService;
+    @Autowired
+    private UserAddrService userAddrService;
+    @Autowired
+    private NewService newService;
 
 
     @Override
@@ -35,12 +44,23 @@ public class UserServiceimpl implements UserService{
         Map<String,Object> map = new HashMap<>();
         if(checkLong){
             UserInfo userInfo = userInfoService.getUserInfoByUserName(userName);
+            List<UserAddr> userAddr = userInfoService.getUserAddrByUserId(userInfo.getUserId());
+            SchoolInfo schoolInfo = userInfoService.getSchoolInfoBySchoolId(userInfo.getSchoolId());
+            List<News> news = newService.getNewsByUserId(userInfo.getUserId());
+            logger.debug("用户信息"+userInfo);
+            logger.debug("地址信息"+userAddr.toString());
+            logger.debug("学校信息"+schoolInfo);
+            logger.debug("帖子信息"+news.toString());
             long token = tokenService.createToken();
             map.put("userName",userInfo.getUserName());
             map.put("userId",userInfo.getUserId());
             map.put("token",token);
             map.put("expireTime",expireTime);//登录失效时间可配置
             map.put("msg",1);
+            map.put("user",userInfo);
+            map.put("userAddr",userAddr);
+            map.put("schoolInfo",schoolInfo);
+            map.put("news",news);
             //TODO:保存token信息,以后的每次请求都需要校验token是否有效
             return map;
         }
@@ -155,6 +175,112 @@ public class UserServiceimpl implements UserService{
         logger.debug("后台返回的信息"+userInfoServicePassword);
         Map<String,Object> result = new HashMap<>();
         result.put("msg",userInfoServicePassword);
+        return result;
+    }
+
+
+    /**
+     * 根据id找地址
+     * @param userId
+     * @return
+     * @throws MyExecption
+     */
+    @Override
+    public Map<String, Object> findAddr(Integer userId) throws MyExecption {
+        Map<String,Object> result = new HashMap<>();
+        logger.debug("开始寻找地址");
+        List<UserAddr> userAddrByUserId = userInfoService.getUserAddrByUserId(userId);
+        logger.debug("后台返回的信息"+userAddrByUserId.toString());
+        if(userAddrByUserId.isEmpty()){
+            result.put("msg",0);
+            return result;
+        }
+        result.put("userAddr",userAddrByUserId);
+        result.put("msg",1);
+        return result;
+    }
+
+
+    /**
+     * 修改用户信息
+     * @param userInfo
+     * @return
+     * @throws MyExecption
+     */
+    @Override
+    public Map<String, Object> changeInfo(UserInfo userInfo) throws MyExecption {
+        Map<String,Object> result = new HashMap<>();
+        logger.debug("开始修改信息");
+        int i = userInfoService.setUpdateUserInfo(userInfo);
+        if(i < 1){
+            result.put("msg",0);
+            return result;
+        }
+        result.put("msg",1);
+        return result;
+    }
+
+
+    /**
+     * 申请成为管理员
+     * @param permissionInfo
+     * @return
+     * @throws MyExecption
+     */
+    @Override
+    public Map<String, Object> toRootUser(PermissionInfo permissionInfo) throws MyExecption {
+        Map<String,Object> result = new HashMap<>();
+        logger.debug("开始申请超级管理员权限");
+        int i = permissionInfoService.toRootUser(permissionInfo);
+        if(i < 1){
+            result.put("msg",0);
+            return result;
+        }
+        result.put("msg",1);
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> getUserInfoByUserId(Integer userId) throws MyExecption {
+        Map<String,Object> result = new HashMap<>();
+        logger.debug("开始根据userId查询用户信息");
+        UserInfo user = userInfoService.getUserinfoByUserId(userId);
+        if(user == null){
+            result.put("msg",0);
+            return result;
+        }
+        result.put("msg",1);
+        result.put("user",user);
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> setUserAddrByUserId(UserAddr userAddr) throws MyExecption {
+        Map<String,Object> result = new HashMap<>();
+        logger.debug("开始添加地址");
+        int i = userAddrService.setUserAddrByUserId(userAddr);
+        if(i < 1){
+            result.put("msg",0);
+            return  result;
+        }
+        result.put("msg",i);
+        return result;
+    }
+
+    /**
+     * 根据用户id查询帖子
+     * @param userId
+     * @return
+     * @throws MyExecption
+     */
+    @Override
+    public Map<String, Object> getNewsByUserId(Integer userId) throws MyExecption {
+        Map<String,Object> result = new HashMap<>();
+        logger.debug("开始查询帖子");
+        List<News> newsByUserId = newService.getNewsByUserId(userId);
+        int size = newsByUserId.size();
+        result.put("size",size);
+        result.put("new",newsByUserId);
         return result;
     }
 

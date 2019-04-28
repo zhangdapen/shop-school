@@ -14,14 +14,23 @@
     </insert>
 
     <update id="updateUserInfo" parameterType="cn.zzu.entity.UserInfo" useGeneratedKeys="true" keyProperty="userId">
-        update user_info
-        set
-        user_password=#{userPassword},
-        user_nickname=#{userNickname},
-        user_image=#{userImage}
-        where
-        user_id=#{userId}
-
+        UPDATE user_info
+        <trim prefix="set" suffixOverrides=",">
+            <if test="userName!=null">user_name=#{userName},</if>
+            <if test="userPassword!=null">user_password=#{userPassword},</if>
+            <if test="schoolId!=null">school_id=#{schoolId},</if>
+            <if test="userNickname!=null">user_nickname=#{userNickname},</if>
+            <if test="userImage!=null">user_image=#{userImage},</if>
+            <if test="userType!=null">user_type=#{userType},</if>
+            <if test="userState!=null">user_state=#{userState},</if>
+            <if test="userDate!=null">user_date=#{userDate},</if>
+            <if test="userQuestion!=null">user_question=#{userQuestion},</if>
+            <if test="userAnswer!=null">user_answer=#{userAnswer},</if>
+            <if test="salt!=null">salt=#{salt},</if>
+            <if test="createdAt!=null">created_at=#{createdAt},</if>
+            <if test="updatedAt!=null">updated_at=#{updatedAt},</if>
+        </trim>
+        WHERE user_id=#{userId}
     </update>
 
     <select id="selectUserInfoAll" parameterType="cn.zzu.entity.UserInfo" resultType="cn.zzu.entity.UserInfo">
@@ -59,6 +68,11 @@
         where user_name =#{userName}
     </select>
 
+    <select id="getUserInfoByUserId" parameterType="Integer" resultType="cn.zzu.entity.UserInfo">
+        select *
+        from user_info
+        where user_id =#{userId}
+    </select>
 
 
 </mapper>

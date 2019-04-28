@@ -23,4 +23,8 @@ public class JsonUtils {
 
       return JSONObject.toJSONString(map);
   }
+
+  public static String object2json(Object object){
+      return JSONObject.toJSONString(object);
+  }
 }

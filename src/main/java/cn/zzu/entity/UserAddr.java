@@ -76,4 +76,16 @@ public class UserAddr {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override
+    public String toString() {
+        return "UserAddr{" +
+                "addrId=" + addrId +
+                ", userId=" + userId +
+                ", addrDesc='" + addrDesc + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", addrState=" + addrState +
+                '}';
+    }
 }

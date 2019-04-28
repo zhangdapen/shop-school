@@ -1,5 +1,7 @@
 package cn.zzu.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class News {
@@ -13,8 +15,10 @@ public class News {
 
     private Integer newsRead;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createTime;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date updateTime;
 
     public News(Integer newsId, String newsDes, Integer userId, Integer newsState, Integer newsRead, Date createTime, Date updateTime) {
@@ -85,5 +89,18 @@ public class News {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "News{" +
+                "newsId=" + newsId +
+                ", newsDes='" + newsDes + '\'' +
+                ", userId=" + userId +
+                ", newsState=" + newsState +
+                ", newsRead=" + newsRead +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }

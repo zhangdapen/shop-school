@@ -15,17 +15,17 @@ public class ManagerController {
 
     @RequestMapping(value="/register")
     public String register(){
-       return "register";
+       return "user/register";
     }
 
     @RequestMapping(value="/login")
     public String login(){
-        return "login";
+        return "user/login";
     }
 
     @RequestMapping(value="/password")
     public String password(){
-        return "password";
+        return "user/password";
     }
 
     @RequestMapping(value="/test")
@@ -34,10 +34,40 @@ public class ManagerController {
     }
 
 
+    @RequestMapping(value = "/owner")
+    public String owner(){
+        return "main/owner";
+    }
+
     @RequestMapping(value="/menu")
     public String menu(){
-        return "menu";
+        return "main/menu";
     }
 
 
+    @RequestMapping(value = "/info")
+    public String info(){
+        return "user/info";
+    }
+
+    @RequestMapping(value = "/addr")
+    public String addr(){
+        return "user/addr";
+    }
+
+    @RequestMapping(value = "/pay")
+    public String pay(){
+        return "user/pay";
+    }
+
+
+    @RequestMapping(value = "/release")
+    public String release(){
+        return "user/release";
+    }
+
+    @RequestMapping(value = "/shopping")
+    public String shopping(){
+        return "shop/shopping";
+    }
 }

@@ -7,11 +7,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-    <!--开启注解-->
-    <mvc:annotation-driven/>
+
     <!--对静态文件进行配置-->
-    <mvc:resources location="/resources/"
-                   mapping="*/resources/**"/>
     <mvc:default-servlet-handler/>
     <!--另一视图解析器-->
     <bean id="viewResolver"
@@ -21,4 +18,12 @@
     </bean>
     <!--扫描controller-->
     <context:component-scan base-package="cn.zzu.controller"/>
+    <!--开启注解-->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg index="0" value="UTF-8"></constructor-arg>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 </beans>

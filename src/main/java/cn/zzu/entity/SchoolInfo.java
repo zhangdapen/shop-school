@@ -64,4 +64,15 @@ public class SchoolInfo {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override
+    public String toString() {
+        return "SchoolInfo{" +
+                "schoolId=" + schoolId +
+                ", schoolName='" + schoolName + '\'' +
+                ", schoolState=" + schoolState +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

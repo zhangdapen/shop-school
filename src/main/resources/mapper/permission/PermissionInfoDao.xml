@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zzu.dao.PermissionInfoDao">
+
+    <insert id="insertPermissionInfo" parameterType="cn.zzu.entity.PermissionInfo" useGeneratedKeys="true" keyProperty="permissionId">
+        insert into permission_info(applica_id,applica_type,applica_des,applica_state,create_time)
+        values (#{applicaId},#{applicaType},#{applicaDes},#{applicaState},#{createTime})
+    </insert>
+
+
+
+
+
+
+
+</mapper>

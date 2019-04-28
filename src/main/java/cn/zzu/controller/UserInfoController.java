@@ -1,13 +1,13 @@
 package cn.zzu.controller;
 
 import ch.qos.logback.classic.Logger;
-import cn.zzu.entity.PermissionInfo;
-import cn.zzu.entity.UserInfo;
+import cn.zzu.entity.*;
 import cn.zzu.execption.MyExecption;
 import cn.zzu.service.UserInfoService;
 import cn.zzu.service.user.UserService;
 import cn.zzu.util.BeanUtil;
 import cn.zzu.util.JsonUtils;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -51,18 +53,9 @@ public class UserInfoController {
     @RequestMapping(value="/login",method = RequestMethod.POST)
     @ResponseBody
     //public String login(UserInfo userInfo, HttpSession session) throws MyExecption{
-    public String login(@RequestBody Map<String,Object> params) throws MyExecption{
+    public String login(@RequestBody Map<String,Object> params,HttpSession session) throws MyExecption{
         logger.debug("[login params]"+params);
         Map<String,Object> result = new HashMap<>();
-        /*UserInfo user = userInfoService.getSelectUserInfo(userInfo);
-        if(user==null){
-            //登录失败
-            return null;
-        }else{
-            //登录成功
-            session.setAttribute("userInfo",user);
-            return null;
-        }*/
         if(params == null){
             result.put("msg",0);
             return JsonUtils.map2json(result);
@@ -74,6 +67,20 @@ public class UserInfoController {
             return JsonUtils.map2json(result);
         }
         Map<String,Object> loginResult = userService.login(userName,password);
+        if(loginResult.get("msg").equals(1)){
+            UserInfo user = (UserInfo) loginResult.get("user");
+            List<UserAddr> addr=(List<UserAddr>)loginResult.get("userAddr");
+            SchoolInfo school=(SchoolInfo)loginResult.get("schoolInfo");
+            List<News> news=(List<News>)loginResult.get("news");
+            session.setAttribute("user",user);
+            session.setAttribute("addr",addr);
+            session.setAttribute("school",school);
+            session.setAttribute("news",news);
+            logger.debug("session数据"+user);
+            logger.debug("session数据"+addr);
+            logger.debug("session数据"+school);
+            logger.debug("session数据"+news);
+        }
         return JsonUtils.map2json(loginResult);
     }
 
@@ -109,62 +116,6 @@ public class UserInfoController {
         Map<String,Object> result = userService.register(user);
         System.out.println(result.toString());
         return JsonUtils.map2json(result);
-    }
-
-
-
-    /**
-     * 修改用户信息controller实现
-     * @param userInfo  用户信息类
-     * @param request   request
-     * @param response  response
-     * @return 地址串
-     * @throws UnsupportedEncodingException 字符编码
-     */
-    @RequestMapping(value="/change",method = RequestMethod.POST)
-    @ResponseBody
-    public String change(UserInfo userInfo, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
-        request.setCharacterEncoding("utf-8");
-        response.setCharacterEncoding("utf-8");
-        int i = userInfoService.setUpdateUserInfo(userInfo);
-        //检查是否有密码的修改
-        if(userInfo.getUserPassword()==null){
-            //没密码的修改,跳转到主页
-            if(i>0){
-                return "主页";
-            }
-            return "注册页面";
-
-        }else{
-            if(i>0){
-                return "登录页面";
-            }
-            return "修改信息页面";
-        }
-    }
-
-    /**
-     * 获取用户信息controller层
-     * @param userInfo 用户类
-     * @return
-     */
-    @RequestMapping(value="select",method=RequestMethod.GET)
-    @ResponseBody
-    public String select(UserInfo userInfo){
-        UserInfo user = userInfoService.getSelectUserInfoAll(userInfo);
-        //把java对象转化成json字符串
-        String s = JSONObject.toJSONString(userInfo);
-        return s;
-    }
-
-    @RequestMapping(value="permiss",method=RequestMethod.POST)
-    public String changePermission(PermissionInfo permissionInfo){
-        int i = userInfoService.setInsertPermissionInfo(permissionInfo);
-        if(i==1){
-            return "已经提交申请";
-        }else{
-            return "请重试";
-        }
     }
 
 
@@ -227,6 +178,161 @@ public class UserInfoController {
         logger.debug("密保问题验证后台传来的数据"+userServiceAnswer.toString());
         return JsonUtils.map2json(userServiceAnswer);
 
+    }
+
+    /**
+     * 通过userID找到地址
+     * @param params
+     * @return
+     * @throws MyExecption
+     */
+    @RequestMapping(value = "/findAddr")
+    @ResponseBody
+    public String findAddr(@RequestBody Map<String,Object> params) throws MyExecption {
+        logger.debug("修改地址传来的数据"+params);
+        Map<String,Object> result = new HashMap<>();
+        if (params == null){
+            result.put("msg",0);
+            return JsonUtils.map2json(result);
+        }
+        String userIds = params.get("userId").toString();
+        Integer userId = Integer.valueOf(userIds);
+        Map<String, Object> addr = userService.findAddr(userId);
+        return JsonUtils.map2json(addr);
+    }
+
+
+    /**
+     * 获取到session中存储的
+     * 用户信息,地址信息,学校信息,帖子信息
+     * @param params
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/info",method = RequestMethod.POST)
+    @ResponseBody
+    public String getSession(@RequestBody Map<String,Object> params,HttpServletRequest request){
+        Map<String,Object> result= new HashMap<>();
+        HttpSession session = request.getSession();
+        UserInfo user = (UserInfo)session.getAttribute("user");
+        List<UserAddr> userAddr=(List<UserAddr>) session.getAttribute("addr");
+        SchoolInfo schoolInfo=(SchoolInfo)session.getAttribute("school");
+        List<News> news=(List<News>)session.getAttribute("news");
+        System.out.println(user);
+        System.out.println(userAddr.toString());
+        System.out.println(schoolInfo);
+        System.out.println(news);
+        result.put("user",user);
+        result.put("userAddr",userAddr);
+        result.put("schoolInfo",schoolInfo);
+        result.put("news",news);
+        result.put("size",news.size());
+        return JsonUtils.map2json(result);
+    }
+
+    /**
+     * 修改用户信息
+     * @param params
+     * @return
+     * @throws MyExecption
+     */
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    @ResponseBody
+    public String updateInfo(@RequestBody Map<String,Object> params) throws MyExecption {
+        logger.debug("前台传来的修改数据"+params);
+        Map<String,Object> result = new HashMap<>();
+        if(params == null){
+            result.put("msg",0);
+            return JsonUtils.map2json(result);
+        }
+        String userNickname = params.get("userNickname").toString();
+        String userIds = params.get("userId").toString();
+        Integer userId = Integer.valueOf(userIds);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserNickname(userNickname);
+        userInfo.setUserId(userId);
+        Map<String, Object> stringObjectMap = userService.changeInfo(userInfo);
+        return JsonUtils.map2json(stringObjectMap);
+    }
+
+    /**
+     * 申请成为管理员
+     * @param params
+     * @return
+     * @throws MyExecption
+     */
+    @RequestMapping(value = "/toRoot",method = RequestMethod.POST)
+    @ResponseBody
+    public String toRoot(@RequestBody Map<String,Object> params) throws MyExecption {
+        logger.debug("修改权限前台传来的数据"+params);
+        Map<String,Object> result = new HashMap<>();
+        if (params == null){
+            result.put("msg",0);
+            return  JsonUtils.map2json(result);
+        }
+        String userIds = params.get("userId").toString();
+        Integer userId = Integer.valueOf(userIds);
+        String applicaType=params.get("applicaType").toString();
+        String applicaDes=params.get("applicaDes").toString();
+        PermissionInfo permissionInfo = new PermissionInfo();
+        permissionInfo.setApplicaId(userId);
+        permissionInfo.setApplicaType(applicaType);
+        permissionInfo.setApplicaDes(applicaDes);
+        permissionInfo.setCreateTime(new Date());
+        permissionInfo.setApplicaState("0");
+        Map<String, Object> stringObjectMap = userService.toRootUser(permissionInfo);
+        return JsonUtils.map2json(stringObjectMap);
+    }
+
+    /**
+     * 根据userId获取用户信息
+     * @param params
+     * @return
+     * @throws MyExecption
+     */
+    @RequestMapping(value = "/getUserInfo",method = RequestMethod.POST)
+    @ResponseBody
+    public String getUserInfo(@RequestBody Map<String,Object> params) throws MyExecption {
+        logger.debug("前台传来的UserId数据"+params);
+        Map<String,Object> result = new HashMap<>();
+        if (params == null){
+            result.put("msg",0);
+            return  JsonUtils.map2json(result);
+        }
+        String userIds = params.get("userId").toString();
+        String[] split = userIds.split(":");
+        Integer userId = Integer.valueOf(split[1]);
+        System.out.println(userId);
+        Map<String, Object> userInfoByUserId = userService.getUserInfoByUserId(userId);
+        return  JsonUtils.map2json(userInfoByUserId);
+    }
+
+    /**
+     * 添加地址到userAddr表
+     * @param params
+     * @return
+     * @throws MyExecption
+     */
+    @RequestMapping(value = "/setAddr",method = RequestMethod.POST)
+    @ResponseBody
+    public String setAddr(@RequestBody Map<String,Object> params) throws MyExecption {
+        logger.debug("前台传来的地址数据"+params);
+        Map<String,Object> result = new HashMap<>();
+        if (params == null){
+            result.put("msg",0);
+            return  JsonUtils.map2json(result);
+        }
+        String userIds = params.get("userId").toString();
+        String[] split = userIds.split(":");
+        Integer userId = Integer.valueOf(userIds);
+        String addrDesc=params.get("addr").toString();
+        UserAddr userAddr = new UserAddr();
+        userAddr.setUserId(userId);
+        userAddr.setAddrState(0);
+        userAddr.setAddrDesc(addrDesc);
+        userAddr.setCreateTime(new Date());
+        Map<String, Object> stringObjectMap = userService.setUserAddrByUserId(userAddr);
+        return  JsonUtils.map2json(stringObjectMap);
     }
 
 }

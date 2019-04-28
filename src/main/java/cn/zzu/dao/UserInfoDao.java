@@ -62,6 +62,18 @@ public interface UserInfoDao {
      */
     UserInfo selectUserInfoAnswer(UserInfo userInfo);
 
+    /**
+     * 根据用户名查找信息
+     * @param userName
+     * @return
+     */
     List<UserInfo> getUserInfoByUserName(String userName);
 
+
+    /**
+     * 根据userId查找用户信息
+     * @param userId
+     * @return
+     */
+    UserInfo getUserInfoByUserId(Integer userId);
 }
