@@ -32,7 +32,9 @@ public class UserInfo {
     /** 更新时间 */
     private Long updatedAt;
 
-    public UserInfo(Integer userId, String userName, String userPassword, Integer schoolId, String userNickname, String userImage, Integer userType, Integer userState, Date userDate, String userQuestion, String userAnswer) {
+    private String userPhone;
+
+    public UserInfo(Integer userId, String userName, String userPassword, Integer schoolId, String userNickname, String userImage, Integer userType, Integer userState, Date userDate, String userQuestion, String userAnswer, String salt, Long createdAt, Long updatedAt, String userPhone) {
         this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;
@@ -44,14 +46,18 @@ public class UserInfo {
         this.userDate = userDate;
         this.userQuestion = userQuestion;
         this.userAnswer = userAnswer;
+        this.salt = salt;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.userPhone = userPhone;
     }
 
-    public UserInfo( String userName, String userPassword, Integer schoolId,  String userQuestion, String userAnswer) {
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.schoolId = schoolId;
-        this.userQuestion = userQuestion;
-        this.userAnswer = userAnswer;
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
     }
 
     public UserInfo() {
@@ -160,6 +166,10 @@ public class UserInfo {
                 ", userDate=" + userDate +
                 ", userQuestion='" + userQuestion + '\'' +
                 ", userAnswer='" + userAnswer + '\'' +
+                ", salt='" + salt + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", userPhone='" + userPhone + '\'' +
                 '}';
     }
 

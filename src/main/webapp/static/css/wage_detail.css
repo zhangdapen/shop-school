@@ -1,0 +1,42 @@
+body {
+	background:rgba(243,243,243,1);
+}
+.container-row {
+  padding: 0 .2rem;
+}
+
+.main-page {
+  width: 100%;
+  padding-top: .88rem;
+}
+.date-row {
+  position: relative;
+  height: 1rem;
+  width: 100%;
+  margin-bottom: .36rem;
+}
+.date-row .weui-input {
+  width: 100%;
+  height: 100%;
+  padding: .26rem .6rem .26rem 0;
+  color: #333;
+  font-size: .36rem;
+  line-height: .48rem;
+}
+.date-row .icon-calendar {
+  position: absolute;
+  right: .2rem;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.container-row .icon {
+  height: .9rem;
+}
+.transaction-wrap {
+  height: .9rem;
+  line-height: .9rem;
+}
+.tip-wrap {
+  padding-bottom: .16rem;
+  padding-top: .16rem;
+}

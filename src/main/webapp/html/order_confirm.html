@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="../static/js/lib/flexible.js"></script>
+  <link rel="stylesheet" href="../static/css/icon.css">
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/weui.min.css">
+  <link rel="stylesheet" href="../static/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/order_confirm.css">
+  <title>shopping</title>
+</head>
+<body>
+  <div class="header">
+    <a href="shopcart.html" class="block btn-back">
+      <i class="icon-back"></i>
+    </a>
+    确认订单
+  </div>
+  <div class="main-page">
+    <div class="address-wrap container-row bg-white margin-b-20">
+      <p class="top f28 color3 margin-b-20 fbold"><a id="username">张宏伟</a><span id="userphone" class="phone">15515548970</span></p>
+      <p  class="area color3 f24">
+        <i  class="icon-area"></i>
+        <a id="add">郑州大学3号楼408</a>
+      </p>
+      <i class="icon-arrow-right-big"></i>
+    </div>
+    <div class="product-list-wrap bg-white margin-b-20">
+      <div class="shop-product">
+        <p class="shop-head f28 color3">
+          <i class="icon-order-shop"></i>
+          郑州大学
+        </p>
+        <div id="aaaa">
+      </div>
+      </div>
+    </div>
+  </div>
+  <!-- footer1 -->
+  <div class="footer clearfix">
+    <p class="total-price pull-left text-right f28 color3 container-row">
+      实付款: <span class="red-font f32">¥</span><span id="count" class="red-font f32">699.99</span>
+    </p>
+    <p class="btn-submit pull-right colorf f28 text-center">确认提交</p>
+  </div>
+  <!-- footer2 -->
+  <div class="footer clearfix" style="display: none;">
+    <p class="total-price pull-left text-right f28 color3 container-row">
+      实付款: <span id="lastprice" class="red-font f32">¥699.99</span>
+    </p>
+  </div>
+
+
+
+
+  <script src="../static/js/lib/jquery-2.1.4.js"></script>
+  <script src="../static/js/lib/jquery-weui.min.js"></script>
+  <script src="../static/js/lib/swiper.min.js"></script>
+  <script>
+    //获取url数据
+    function  getParams(name, href) {
+      var href = href || window.location.href,
+              value = '';
+
+      if (name) {
+        var reg = new RegExp(name + '=([^&]*)', 'g');
+        href.replace(reg, function($0, $1) {
+          value = decodeURI($1);
+        });
+      } else {
+        value = {};
+        var reg = /\b(\w+)=([^\/&]*)/g;
+        href.replace(reg, function($0, $1, $2) {
+          value[$1] = decodeURI($2);
+        });
+      }
+      return value;
+    };
+
+
+    $(function() {
+      //获取userId和price
+      var price=getParams("price");
+      var userId=getParams("userId");
+      //根据userId获取地址
+      var aaa = {"userId":userId};
+      $.ajax({
+        url:"/school_war_exploded/admin/findAddr",
+        type:"POST",
+        dataType:"json",
+        async: false,
+        data:JSON.stringify(aaa),
+        contentType:'application/json;charset=UTF-8',
+        success:function (data) {
+          if(data.msg == 1){
+            var arr = data.userAddr;
+            $("#add").text(arr[0].addrDesc);
+          }
+        }
+      });
+
+      //根据userId获取user信息
+      $.ajax({
+        url:"/school_war_exploded/admin/getUser",
+        type:"POST",
+        dataType:"json",
+        async: false,
+        data:JSON.stringify(aaa),
+        contentType:'application/json;charset=UTF-8',
+        success:function (data) {
+          if(data.msg == 1){
+            $("#username").text(data.user.userName);
+            $("#userphone").text(data.user.userPhone);
+          }
+        }
+      });
+
+
+
+
+
+
+      $("#lastprice").text(price);
+      $('.coupon-list li').on('click', function() {
+        $.closePopup();
+      });
+      $('.coupon-popup .popup-foot').on('click', function() {
+        $('.coupon-check').attr("checked",false);
+        $.closePopup();
+      });
+
+      // 金币抵扣confirm
+      $('.btn-submit').on('click', function() {
+        var $this = $(this);
+        if ($this.hasClass('disabled')) return;
+        $.modal({
+          title: "",
+          text: "确认提交订单?",
+          buttons: [
+            { text: "再想想", className: "confirm-concel color6 f32", onClick: function(){ console.log(1)} },
+            { text: "确认购买", className: "confirm-sure red-font f32", onClick: function(){ window.location.href="payway.html?price="+price} },
+          ]
+        });
+      })
+
+
+
+
+      var hml='<div class="product-item clearfix"><div class="imgbox"><img src="../static/img/demo/goods1.png" alt="">'
+              +'</div><div class="info-row pull-left"><p id="des1" class="name fbold lineclamp2 f24">';
+      var hml1='</p></div><div class="num-row pull-right"><p id="pric1" class="price fbolder f28 color3">';
+
+      var hml2='</p></div></div>';
+
+      //获取订单信息
+      var orderId=getParams("orderId");
+      var orderInfo={"orderId":orderId}
+      $.ajax({
+        url:"/school_war_exploded/order/getOrder",
+        type:"POST",
+        dataType:"json",
+        async: false,
+        data:JSON.stringify(orderInfo),
+        contentType:'application/json;charset=UTF-8',
+        success:function (data) {
+          if(data.msg == 1){
+            var arr=data.goodsInfos
+            for(var i=0;i<arr.length;i++){
+              $("#aaaa").append(hml+arr[i].goodsDes+hml1+"¥"+arr[i].goodsPrice);
+              $("#count").text(data.orderInfo.orderAmount);
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

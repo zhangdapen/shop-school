@@ -75,4 +75,16 @@ public class OrderInfo {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override
+    public String   toString() {
+        return "OrderInfo{" +
+                "orderId=" + orderId +
+                ", orderAmount=" + orderAmount +
+                ", addrId=" + addrId +
+                ", orderState=" + orderState +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

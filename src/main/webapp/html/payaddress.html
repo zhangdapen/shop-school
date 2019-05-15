@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../static/js/lib/flexible.js"></script>
+  <link rel="stylesheet" href="../static/css/icon.css">
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/weui.min.css">
+  <link rel="stylesheet" href="../static/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/payaddress.css">
+  <title>shopping</title>
+</head>
+<body>
+	<div class="header">
+    <a href="/" class="block btn-back">
+      <i class="icon-back"></i>
+    </a>
+   	 收货地址	
+  </div>
+  <div class="headersplit-h"></div>  
+  <div class="address-way">  	
+  	<ul>
+  		<li class="clearfix active">
+  			<div class="edit-address">
+  				<a href=""><i class="icon-edit"></i></a>
+  			</div>
+  			<div class="address-info">
+  				<div class="address-info-one clearfix f28">
+  					<div class="address-name fl text-overflow">田某某</div>
+  					<div class="address-phone fr">13186999999</div>
+  				</div>
+  				<div class="address-info-two f24">
+  					<p><span class="red-font">[默认] </span>浙江省杭州市余杭区欧美金融城欧美金融城欧美金融城欧美金融城欧美金融城</p>
+  				</div>
+  			</div>
+  			<div class="address-check">
+  				<div class="radioinput">
+						<input type="radio" name="payway" id="radio-1-2"/><label for="radio-1-2"></label>
+					</div>
+  			</div>
+  		</li>
+  		<li class="clearfix">
+  			<div class="edit-address">
+  				<a href=""><i class="icon-edit"></i></a>
+  			</div>
+  			<div class="address-info">
+  				<div class="address-info-one clearfix f28">
+  					<div class="address-name fl text-overflow">田某某</div>
+  					<div class="address-phone fr">13186999999</div>
+  				</div>
+  				<div class="address-info-two f24">
+  					<p><span class="red-font">[默认] </span>浙江省杭州市余杭区欧美金融城欧美金融城欧美金融城欧美金融城欧美金融城</p>
+  				</div>
+  			</div>
+  			<div class="address-check">
+  				<div class="radioinput">
+						<input type="radio" name="payway" id="radio-1-2"/><label for="radio-1-2"></label>
+					</div>
+  			</div>
+  		</li>  
+  		<li class="clearfix">
+  			<div class="edit-address">
+  				<a href=""><i class="icon-edit"></i></a>
+  			</div>
+  			<div class="address-info">
+  				<div class="address-info-one clearfix f28">
+  					<div class="address-name fl text-overflow">田某某</div>
+  					<div class="address-phone fr">13186999999</div>
+  				</div>
+  				<div class="address-info-two f24">
+  					<p><span class="red-font">[默认] </span>浙江省杭州市余杭区欧美金融城欧美金融城欧美金融城欧美金融城欧美金融城</p>
+  				</div>
+  			</div>
+  			<div class="address-check">
+  				<div class="radioinput">
+						<input type="radio" name="payway" id="radio-1-2"/><label for="radio-1-2"></label>
+					</div>
+  			</div>
+  		</li>
+  	</ul>
+  </div> 
+  <!--底部操作-->
+  <div class="bottom-geduan"></div>
+	<!--底部固定-->
+	<div class="cart-bottom">
+		<button type="button" class="pay-btn">新增地址</button>		
+	</div>
+  <script src="../static/js/lib/jquery-2.1.4.js"></script>
+  <script src="../static/js/lib/jquery-weui.min.js"></script>
+  <script src="../static/js/lib/swiper.min.js"></script>
+  <script>
+    $(function() {
+    	$('.address-way li').on('click', function() {
+        var $this = $(this);
+        $(this).addClass("active").siblings().removeClass("active");
+        $(this).find(':radio').prop("checked", true);	
+      })
+    	//初始化
+    	$('.address-way li').each(function(){
+    		if($(this).hasClass("active")){
+    			$(this).find(':radio').prop("checked", true);	
+    		}
+    	})
+    });
+  </script>
+</body>
+</html>

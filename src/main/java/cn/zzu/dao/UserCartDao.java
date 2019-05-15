@@ -3,6 +3,7 @@ package cn.zzu.dao;
 import cn.zzu.entity.UserCart;
 import org.apache.ibatis.annotations.MapKey;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,12 +32,11 @@ public interface UserCartDao {
      */
     int deleteUserCartInfoAll(UserCart userCart);
 
-
     /**
      * 查询用户购物车中的所有商品
      * @param userId
      * @return
      */
     @MapKey("cartId")
-    Map<Integer,UserCart> selectUserCarInfo(Integer userId);
+    List<UserCart> selectUserCarInfo(Integer userId);
 }

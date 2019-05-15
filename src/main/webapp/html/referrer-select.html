@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="../static/js/lib/flexible.js"></script>
+  <link rel="stylesheet" href="../static/css/icon.css">
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/weui.min.css">
+  <link rel="stylesheet" href="../static/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/referrer-select.css">
+  <title>shopping</title>
+</head>
+<body>
+  <div class="header container-row">
+    <a href="/" class="block btn-back">
+      <i class="icon-back"></i>
+    </a>
+    选择推荐人
+    <span class="text-submit">提交</span>
+  </div>
+  <div class="main-page">
+    <div class="referrer-list bg-white weui-cells_radio">
+      <label class="referrer-item clearfix block weui-check__label" for="referrer1">
+        <div class="imgbox pull-left">
+            <img src="../static/img/demo/head.png" alt="">
+        </div>
+        <p class="pull-left f28 color3">田某某</p>
+        <div class="btn-checkbox pull-right">
+          <input type="radio" class="weui-check coupon-check" name="referrerCoupon" id="referrer1">
+          <i class="icon-checked"></i>
+        </div>
+      </label>
+      <label class="referrer-item clearfix block weui-check__label" for="referrer2">
+        <div class="imgbox pull-left">
+            <img src="../static/img/demo/head.png" alt="">
+        </div>
+        <p class="pull-left f28 color3">田某某</p>
+        <div class="btn-checkbox pull-right">
+          <input type="radio" class="weui-check coupon-check" name="referrerCoupon" id="referrer2">
+          <i class="icon-checked"></i>
+        </div>
+      </label>
+      <label class="referrer-item clearfix block weui-check__label" for="referrer3">
+        <div class="imgbox pull-left">
+            <img src="../static/img/demo/head.png" alt="">
+        </div>
+        <p class="pull-left f28 color3">田某某</p>
+        <div class="btn-checkbox pull-right">
+          <input type="radio" class="weui-check coupon-check" name="referrerCoupon" id="referrer3">
+          <i class="icon-checked"></i>
+        </div>
+      </label>
+      <label class="referrer-item clearfix block weui-check__label" for="referrer4">
+        <div class="imgbox pull-left">
+            <img src="../static/img/demo/head.png" alt="">
+        </div>
+        <p class="pull-left f28 color3">田某某</p>
+        <div class="btn-checkbox pull-right">
+          <input type="radio" class="weui-check coupon-check" name="referrerCoupon" id="referrer4">
+          <i class="icon-checked"></i>
+        </div>
+      </label>
+    </div>
+    <div class="btn-add f28 red-font text-center bg-white">添加其他用户</div>
+  </div>
+
+  <!-- 弹窗dialog -->
+  <div class="weui-mask transition"></div>
+  <!-- 添加其他用户 -->
+  <div class="weui-dialog dialog-add transition">
+    <div class="weui-dialog__hd f32 color3">添加其他用户</div>
+    <div class="weui-dialog__bd text-left margin-t-70 margin-b-50">
+      <input type="text" placeholder="请输入店主邀请码">
+    </div>
+    <div class="weui-dialog__ft">
+      <a href="javascript:;" class="weui-dialog__btn f32 color6 dialog-btn-cancel">取消</a>
+      <a href="javascript:;" class="weui-dialog__btn f32 red-font dialog-btn-sure">确定</a>
+    </div>
+  </div>
+  <!-- 确认添加的用户 -->
+  <div class="weui-dialog dialog-confirm-referrer transition">
+    <div class="weui-dialog__hd f32 color3">确认添加用户</div>
+    <div class="weui-dialog__bd text-center">
+      <img src="../static/img/demo/head.png" alt="">
+      <span class="f32 color3 fbold name">田某某</span>
+    </div>
+    <div class="weui-dialog__ft">
+      <a href="javascript:;" class="weui-dialog__btn f32 color6 dialog-btn-cancel">重新填写邀请码</a>
+      <a href="javascript:;" class="weui-dialog__btn f32 red-font dialog-btn-sure">确定</a>
+    </div>
+  </div>
+
+  <script src="../static/js/lib/jquery-2.1.4.js"></script>
+  <script src="../static/js/lib/jquery-weui.min.js"></script>
+  <script src="../static/js/lib/swiper.min.js"></script>
+  <script>
+    $(function() {
+      $('.btn-add').on('click', function () {
+        $('.weui-mask').addClass('show');
+        $('.dialog-add').addClass('show');
+      });
+
+      $('.dialog-add .dialog-btn-cancel').on('click', function () {
+        $('.weui-mask').removeClass('show');
+        $('.weui-dialog').removeClass('show');
+      });
+
+      $('.dialog-add .dialog-btn-sure').on('click', function () {
+        $('.dialog-add').removeClass('show');
+        $('.dialog-confirm-referrer').addClass('show');
+      })
+
+      $('.dialog-confirm-referrer .dialog-btn-cancel').on('click', function () {
+        $('.dialog-add').addClass('show');
+        $('.dialog-confirm-referrer').removeClass('show');
+      });
+      
+      $('.dialog-confirm-referrer .dialog-btn-sure').on('click', function () {
+        $('.weui-mask').removeClass('show');
+        $('.weui-dialog').removeClass('show');
+      })
+    });
+  </script>
+</body>
+</html>

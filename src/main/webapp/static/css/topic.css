@@ -1,0 +1,31 @@
+.main-page {
+  padding-top: .88rem;
+}
+
+.topic-list-wrap .topic-item {
+  position: relative;
+  padding: .3rem 1rem .3rem 2.4rem;
+  border-bottom: 1px solid #D1D1D1;
+  height: 2.4rem;
+  width: 100%;
+}
+.topic-list-wrap .topic-item:last-child {
+  border-bottom: none;
+}
+.topic-item .imgbox{
+  position: absolute;
+  top: .3rem;
+  left: .2rem;
+  height: 2.2rem;
+  width: 1.8rem;
+}
+.topic-item .imgbox img {
+  height: 100%;
+  width: 100%;
+}
+.topic-item  .icon-arrow-right-big {
+  position: absolute;
+  top: 50%;
+  right: .2rem;
+  transform: translate(0, -50%);
+}

@@ -227,6 +227,8 @@ public class UserInfoController {
         result.put("schoolInfo",schoolInfo);
         result.put("news",news);
         result.put("size",news.size());
+        result.put("userInfoId",user.getUserId());
+        result.put("msg",1);
         return JsonUtils.map2json(result);
     }
 
@@ -302,6 +304,22 @@ public class UserInfoController {
         String userIds = params.get("userId").toString();
         String[] split = userIds.split(":");
         Integer userId = Integer.valueOf(split[1]);
+        System.out.println(userId);
+        Map<String, Object> userInfoByUserId = userService.getUserInfoByUserId(userId);
+        return  JsonUtils.map2json(userInfoByUserId);
+    }
+
+    @RequestMapping(value = "/getUser",method = RequestMethod.POST)
+    @ResponseBody
+    public String getUser(@RequestBody Map<String,Object> params) throws MyExecption {
+        logger.debug("前台传来的UserId数据"+params);
+        Map<String,Object> result = new HashMap<>();
+        if (params == null){
+            result.put("msg",0);
+            return  JsonUtils.map2json(result);
+        }
+        String userIds = params.get("userId").toString();
+        Integer userId = Integer.valueOf(userIds);
         System.out.println(userId);
         Map<String, Object> userInfoByUserId = userService.getUserInfoByUserId(userId);
         return  JsonUtils.map2json(userInfoByUserId);

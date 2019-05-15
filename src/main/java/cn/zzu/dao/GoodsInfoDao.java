@@ -3,6 +3,8 @@ package cn.zzu.dao;
 import cn.zzu.entity.GoodsInfo;
 import cn.zzu.entity.PermissionInfo;
 
+import java.util.List;
+
 public interface GoodsInfoDao {
 
 
@@ -28,4 +30,34 @@ public interface GoodsInfoDao {
      * @return
      */
     Double selectGoodsInfoPrice(Integer goodsId);
+
+
+    /**
+     * 根据商品id获取商品信息
+     * @param goodsId
+     * @return
+     */
+    GoodsInfo getGoodsInfoById(Integer goodsId);
+
+    /**
+     * 获取所有商品信息
+     * @return
+     */
+    List<GoodsInfo> getGoodsInfo();
+
+
+    /**
+     * 根据categoryId查询商品信息
+     * @param id
+     * @return
+     */
+    List<GoodsInfo> getGoodsInfoByCategory(Integer id);
+
+
+    /**
+     * 根据goodsId获取商品信息
+     * @param goodsId
+     * @return
+     */
+    GoodsInfo getGoodsInfoByGoodsId(Integer goodsId);
 }

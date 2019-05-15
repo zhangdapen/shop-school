@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zzu.dao.CollDao">
+    <insert id="setColl" parameterType="cn.zzu.entity.Coll" useGeneratedKeys="true">
+        insert into coll(coll_desc,coll_image,coll_type,create_time,id)
+        values (#{collDesc},#{collImage},#{collType},#{createTime},#{Id})
+    </insert>
+
+    <update id="updateColl" parameterType="Integer" useGeneratedKeys="true">
+        UPDATE coll
+        set coll_state=0
+        WHERE id=#{Id}
+    </update>
+</mapper>

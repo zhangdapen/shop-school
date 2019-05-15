@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="../static/js/lib/flexible.js"></script>
+  <link rel="stylesheet" href="../static/css/icon.css">
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/weui.min.css">
+  <link rel="stylesheet" href="../static/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/setting.css">
+  <title>shopping</title>
+</head>
+<body>
+  <div class="header container-row">
+    <a href="/" class="block btn-back">
+      <i class="icon-back"></i>
+    </a>
+    设置
+  </div>
+
+  <div class="main-page">
+    <div class="edit-referrer-row container-row bg-white margin-b-20">
+      <a href="javascript:;" class="block clearfix" id="editReferrer">
+        <p class="pull-left f28 color3">
+          修改上级
+          <span class="f28 color6">仅注册后七天内有效</span>
+        </p>
+        <i class="icon-arrow-right-big pull-right"></i>
+      </a>
+    </div>
+    <div class="btn-row container-row margin-t-40">
+      <p class="btn-loginout text-center">退出当前账户</p>
+    </div>
+  </div>
+
+  <!-- 弹窗dialog -->
+  <div class="weui-mask transition"></div>
+  <!-- 确认推荐人 -->
+  <div class="weui-dialog dialog-edit-referrer transition">
+    <div class="weui-dialog__hd f32 color3">确认推荐人</div>
+    <div class="weui-dialog__bd text-center">
+      <p class="imgbox">
+        <img src="../static/img/demo/head.png" alt="">
+        <span class="f32 color3 fbold name">田某某</span>
+      </p>
+      <p class="f24 color6">当您确认推荐人后，您今后的购买交易都将在此推荐人的店铺中完成。</p>
+      <p class="f24 color6">推荐人仅在七天内有一次修改机会</p>
+      <div class="input-row clearfix">
+        <span class="label pull-left f28 color3">修改推荐人</span>
+        <input class="pull-left" type="text">
+      </div>
+    </div>
+    <div class="weui-dialog__ft">
+      <a href="javascript:;" class="weui-dialog__btn f32 red-font dialog-btn-sure">确定推荐人</a>
+    </div>
+  </div>
+  <!-- 确认修改推荐人 -->
+  <div class="weui-dialog dialog-confirm-edit-referrer transition">
+    <div class="weui-dialog__hd f32 color3">确认修改推荐人</div>
+    <div class="weui-dialog__bd text-center">
+      <img src="../static/img/demo/head.png" alt="">
+      <span class="f32 color3 fbold name">田某某</span>
+    </div>
+    <div class="weui-dialog__ft">
+      <a href="javascript:;" class="weui-dialog__btn f32 color6 dialog-btn-cancel">返回修改</a>
+      <a href="javascript:;" class="weui-dialog__btn f32 red-font dialog-btn-sure">确认推荐人</a>
+    </div>
+  </div>
+
+  <script src="../static/js/lib/jquery-2.1.4.js"></script>
+  <script src="../static/js/lib/jquery-weui.min.js"></script>
+  <script src="../static/js/lib/swiper.min.js"></script>
+  <script>
+    $(function() {
+      $('#editReferrer').on('click', function() {
+        $('.weui-mask').addClass('show');
+        $('.dialog-edit-referrer').addClass('show');
+      });
+
+      $('.dialog-edit-referrer .dialog-btn-sure').on('click', function() {
+        $('.dialog-edit-referrer').removeClass('show');
+        $('.dialog-confirm-edit-referrer').addClass('show');
+      });
+
+      $('.dialog-confirm-edit-referrer .dialog-btn-cancel').on('click', function() {
+        $('.dialog-confirm-edit-referrer').removeClass('show');
+        $('.dialog-edit-referrer').addClass('show');
+      });
+
+      $('.dialog-confirm-edit-referrer .dialog-btn-sure').on('click', function() {
+        $('.dialog-confirm-edit-referrer').removeClass('show');
+        $('.weui-mask').removeClass('show');
+      });
+    });
+  </script>
+</body>
+</html>

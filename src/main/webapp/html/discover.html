@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="../static/js/lib/flexible.js"></script>
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/weui.min.css">
+  <link rel="stylesheet" href="../static/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="../static/css/icon.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/discover.css">
+  <title>shopping</title>
+</head>
+<body>
+  <div class="header">
+    po在墙上
+  </div>
+  <div class="main-page">
+    <div class="banner-wrap">
+      <img src="../static//img/demo/1.jpg" alt="">
+    </div>
+    <div id="aaa" class="discover-list-wrap margin-t-10">
+    </div>
+  </div>
+  <div class="weui-tabbar" style="position: fixed">
+    <a href="/school_war_exploded/html/index.html" class="weui-tabbar__item weui-bar__item--on">
+      <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/buy.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">购物</p>
+    </a>
+    <a href="/school_war_exploded/html/coupon.html" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/new.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">新闻</p>
+    </a>
+    <a href="/school_war_exploded/html/discover.html" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/discover.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">发现</p>
+    </a>
+    <a href="/school_war_exploded/manager/owner" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/me.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">我</p>
+    </a>
+  </div>
+  <script src="../static/js/lib/jquery-2.1.4.js"></script>
+  <script src="../static/js/lib/jquery-weui.min.js"></script>
+  <script src="../static/js/lib/swiper.min.js"></script>
+  <script>
+    $(function() {
+      var navSwiper = new Swiper('.topic-list', {
+        slidesPerView: 3.7,
+        freeMode: true,
+        on: {
+          init: function() {
+            navSlideWidth = this.slides.eq(0).css('width'); //导航字数需要统一,每个导航宽度一致
+            navSum = this.slides[this.slides.length - 1].offsetLeft //最后一个slide的位置
+            clientWidth = parseInt(this.$wrapperEl.css('width')) //Nav的可视宽度
+            navWidth = 0
+            for (i = 0; i < this.slides.length; i++) {
+              navWidth += parseInt(this.slides.eq(i).css('width'))
+            }
+          },
+
+        },
+      });
+      var html1='<div class="discover-item bg-white margin-b-20">'+
+              '<div class="discover-item_contnet container-row">'+
+      '<a href="/" class="imgbox block">'+
+      '<img src="../static/img/demo/zzu2.jpg" alt="">'+
+      '</a>'+
+      '<p class="item-head clearfix">'+
+      '<a href="/" class="red-font2 f30">';
+      var html2='</a>'+
+      '<span class="f24 color6 pull-right">';
+      var html3='</span>'+
+      ' </p>'+
+      '<a href="/" class="block item-title f30 color3 fbold lineclamp2 margin-b-15">';
+      // var html4='</a>'+
+      // '<a href="/" class="block item-content f24 color6 margin-b-15">';
+      var html5='</a>'+
+      '</div>'+
+      '<div class="discover-item_operations clearfix">'+
+      '<a href="/" class="operation-item block text-center pull-left">'+
+      '<i class="icon-download"></i>'+
+      ' <span class="f28 color3 margin-r-20 margin-l-20">评论</span>'+
+      '</a>'+
+      '<a href="/" class="operation-item block text-center pull-left">'+
+      '<i class="icon-share"></i>'+
+      '<span class="f28 color3 margin-r-20 margin-l-20">分享</span>'+
+      '</a>'+
+      '</div>'+
+      '</div>';
+      var news={};
+      $.ajax({
+        url:"/school_war_exploded/new/getNews",
+        type:"POST",
+        dataType:"json",
+        async: false,
+        data:JSON.stringify(news),
+        contentType:'application/json;charset=UTF-8',
+        success:function (data) {
+          if(data.msg == 1){
+            var arr =data.news;
+            for(var i=0;i<data.news.length;i++){
+              $("#aaa").append(html1+arr[i].userId+html2+arr[i].createTime+html3+arr[i].newsDes+html5);
+            }
+          }
+        }
+      });
+
+
+    });
+  </script>
+</body>
+</html>

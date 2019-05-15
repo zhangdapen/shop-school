@@ -12,4 +12,10 @@ public interface NewDao {
      * @return
      */
     List<News> getNewsByUserId(Integer userId);
+
+    /**
+     * 获取所有帖子
+     * @return
+     */
+    List<News> getNews();
 }

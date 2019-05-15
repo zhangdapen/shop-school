@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="../static/js/lib/flexible.js"></script>
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/weui.min.css">
+  <link rel="stylesheet" href="../static/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="../static/css/icon.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/logistics.css">
+  <title>shopping</title>
+</head>
+<body>
+  <div class="header">
+    <a href="/" class="block btn-back">
+      <i class="icon-back"></i>
+    </a>
+    快递查询
+  </div>
+  <div class="main-page">
+    <div class="order-wrap container-row clearfix">
+      <div class="imgbox pull-left">
+        <img src="../static/img/demo/goods3.png" alt="">
+      </div>
+      <div class="info pull-left">
+        <p class="f28 color3"><span class="label color6">物流公司: </span>中通</p>
+        <p class="f28 color3 clearfix"><span class="label color6">物流单号: </span><span class="order-no">7758176519765916</span><span class="btn-copy pull-right color9 f24 text-center" id="btnCopy">复制</span></p>
+        <p class="f28 color3"><span class="label color6">物流电话: </span><a class="color-link" href="tel:95311">95311</a></p>
+      </div>
+    </div>
+    <div class="splitbold-line"></div>
+    <div class="logistics-wrap container-row">
+      <p class="title f28 color3">订单跟踪</p>
+      <ul class="logistics-list">
+        <li class="logistics-item active">
+          <p class="f24">
+            【杭州市】您的快件已【欧美金融城t5快递收发室】百世邻里收取，请尽快前往领取【 <a href="tel:13456142435" class="color-link">13456142435</a> 浙江省杭州市余杭区欧美金融城快递收发室】
+          </p>
+          <p class="f24 margin-t-10">2018-08-28 12:12:12</p>
+        </li>
+        <li class="logistics-item">
+          <p class="f24">
+            【杭州市】您的快件已【欧美金融城t5快递收发室】百世邻里收取，请尽快前往领取【 <a href="tel:13456142435" class="color-link">13456142435</a> 浙江省杭州市余杭区欧美金融城快递收发室】
+          </p>
+          <p class="f24 margin-t-10">2018-08-28 12:12:12</p>
+        </li>
+        <li class="logistics-item">
+          <p class="f24">
+            【杭州市】您的订单到达【杭州仓前站】
+          </p>
+          <p class="f24 margin-t-10">2018-08-28 12:12:12</p>
+        </li>
+        <li class="logistics-item">
+          <p class="f24">
+            订单支付成功
+          </p>
+          <p class="f24 margin-t-10">2018-08-28 12:12:12</p>
+        </li>
+        <li class="logistics-item">
+          <p class="f24">
+            订单提交成功
+          </p>
+          <p class="f24 margin-t-10">2018-08-28 12:12:12</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="../static/js/lib/jquery-2.1.4.js"></script>
+  <script src="../static/js/lib/jquery-weui.min.js"></script>
+  <script src="../static/js/lib/swiper.min.js"></script>
+  <script>
+    $(function() {
+      $('#btnCopy').on('click', function() {
+        var input = document.createElement('input');
+        input.setAttribute('readonly', 'readonly');
+
+        var orderNo = $('.order-no').text()
+        input.setAttribute('value', orderNo);
+        document.body.appendChild(input);
+        input.setSelectionRange(0, 9999);
+        if (document.execCommand('copy')) {
+          document.execCommand('copy');
+        }
+        document.body.removeChild(input);
+      })
+    });
+  </script>
+</body>
+</html>

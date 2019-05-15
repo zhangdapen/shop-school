@@ -9,4 +9,9 @@
         (#{orderId},#{goodsId},#{createTime})
     </insert>
 
+    <select id="getOrderGoodsByOrderId" parameterType="Integer" resultType="cn.zzu.entity.OrderGoods">
+        select *
+        from order_goods
+        where order_id=#{orderId}
+    </select>
 </mapper>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>后台管理系统</title>
+</head>
+<body>
+<form>
+    <div>
+        用户名:<input type="text" id="username"/>
+    </div>
+    <div>
+        密码:<input type="password" id="pass"/>
+    </div>
+    <button onclick="login()">登录</button>
+</form>
+<script>
+    function login(){
+        var username=$("#username").val();
+        var pass=$("#password").val();
+        var userInfo={"username":username,"pass":pass};
+        $.ajax({
+            url:"/school_war_exploded/admin/login",
+            type:"POST",
+            dataType:"json",
+            async: false,
+            data:JSON.stringify(userInfo),
+            contentType:'application/json;charset=UTF-8',
+            success:function (data) {
+                alert(data.msg);
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

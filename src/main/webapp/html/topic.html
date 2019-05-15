@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="../static/js/lib/flexible.js"></script>
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/weui.min.css">
+  <link rel="stylesheet" href="../static/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="../static/css/icon.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/topic.css">
+  <title>shopping</title>
+</head>
+<body>
+  <div class="header">
+    <!--<a href="/" class="block btn-back">-->
+      <!--<i class="icon-back"></i>-->
+    <!--</a>-->
+    电影推荐
+  </div>
+
+  <div class="main-page">
+    <div class="topic-list-wrap">
+      <a href="/" class="topic-item block">
+        <div class="imgbox">
+          <img src="../static/img/demo/goods2.png" alt="">
+        </div>
+        <p class="title f30 color3 fbold margin-b-10">爆款清单</p>
+        <p class="f24 color6 margin-b-20 text-justify lineclamp2">全球时刻的爆款清单；全球时刻的爆款清单；全球时刻的爆款清单；全球时刻的爆款清单；全球时刻的爆款清单；全球时刻的爆款清单；全球时刻的爆款清单</p>
+        <p class="f24 color6">100条动态</p>
+        <i class="icon-arrow-right-big"></i>
+      </a>
+    </div>
+  </div>
+  <div class="weui-tabbar" style="position: fixed">
+    <a href="/school_war_exploded/html/index.html" class="weui-tabbar__item weui-bar__item--on">
+      <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/buy.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">购物</p>
+    </a>
+    <a href="/school_war_exploded/html/coupon.html" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/new.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">新闻</p>
+    </a>
+    <a href="/school_war_exploded/html/discover.html" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/discover.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">发现</p>
+    </a>
+    <a href="/school_war_exploded/manager/owner" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/me.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">我</p>
+    </a>
+  </div>
+  <div class="weui-tabbar" style="position: fixed">
+    <a href="/school_war_exploded/html/index.html" class="weui-tabbar__item weui-bar__item--on">
+      <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/buy.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">购物</p>
+    </a>
+    <a href="/school_war_exploded/html/topic.html" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/icon_nav_msg.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">通讯录</p>
+    </a>
+    <a href="#tab3" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/discover.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">发现</p>
+    </a>
+    <a href="/school_war_exploded/manager/owner" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/me.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">我</p>
+    </a>
+  </div>
+  <script src="../static/js/lib/jquery-2.1.4.js"></script>
+  <script src="../static/js/lib/jquery-weui.min.js"></script>
+  <script src="../static/js/lib/swiper.min.js"></script>
+  <script>
+    $(function() {
+      $.ajax({
+        url:"https://api.douban.com/v2/movie/in_theaters?city=广州&start=0&count=10",
+        dataType:'jsonp',
+        processData: false,
+        type:'get',
+        success:function(data){
+          alert(data.name);
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown) {
+          alert(XMLHttpRequest.status);
+          alert(XMLHttpRequest.readyState);
+          alert(textStatus);
+        }});
+    });
+  </script>
+</body>
+</html>

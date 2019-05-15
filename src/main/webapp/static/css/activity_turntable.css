@@ -1,0 +1,67 @@
+.activity-bg {
+  display: block;
+  width: 100%;
+}
+.main-page {
+  position: absolute;
+  top: 5.12rem;
+  left: 0;
+  width: 100%;
+}
+.main-page .turntable-wrap {
+  position: relative;
+  width: 100%;
+}
+.turntable-transition {
+  transition: transform 10s cubic-bezier(0.4, 0.2, 0, 1.0);
+}
+.main-page .turntable-wrap .turntable{
+  width: 6rem;
+  height: 6rem;
+  margin: auto;
+  background: url(../img/activity_pan.png) no-repeat center;
+  background-size: cover!important;
+}
+.main-page .turntable-wrap .btn-arrow {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 3.14rem;
+  width: 3.14rem;
+  background: url(../img/activity_arrow.png) no-repeat center;
+  background-size: contain!important;
+}
+
+.main-page .turntable-wrap .turntable.transition-scale {
+  transform: rotateZ(720deg);
+}
+
+.dialog-prize {
+  max-width: 6rem;
+  width: 6rem;
+  height: 6rem;
+  background-size: contain!important;
+}
+.dialog-prize.prize-gold-50 {
+  background: url(../img/prize_gold_50.png) no-repeat center;
+}
+.dialog-prize.prize-gold-20 {
+  background: url(../img/prize_gold_20.png) no-repeat center;
+}
+.dialog-prize.prize-gold-10 {
+  background: url(../img/prize_gold_10.png) no-repeat center;
+}
+.dialog-prize.prize-gold-5 {
+  background: url(../img/prize_gold_5.png) no-repeat center;
+}
+.dialog-prize.prize-cut-quarter {
+  background: url(../img/prize_cut_quarter.png) no-repeat center;
+}
+.dialog-prize.prize-cut-half {
+  background: url(../img/prize_cut_half.png) no-repeat center;
+}
+.dialog-prize.prize-cut-all {
+  background: url(../img/prize_cut_all.png) no-repeat center;
+}

@@ -2,6 +2,7 @@ package cn.zzu.service;
 
 import cn.zzu.entity.UserCart;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,7 +15,7 @@ public interface UserCartService {
      * @param userCart  购物车类
      * @return
      */
-    int setInsertUserCartInfo(UserCart userCart);
+    Map<String,Object> setInsertUserCartInfo(UserCart userCart);
 
     /**
      * 删除单个商品
@@ -35,5 +36,5 @@ public interface UserCartService {
      * @param userId
      * @return
      */
-    Map<Integer,UserCart> getSelectUserCarInfo(Integer userId);
+    Map<String,Object> getSelectUserCarInfo(Integer userId);
 }

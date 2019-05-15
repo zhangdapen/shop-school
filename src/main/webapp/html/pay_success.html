@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="../static/js/lib/flexible.js"></script>
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/weui.min.css">
+  <link rel="stylesheet" href="../static/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="../static/css/icon.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/pay_success.css">
+  <title>shopping</title>
+</head>
+<body>
+	<div class="header">
+    <a href="javascript:;" class="block btn-back">
+      <i class="icon-back"></i>
+    </a>
+   	 支付完成 	
+  </div>
+  <div class="main-page">
+    <i class="icon-pay-success"></i>
+    <p id="lastprice" class="f36 color6 text-center price-row"></p>
+    <div class="text-center btn-row">
+      <a href="/" class="btn">查看订单</a>
+      <a href="/school_war_exploded/html/index.html" class="btn">返回首页</a>
+    </div>
+  </div>
+  <script src="../static/js/lib/jquery-2.1.4.js"></script>
+  <script src="../static/js/lib/jquery-weui.min.js"></script>
+  <script src="../static/js/lib/swiper.min.js"></script>
+  <script>
+    $(function() {
+      //获取url数据
+      function  getParams(name, href) {
+        var href = href || window.location.href,
+                value = '';
+
+        if (name) {
+          var reg = new RegExp(name + '=([^&]*)', 'g');
+          href.replace(reg, function($0, $1) {
+            value = decodeURI($1);
+          });
+        } else {
+          value = {};
+          var reg = /\b(\w+)=([^\/&]*)/g;
+          href.replace(reg, function($0, $1, $2) {
+            value[$1] = decodeURI($2);
+          });
+        }
+        return value;
+      };
+      $("#lastprice").text("¥"+getParams("price"));
+    });
+  </script>
+</body>
+</html>

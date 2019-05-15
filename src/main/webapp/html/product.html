@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../static/js/lib/flexible.js"></script>
+  <link rel="stylesheet" href="../static/css/icon.css">
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/weui.min.css">
+  <link rel="stylesheet" href="../static/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/product.css">
+  <title>shopping</title>
+</head>
+<body>
+  <div class="product-header clearfix">
+    <a href="index.html" class="block pull-left">
+      <i class="icon-back"></i>
+    </a>
+    <a href="javascript:;" class="block pull-right open-popup" data-target="#sharePopup1">
+      <i class="icon-share"></i>
+    </a>
+  </div>
+	<div class="main-page">
+    <div class="swiper-container goods-swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1n3rZHFXXXXX9XFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
+        <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i4/TB10rkPGVXXXXXGapXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
+        <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
+      </div>
+      <div class="swiper-pagination"></div>
+      </div>
+      <!--商品本来价格-->
+      <div class="goods-passprice">
+        <span class="red-font">¥</span><span id="price" class="red-font">¥</span>
+      </div>
+      <!--商品具体详情-->
+      <div class="goods-detail-one">
+        <div class="details-1 clearfix">
+          <div id="desc" class="goods-detail-name lineclamp2">
+
+          </div>
+          <div id="g" class="goods-detail-save">
+            <i class="icon-favorite"></i>
+            <span class="f24">收藏</span>
+            <div class="save-line"></div>
+          </div>
+        </div>
+      </div>
+      <div class="split-line"></div>
+      <div class="goods-ensure clearfix">
+        <ul class="clearfix fl">
+          <li>
+            <img src="../static/img/icon-real.png" alt="" />
+            <span>真实可靠 </span>
+          </li>
+          <li>
+            <img src="../static/img/icon-pay.png" alt="" />
+            <span>人人公益 </span>
+          </li>
+          <li>
+            <img src="../static/img/icon-return.png" alt="" />
+            <span>送货上楼 </span>
+          </li>
+        </ul>
+        <i class="icon-arrow-right fr"></i>
+      </div>
+      <div class="splitbold-line"></div>
+      <!--系列参数-->
+      <ul class="goods-basiclist">
+        <li class="basicitem clearfix">
+          <div class="basicitem-name">范围</div>
+          <div class="basicitem-param">校园内商品流动,安全可靠</div>
+          <i class="icon-arrow-right"></i>
+        </li>
+        <!--<div class="split-line"></div>-->
+        <!--<li class="basicitem clearfix">-->
+          <!--<div class="basicitem-name">促销</div>-->
+          <!--<div class="basicitem-param red-font">100元任选5件</div>-->
+          <!--<i class="icon-arrow-right"></i>-->
+        <!--</li>-->
+        <!--<div class="split-line"></div>-->
+        <!--<li class="basicitem clearfix" data-popid="couponmodal">-->
+          <!--<a href="javascript:;" class="block open-popup clearfix" data-target="#couponPopup">-->
+            <!--<div class="basicitem-name">领券</div>-->
+            <!--<div class="basicitem-param red-font">满1000减200元优惠券</div>-->
+            <!--<i class="icon-arrow-right"></i>-->
+          <!--</a>-->
+        <!--</li>-->
+        <div class="split-line"></div>
+        <li class="basicitem clearfix">
+          <a href="javascript:;" class="block open-popup clearfix" data-target="#postagePopup">
+            <div class="basicitem-name">运费</div>
+            <div class="basicitem-param">免运费送货上楼</div>
+            <i class="icon-arrow-right"></i>
+          </a>
+        </li>
+        <div class="split-line"></div>
+        <li class="basicitem clearfix">
+          <div class="basicitem-name">说明</div>
+          <div class="basicitem-param">退货需要自行协商</div>
+          <i class="icon-arrow-right"></i>
+        </li>
+      </ul>
+  </div>
+  <!-- footer1 -->
+  <div class="product-footer clearfix" style="">
+    <div class="page-links pull-left weui-flex">
+      <a href="index.html" class="link block weui-flex__item text-center">
+        <i class="icon-home"></i>
+        <span>首页</span>
+      </a>
+      <a href="shopcart.html" class="link block weui-flex__item text-center">
+        <i class="icon-shoppingcar"></i>
+        <span>购物车</span>
+      </a>
+    </div>
+    <a id="addcar" href="javascript:;" class="btn btn-add-car pull-left block open-popup" data-target="#specselectPopup">
+      加入购物车
+    </a>
+    <a id="buy" href="javascript:;" class="btn btn-buy pull-left block open-popup" data-target="#specselectPopup">
+      立即购买
+    </a>
+  </div>
+  <!-- footer2 -->
+  <div class="product-footer product-footer2 clearfix" style="display: none">
+    <div class="page-links pull-left weui-flex">
+      <a href="/" class="link block weui-flex__item text-center">
+        <i class="icon-home"></i>
+        <span>首页</span>
+      </a>
+      <a href="/" class="link block weui-flex__item text-center link-car">
+        <i class="icon-shoppingcar"></i>
+        <span>购物车</span>
+        <span class="num">3</span>
+      </a>
+    </div>
+    <a id="setaddr" href="javascript:;" class="btn btn-add-car pull-left block open-popup" data-target="#specselectPopup">
+      加入购物车
+    </a>
+  </div>
+  <!-- 回到顶部按钮 -->
+  <i class="scroll-top"></i>
+	<!--弹出框说明系列-->
+  <!-- 分享弹窗一 -->
+  <div class="weui-popup__container share-popup popup-bottom" id="sharePopup1">
+    <div class="weui-popup__overlay"></div>
+    <div class="weui-popup__modal">
+      <p class="title">分享</p>
+      <p class="tip">分享给其他同学吧</p>
+      <div class="share-type weui-flex">
+        <div class="weui-flex__item item text-center">
+          <i class="icon-link"></i>
+          <p>复制链接</p>
+        </div>
+        <div class="weui-flex__item item text-center">
+          <i class="icon-code"></i>
+          <p>商品二维码</p>
+        </div>
+        <div class="weui-flex__item item text-center">
+          <i class="icon-share-wx"></i>
+          <p>微信好友</p>
+        </div>
+        <div class="weui-flex__item item text-center">
+          <i class="icon-share-wxcircle"></i>
+          <p>朋友圈</p>
+        </div>
+      </div>
+      <a href="javascript:;" class="btn-close close-popup">
+        <i></i>
+      </a>
+    </div>
+  </div>
+  <!-- 分享弹窗二 -->
+  <div class="weui-popup__container share-popup popup-bottom" id="sharePopup2">
+    <div class="weui-popup__overlay"></div>
+    <div class="weui-popup__modal">
+      <p class="title">分享到</p>
+      <div class="share-type weui-flex">
+        <div class="weui-flex__item item text-center">
+          <i class="icon-link"></i>
+          <p>复制链接</p>
+        </div>
+        <div class="weui-flex__item item text-center">
+          <i class="icon-share-wx"></i>
+          <p>微信好友</p>
+        </div>
+        <div class="weui-flex__item item text-center">
+          <i class="icon-share-wxcircle"></i>
+          <p>朋友圈</p>
+        </div>
+      </div>
+      <a href="javascript:;" class="btn-close close-popup">
+        <i></i>
+      </a>
+    </div>
+  </div>
+  <script src="../static/js/lib/jquery-2.1.4.js"></script>
+  <script src="../static/js/lib/jquery-weui.min.js"></script>
+  <script src="../static/js/lib/swiper.min.js"></script>
+  <script type="text/javascript">
+    function  getParams(name, href) {
+      var href = href || window.location.href,
+              value = '';
+
+      if (name) {
+        var reg = new RegExp(name + '=([^&]*)', 'g');
+        href.replace(reg, function($0, $1) {
+          value = decodeURI($1);
+        });
+      } else {
+        value = {};
+        var reg = /\b(\w+)=([^\/&]*)/g;
+        href.replace(reg, function($0, $1, $2) {
+          value[$1] = decodeURI($2);
+        });
+      }
+      return value;
+    };
+
+  	$(function() {
+  	  //初始化页面
+      var goodsId=getParams("goodsId");
+      var goods={"goodsId":goodsId};
+      var id;
+      $.ajax({
+        url:"/school_war_exploded/goods/getGoodsById",
+        type:"POST",
+        dataType:"json",
+        async: false,
+        data:JSON.stringify(goods),
+        contentType:'application/json;charset=UTF-8',
+        success:function (data) {
+          if(data.msg == 1){
+            $("#price").text(data.goodsInfo.goodsPrice);
+            $("#desc").text(data.goodsInfo.goodsDes);
+            id=data.goodsInfo.goodsId;
+          }
+        }
+      });
+
+      var prouserId;
+      //加入购物车操作
+      $("#addcar").on("click",function () {
+        //获取userId
+        var a={"id":id};
+        $.ajax({
+          url:"/school_war_exploded/admin/info",
+          type:"POST",
+          dataType:"json",
+          async: false,
+          data:JSON.stringify(a),
+          contentType:'application/json;charset=UTF-8',
+          success:function (data) {
+            if(data.msg == 1){
+              prouserId=data.userInfoId
+            }
+          }
+        });
+        var userCar = {"goodsId":goodsId,"userId":prouserId};
+        $.ajax({
+          url:"/school_war_exploded/car/setCar",
+          type:"POST",
+          dataType:"json",
+          async: false,
+          data:JSON.stringify(userCar),
+          contentType:'application/json;charset=UTF-8',
+          success:function (data) {
+            if(data.msg == 1){
+              $.toast("添加成功");
+            }
+          }
+        });
+      });
+
+
+      var count=0;
+      // 收藏及取消
+      $('.goods-detail-save').on('click', function () {
+        count++;
+        if(count % 2 == 0){
+          //取消操作
+          if($("#g").hasClass("active")){
+            var goodsId = {"goodsId":id};
+            $.ajax({
+              url:"/school_war_exploded/coll/updateColl",
+              type:"POST",
+              dataType:"json",
+              async: false,
+              data:JSON.stringify(goodsId),
+              contentType:'application/json;charset=UTF-8',
+              success:function (data) {
+                $("#g").removeClass("active");
+              }
+            });
+          }
+        }else{
+          //收藏操作
+          var desc=$("#desc").html();
+          var price=$("#price").html();
+          var coll={"desc":desc,"price":price,"id":id};
+          $.ajax({
+            url:"/school_war_exploded/coll/setColl",
+            type:"POST",
+            dataType:"json",
+            async: false,
+            data:JSON.stringify(coll),
+            contentType:'application/json;charset=UTF-8',
+            success:function (data) {
+              if(data.msg == 1){
+                $("#g").addClass('active');
+              }
+            }
+          });
+        }
+
+      })
+
+      $('.scroll-top').click(function() {
+        $("html,body").animate({scrollTop:0},"fast");
+      });
+
+
+      var bannerSwiper = new Swiper('.goods-swiper-container', {
+        loop: true,
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'fraction',
+          renderFraction: function(currentClass, totalClass) {
+            return '<span class="' + currentClass + '"></span>' + '/' + '<span class="' + totalClass + '"></span>';
+          },
+        },
+      });
+
+      $('.spec-item').on('click', function () {
+        var $this = $(this)
+        if ($this.hasClass('disabled')) return
+        $this.siblings('.spec-item').removeClass('active');
+        $this.toggleClass('active')
+      })
+
+      $('.num-input').on('input', function() {
+        var $this = $(this);
+        if ($this.val() || $this.val() > 0) {
+          $this.prev().removeClass('disabled');
+        } else {
+          $this.prev().addClass('disabled');
+        }
+      })
+
+      $('.num-add').on('click', function() {
+        var $this = $(this);
+        var $input = $this.prev();
+        var num = parseInt($input.val() || 0);
+
+        if ($this.hasClass('disabled')) return;
+
+        $input.val(num + 1);
+        $('.num-minus').removeClass('disabled');
+      })
+
+      $('.num-minus').on('click', function() {
+        var $this = $(this);
+        var $input = $this.next();
+        var num = parseInt($input.val() || 0);
+
+        if ($this.hasClass('disabled') && num === 0) return;
+
+        num--;
+        $input.val(num);
+
+        if (num === 0) $this.addClass('disabled');
+        $('.num-add').removeClass('disabled');
+      })
+  	});
+  </script>
+</body>
+</html>

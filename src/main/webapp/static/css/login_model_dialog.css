@@ -1,0 +1,31 @@
+.dialog-check-phone input {
+  display: block;
+  width: 100%;
+  color: #999;
+  background: none;
+  border: none;
+  border-bottom: 1px #C1C1C1 solid;
+  padding: .08rem 0;
+  font-size: .28rem;
+  line-height: .28rem;
+  outline: none;
+}
+.dialog-check-phone .tip {
+  margin-bottom: .35rem;
+  margin-top: .1rem;
+}
+.dialog-check-phone .weui-dialog__bd {
+  /* margin-bottom: .35rem */
+}
+.dialog-check-phone .phone-code-row {
+  position: relative;
+}
+.dialog-check-phone .phone-code-row input {
+  padding-right: 1.2rem;
+}
+.dialog-check-phone .phone-code-row .btn-code {
+  position: absolute;
+  right: 0;
+  top: 0;
+  line-height: .52rem;
+}

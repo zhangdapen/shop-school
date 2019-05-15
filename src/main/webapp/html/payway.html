@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../static/js/lib/flexible.js"></script>
+  <link rel="stylesheet" href="../static/css/icon.css">
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/weui.min.css">
+  <link rel="stylesheet" href="../static/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/payway.css">
+  <title>shopping</title>
+</head>
+<body>
+	<div class="header">
+    <a href="javascript:;" class="block btn-back">
+      <i class="icon-back"></i>
+    </a>
+   	 支付方式   	
+  </div>
+  <div class="headersplit-h"></div>
+  <div class="pay-price">
+  	订单总额：
+      <b class="red-font">¥</b><b class="red-font" id="lastprice"></b>
+  </div>
+  <div class="splitbold-line"></div>
+  <div class="pay-way">
+  	<h4>请选择支付方式</h4>
+  	<ul class="payway-list weui-cells_radio">
+  		<li>
+        <label for="payway1" class="clearfix block weui-check__label">
+          <img src="../static/img/pay-wechat.png" alt="" />
+          <span>微信支付</span> 
+          <!-- <div class="radioinput pull-right">
+            <input type="radio" name="payway" id="radio-1-0"/><label for="radio-1-0"></label>
+          </div> -->
+          <div class="btn-checkbox pull-right">
+            <input type="radio" class="weui-check coupon-check" name="payway" id="payway1">
+            <i class="icon-checked"></i>
+          </div>
+        </label>
+  		</li>
+  		<li>
+        <label for="payway2" class="clearfix block weui-check__label">
+          <img src="../static/img/pay-zhifubao.png" alt="" />
+          <span>支付宝支付</span>
+          <!-- <div class="radioinput pull-right">
+            <input type="radio" name="payway" id="radio-1-1"/><label for="radio-1-1"></label>
+          </div> -->
+          <div class="btn-checkbox pull-right">
+            <input type="radio" class="weui-check coupon-check" name="payway" id="payway2">
+            <i class="icon-checked"></i>
+          </div>
+        </label>
+  		</li>
+  		<li>
+        <!--<label for="payway3" class="clearfix block weui-check__label">-->
+          <!--<img src="../static/img/pay-bank.png" alt="" />-->
+          <!--<span>微校支付</span>-->
+          <!--<span class="gray-font">（推荐）</span>-->
+          <!--&lt;!&ndash; <div class="radioinput pull-right">-->
+            <!--<input type="radio" name="payway" id="radio-1-2"/><label for="radio-1-2"></label>-->
+          <!--</div> &ndash;&gt;-->
+          <!--<div class="btn-checkbox pull-right">-->
+            <!--<input type="radio" class="weui-check coupon-check" name="payway" id="payway3">-->
+            <!--<i class="icon-checked"></i>-->
+          <!--</div>-->
+        <!--</label>-->
+  		</li>
+  	</ul>
+  </div>
+  <!--&lt;!&ndash;填写错误提醒&ndash;&gt;-->
+  <!--<div class="nopay-tip">-->
+  	<!--<p class="gray-font f28">如支付失败，提示： <br />您的身份资料与账户资料不匹配，请核实后再发起支付。请重新填写身份信息</p>-->
+  	<!--<div class="text-center"><a href="javascript:;" class="red-font f28 open-popup" data-target="#verifyPopup">去填写实名认证信息></a></div>-->
+  <!--</div>-->
+  <!--底部操作-->
+  <div class="bottom-geduan"></div>
+	<!--底部固定 购买-->
+	<div class="cart-bottom">
+		<button id="pay" type="button" class="pay-btn" onclick="pay()">立即支付</button>
+  </div>
+ 
+  <!--&lt;!&ndash; 实名认证popup &ndash;&gt;-->
+  <!--<div class="weui-popup__container verify-popup popup-bottom" id="verifyPopup">-->
+    <!--<div class="weui-popup__overlay"></div>-->
+    <!--<div class="weui-popup__modal">-->
+      <!--<div class="main">-->
+        <!--<p class="title f32 color3">实名认证</p>-->
+        <!--<p class="f24 color6">您购买的跨境商品／特殊商品，需要提供身份信息，<span class="red-font">且身份信息与微信的实名信息一致,可以与收货人信息不同 仅用于海关检验</span></p>-->
+        <!--<input class="name" type="text" placeholder="真实姓名">-->
+        <!--<input class="idnumber" type="text" placeholder="身份证号码">-->
+      <!--</div>-->
+		  <!--<button type="button" class="btn-submit">提交</button>		-->
+    <!--</div>-->
+  <!--</div>-->
+  <script src="../static/js/lib/jquery-2.1.4.js"></script>
+  <script src="../static/js/lib/jquery-weui.min.js"></script>
+  <script src="../static/js/lib/swiper.min.js"></script>
+  <script>
+      var price;
+    $(function() {
+        //获取url数据
+        function  getParams(name, href) {
+            var href = href || window.location.href,
+                value = '';
+
+            if (name) {
+                var reg = new RegExp(name + '=([^&]*)', 'g');
+                href.replace(reg, function($0, $1) {
+                    value = decodeURI($1);
+                });
+            } else {
+                value = {};
+                var reg = /\b(\w+)=([^\/&]*)/g;
+                href.replace(reg, function($0, $1, $2) {
+                    value[$1] = decodeURI($2);
+                });
+            }
+            return value;
+        };
+
+        price=getParams("price");
+        $("#lastprice").text(price);
+        var rm=document.getElementsByName("payway");
+        var flag=false;
+        for(var i=0;i<rm.length;i++){
+            if(rm[i].checked){
+                flag=false;
+                break;
+            }
+        }
+        if(!flag){
+            rm[0].checked=true;
+        }
+
+      $('.btn-back').on('click', function() {
+        var $this = $(this);
+        $.modal({
+          title: "确认放弃支付吗？",
+          text: "超过订单支付时间后，订单将被取消，请尽快完成支付。",
+          buttons: [
+            { text: "放弃", className: "confirm-concel color6 f32", onClick: function(){ console.log(1)} },
+            { text: "继续支付", className: "confirm-sure red-font f32", onClick: function(){ console.log(2)} },
+          ]
+        });
+      });
+
+      // $('.btn-submit').on('click', function() {
+      //   $.modal({
+      //     title: "",
+      //     text: "姓名与身份证信息不一致",
+      //     buttons: [
+      //       { text: "重新认证", className: "confirm-sure red-font f32", onClick: function(){ console.log(2)} },
+      //     ]
+      //   });
+
+        // $.modal({
+        //   title: "",
+        //   text: "您的身份证信息有误，请重试",
+        //   buttons: [
+        //     { text: "重新认证", className: "confirm-sure red-font f32", onClick: function(){ console.log(2)} },
+        //   ]
+        // });
+          // })
+    });
+    function pay(){
+        window.location.href="pay_success.html?price="+price;
+    }
+  </script>
+</body>
+</html>

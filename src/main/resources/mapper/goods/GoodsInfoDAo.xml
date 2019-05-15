@@ -16,4 +16,27 @@
         from goods_info
         where goods_id=#{goodsId}
     </select>
+
+    <select id="getGoodsInfoById" resultType="cn.zzu.entity.GoodsInfo">
+        select *
+        from goods_info
+        where goods_id=#{goodsId}
+    </select>
+
+    <select id="getGoodsInfo" resultType="cn.zzu.entity.GoodsInfo">
+        select *
+        from goods_info
+    </select>
+
+    <select id="getGoodsInfoByCategory" resultType="cn.zzu.entity.GoodsInfo">
+        select *
+        from goods_info
+        where category_id=#{categoryId}
+    </select>
+
+    <select id="getGoodsInfoByGoodsId" resultType="cn.zzu.entity.GoodsInfo">
+        select *
+        from goods_info
+        where goods_id=#{goodsId}
+    </select>
 </mapper>

@@ -9,6 +9,9 @@
         where user_id =#{userId}
     </select>
 
-
+    <select id="getNews"  resultType="cn.zzu.entity.News">
+        select *
+        from news
+    </select>
 
 </mapper>

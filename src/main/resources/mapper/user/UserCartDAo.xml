@@ -27,6 +27,7 @@
         select *
         from user_cart
         where user_id=#{userId}
+        and cart_state=0
     </select>
 
 </mapper>

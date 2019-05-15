@@ -1,0 +1,30 @@
+.main-page {
+  padding-top: 2rem;
+}
+.icon-pay-success {
+  width: 3.16rem;
+  height: .6rem;
+  display: block;
+  margin: auto;
+  background: url(../img/icon-pay-success.png) no-repeat center;
+  background-size: contain!important;
+}
+
+.price-row {
+  margin: .32rem auto;
+}
+.btn-row {
+  font-size: 0;
+}
+.btn-row .btn {
+  display: inline-block;
+  vertical-align: middle;
+  height: .72rem;
+  line-height: .7rem;
+  width: 1.8rem;
+  border: 1px solid #D1D1D1;
+  border-radius: .04rem;
+  font-size: .28rem;
+  color: #666;
+  margin: auto .32rem;
+}

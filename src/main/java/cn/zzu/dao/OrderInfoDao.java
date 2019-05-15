@@ -14,4 +14,11 @@ public interface OrderInfoDao {
      * @return
      */
     int insertOrderInfo(OrderInfo orderInfo);
+
+    /**
+     * 根据orderId获取订单信息
+     * @param orderId
+     * @return
+     */
+    OrderInfo getOrderInfoByOrderId(Integer orderId);
 }

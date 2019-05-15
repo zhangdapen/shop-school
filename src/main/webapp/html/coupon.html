@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="../static/js/lib/flexible.js"></script>
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/weui.min.css">
+  <link rel="stylesheet" href="../static/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="../static/css/icon.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/topic.css">
+  <title>shopping</title>
+</head>
+<body>
+<div class="header">
+  <!--<a href="/" class="block btn-back">-->
+  <!--<i class="icon-back"></i>-->
+  <!--</a>-->
+  豆瓣TOP10
+</div>
+
+<div id="movie" class="main-page">
+</div>
+<div class="weui-tabbar" style="position: fixed">
+  <a href="/school_war_exploded/html/index.html" class="weui-tabbar__item weui-bar__item--on">
+    <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+    <div class="weui-tabbar__icon">
+      <img src="/school_war_exploded/images/buy.png" alt="">
+    </div>
+    <p class="weui-tabbar__label">购物</p>
+  </a>
+  <a href="/school_war_exploded/html/coupon.html" class="weui-tabbar__item">
+    <div class="weui-tabbar__icon">
+      <img src="/school_war_exploded/images/new.png" alt="">
+    </div>
+    <p class="weui-tabbar__label">电影推荐</p>
+  </a>
+  <a href="/school_war_exploded/html/discover.html" class="weui-tabbar__item">
+    <div class="weui-tabbar__icon">
+      <img src="/school_war_exploded/images/discover.png" alt="">
+    </div>
+    <p class="weui-tabbar__label">发现</p>
+  </a>
+  <a href="/school_war_exploded/manager/owner" class="weui-tabbar__item">
+    <div class="weui-tabbar__icon">
+      <img src="/school_war_exploded/images/me.png" alt="">
+    </div>
+    <p class="weui-tabbar__label">我</p>
+  </a>
+</div>
+<script src="../static/js/lib/jquery-2.1.4.js"></script>
+<script src="../static/js/lib/jquery-weui.min.js"></script>
+<script src="../static/js/lib/swiper.min.js"></script>
+<script>
+  var html1='<div class="topic-list-wrap"><a href="/" class="topic-item block"><div class="imgbox">';
+  var html2='<img src="';
+
+  var html3='" alt=""></div><p class="title f30 color3 fbold margin-b-10">';
+
+  var html4='</p><p class="f24 color6 margin-b-20 text-justify lineclamp2">';
+
+  var html5='</p><p class="f24 color6">';
+
+  var html6='</p><i class="icon-arrow-right-big"></i></a></div>';
+  $(function() {
+    $.ajax({
+      url:"https://douban.uieee.com/v2/movie/in_theaters?city=%E5%B9%BF%E5%B7%9E&start=0&count=10",
+      dataType:'jsonp',
+      processData: false,
+      type:'get',
+      success:function(data){
+        var arr = data.subjects;
+        for(var i=0;i<data.subjects.length;i++){
+          $("#movie").append(html1+html2+getImages(arr[i].images.large)+html3+arr[i].title+html4+arr[i].year+html4+html5+arr[i].genres[0]);
+        }
+        function getImages( _url ){
+          if( _url !== undefined ){
+            var _u = _url.substring( 7 );
+            return 'https://images.weserv.nl/?url=' + _u;
+          }
+        }
+      },
+      error:function(XMLHttpRequest, textStatus, errorThrown) {
+        alert(XMLHttpRequest.status);
+        alert(XMLHttpRequest.readyState);
+        alert(textStatus);
+      }});
+  });
+</script>
+</body>
+</html>

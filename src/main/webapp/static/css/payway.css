@@ -1,0 +1,102 @@
+/*购物车css*/
+.pay-price{
+	height: 1rem;
+	line-height: 1rem;
+	padding: 0 0.2rem;
+	font-size: 0.28rem;
+}
+.pay-price b{
+	font-size: 0.44rem;
+	margin-left: 0.2rem;
+}
+.pay-way h4{
+	height: 0.96rem;
+	line-height: 0.96rem;
+	padding: 0 0.2rem;
+  font-size: 0.28rem;
+	border-bottom: 1px solid rgba(240,240,240,1);
+}
+.pay-way ul{
+	padding-left: 0.32rem;
+}
+.pay-way ul li{
+	/* padding:0.32rem 0.32rem 0.32rem 0;
+	line-height: 0.4rem;
+	font-size: 0.32rem;	 */
+	border-bottom: 1px solid rgba(240,240,240,1);
+}
+.pay-way ul li label {
+  position: relative;
+  padding:0.28rem 0.32rem 0.28rem 0;
+  height: 1.16rem;
+	line-height: 0.6rem;
+	font-size: 0.32rem;	
+}
+.pay-way ul li img{
+	width: 0.58rem;
+	height: 0.58rem;
+	margin-right: 0.3rem;
+	vertical-align: middle;
+}
+.pay-way ul li span{
+	margin-right: 0.1rem;
+}
+/*底部固定*/
+.cart-bottom{
+	position: fixed;
+	bottom: 0;
+	z-index: 8;
+	background: #fff;
+	left: 0;
+	right: 0;
+}
+.pay-btn, 
+.btn-submit {
+	width:100%;
+	height:1.1rem;
+	background:rgba(214,21,24,1);
+	line-height: 1.1rem;
+	text-align: center;
+	color: #fff;
+	font-size: 0.32rem;
+}
+.nopay-tip{
+	width:6.86rem;
+	height:2.1rem;
+	background:rgba(246,246,246,1);
+	border-radius:0.16rem;
+	margin:0 auto;
+	margin-top: 2.4rem;
+	padding:0.18rem 0.24rem;
+	line-height: 0.4rem;
+}
+.nopay-tip p{
+	line-height: 0.4rem;
+	margin-bottom: 0.2rem;
+}
+.nopay-tip a{	
+	
+}
+
+.payway-list .btn-checkbox{
+  margin-top: .1rem;
+}
+
+.verify-popup .weui-popup__modal .main {
+  padding: .32rem;
+}
+.verify-popup .main input {
+  width: 100%;
+  height: .72rem;
+  padding: .18rem .32rem;
+  line-height: .34rem;
+  border: 1px solid #D2D2D2;
+  outline: none;
+  font-size: .24rem;
+  color: #666;
+  border-radius: .08rem;
+  margin-bottom: .16rem;
+}
+.verify-popup .main input.name {
+  margin-top: .36rem;
+}

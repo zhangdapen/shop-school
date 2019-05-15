@@ -1,0 +1,65 @@
+/*购物车css*/
+.address-way{
+
+}
+.address-way li{
+	padding: 0.32rem;
+	background:#fff;
+	border-bottom: 1px solid rgba(240,240,240,1);
+}
+.address-way li.active{
+	background:rgba(243,243,243,1);
+}
+.address-way li .address-check .radioinput{
+	display: none;
+}
+.address-way li.active .address-check .radioinput{
+	display: block;
+}
+.address-way li .edit-address{
+	height: 1.36rem;
+	display: flex;
+	align-items: center;
+	float: left;
+	margin-right: 0.3rem;
+}
+.address-info{
+	float: left;
+	width: 5.45rem;
+}
+.address-info .address-info-one{
+	margin-bottom: 0.2rem;
+}
+.address-name{
+	max-width: 2.6rem;
+}
+.address-info-two{
+	line-height: 0.34rem;
+}
+.address-check{
+	float: right;
+	height: 1.36rem;
+	width: 0.4rem;
+	display: flex;
+	align-items: center;
+}
+
+/*底部固定*/
+.cart-bottom{
+	position: fixed;
+	bottom: 0;
+	z-index:100;
+	background: #fff;
+	left: 0;
+	right: 0;
+}
+.pay-btn{
+	width:100%;
+	height:1.1rem;
+	background:rgba(214,21,24,1);
+	line-height: 1.1rem;
+	text-align: center;
+	color: #fff;
+	font-size: 0.32rem;
+}
+

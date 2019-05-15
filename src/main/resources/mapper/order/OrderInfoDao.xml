@@ -2,11 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.zzu.dao.OrderInfoDao">
     <insert id="insertOrderInfo" parameterType="cn.zzu.entity.OrderInfo" useGeneratedKeys="true" keyProperty="orderId">
+        <selectKey resultType="java.lang.Integer" keyProperty="orderId" order="AFTER" >
+            SELECT LAST_INSERT_ID()
+        </selectKey>
         insert into
         order_info
-        (order_amount,addr_id,order_satet,create_time)
+        (order_amount,addr_id,order_state,create_time)
         values
-        (#{orderAmount},#{addrId},#{1},#{createTime})
+        (#{orderAmount},#{addrId},1,#{createTime})
     </insert>
 
+
+    <select id="getOrderInfoByOrderId" parameterType="Integer" resultType="cn.zzu.entity.OrderInfo">
+        select *
+        from order_info
+        where order_id=#{orderId} and order_state=1
+    </select>
 </mapper>

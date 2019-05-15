@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="../static/js/lib/flexible.js"></script>
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/weui.min.css">
+  <link rel="stylesheet" href="../static/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="../static/css/icon.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/wage_detail.css">
+  <title>shopping</title>
+</head>
+<body>
+  <div class="header">
+    <a href="/" class="block btn-back">
+      <i class="icon-back"></i>
+    </a>
+    工资明细
+  </div>
+  <div class="main-page">
+    <div class="date-row bg-white container-row">
+      <input id="dateInput" class="weui-input" type="text" value="2016年 1月" readonly>
+      <i class="icon-calendar"></i>
+    </div>
+    <div class="transaction-wrap bg-white container-row clearfix margin-b-20">
+      <i class="icon-table pull-left icon margin-r-10"></i>
+      <span class="f30 color3">交易完成销售额</span>
+      <span class="f30 red-font2 pull-right">¥150000000.00</span>
+    </div>
+    <div class="transaction-wrap bg-white container-row clearfix border_b">
+      <i class="icon-black-card pull-left icon margin-r-10"></i>
+      <span class="f30 color3">创业黑卡开通人数:</span>
+      <span class="f30 color3 pull-right">100</span>
+    </div>
+    <div class="transaction-wrap bg-white container-row clearfix margin-b-20">
+      <i class="icon-gold-card pull-left icon margin-r-10"></i>
+      <span class="f30 color3">全球金卡开通人数:</span>
+      <span class="f30 color3 pull-right">100</span>
+    </div>
+    <div class="tip-wrap bg-white container-row margin-b-20">
+      <p class="color6 f24">*预计工资收入(交易完成销售额x1.5%+当月市场政策奖励)： </p>
+      <span class="f30 red-font2">¥150000000.00x1.5%=12345677.00</span>
+    </div>
+    <div class="transaction-wrap bg-white container-row clearfix margin-b-20">
+      <span class="f30 color3">12月工资</span>
+      <span class="f30 red-font2 pull-right">¥150000000.00</span>
+    </div>
+    <div class="transaction-wrap bg-white container-row clearfix margin-b-20">
+      <span class="f30 color3">合计收入</span>
+      <span class="f30 red-font2 pull-right">¥150000000.00</span>
+    </div>
+  </div>
+
+  <script src="../static/js/lib/jquery-2.1.4.js"></script>
+  <script src="../static/js/lib/jquery-weui.min.js"></script>
+  <script src="../static/js/lib/swiper.min.js"></script>
+  <script>
+    $(function() {
+      $('#dateInput').picker({
+        title: "请选择年月",
+        cols: [
+          {
+            textAlign: 'center',
+            values: ['2000年','2001年','2002年','2003年','2004年','2005年','2006年',
+            '2007年','2008年','2009年','2010年','2011年','2012年','2013年','2014年',
+            '2015年','2016年','2017年','2018年','2019年']
+          },
+          {
+            textAlign: 'center',
+            values: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+          }
+        ],
+        onChange: function(e, values) {
+
+        },
+        onClose: function(e) {
+          console.log(e.displayValue)
+        }
+      });
+    });
+  </script>
+</body>
+</html>

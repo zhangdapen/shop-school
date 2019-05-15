@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="../static/js/lib/flexible.js"></script>
+  <link rel="stylesheet" href="../static/css/icon.css">
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/weui.min.css">
+  <link rel="stylesheet" href="../static/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/login_model_dialog.css">
+  <title>shopping</title>
+</head>
+<body>
+
+  <div class="weui-mask transition"></div>
+  <!-- 验证手机号 -->
+  <button id="checkPhone" style="margin: .4rem;padding: .2rem;">验证手机号</button>
+  <div class="weui-dialog dialog-check-phone transition">
+    <div class="weui-dialog__hd clearfix">
+      <i class="icon-close pull-right"></i>
+    </div>
+    <div class="weui-dialog__bd text-left">
+      <p class="f28 color3 text-center tip">为保护您的帐号安全，请先验证电话号码</p>
+      <input class="margin-b-50" type="text" placeholder="请输入手机号">
+      <p class="phone-code-row">
+        <input type="text" placeholder="请输入验证码">
+        <span class="btn-code red-font f24">获取验证码</span>
+      </p>
+    </div>
+    <div class="weui-dialog__ft">
+      <a href="javascript:;" class="weui-dialog__btn f32 red-font dialog-btn-sure">确定</a>
+    </div>
+  </div>
+
+  <script src="../static/js/lib/jquery-2.1.4.js"></script>
+  <script src="../static/js/lib/jquery-weui.min.js"></script>
+  <script src="../static/js/lib/swiper.min.js"></script>
+  <script>
+    $(function() {
+      $('#checkPhone').on('click', function () {
+        $('.weui-mask').addClass('show');
+        $('.dialog-check-phone').addClass('show');
+      });
+
+      $('.dialog-check-phone .dialog-btn-sure,.dialog-check-phone .icon-close').on('click', function () {
+        $('.weui-mask').removeClass('show');
+        $('.dialog-check-phone').removeClass('show');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="../static/js/lib/flexible.js"></script>
+  <link rel="stylesheet" href="../static/css/icon.css">
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/weui.min.css">
+  <link rel="stylesheet" href="../static/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/index.css">
+  <title>购物</title>
+</head>
+<body>
+
+  <div class="search-bar-wrap clearfix">
+    <a href="/" class="pull-left user-head">
+      <img src="../static/img/demo/head.png" alt="">
+    </a>
+    <div class="search-input-row">
+      <i class="icon-search"></i>
+      <input class="weui-input" type="text" placeholder="请输入关键字">
+    </div>
+    <div class="share-btn pull-right">
+      <i class="icon-share"></i>
+      <!-- 分享 -->
+    </div>
+  </div>
+  <div class="nav-bar-wrap">
+    <ul class="nav-bar clearfix">
+      <li class="nav-item btn-nav-more">
+        <i class="icon-more"></i>
+      </li>
+    </ul>
+  </div>
+  <div class="mod"></div>
+  <div class="nav-more">
+    <p class="nav-more-head clearfix">
+      <span class="block pull-left f28">分类</span>
+      <i class="icon-close-sm pull-right"></i>
+    </p>
+    <div class="weui-row nav-list-wrap">
+      <a id="n1" name="a" onclick="digital(1)" class="weui-col-20 nav-item">数码</a>
+      <a id="n2" name="a" onclick="digital(2)" class="weui-col-20 nav-item">图书</a>
+      <a id="n3" name="a" onclick="digital(3)" class="weui-col-20 nav-item">服装</a>
+      <a id="n4" name="a" onclick="digital(4)" class="weui-col-20 nav-item">化妆品</a>
+      <a id="n5" name="a" onclick="digital(5)" class="weui-col-20 nav-item">其它</a>
+    </div>
+  </div>
+  <div class="main-page">
+    <div class="swiper-container banner-wrap">
+      <div class="swiper-wrapper items-wrap">
+        <div class="swiper-slide item">
+          <img src="../static/img/demo/1.jpg"></div>
+        <div class="swiper-slide item">
+          <img src="../static/img/demo/2.jpg"></div>
+        <div class="swiper-slide item">
+          <img src="../static/img/demo/3.jpg"></div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+    <div class="advantage-wrap clearfix">
+      <p class="item f24 pull-left">
+        <i class="icon-gou"></i>
+        少钱购好物
+      </p>
+      <p class="item f24">
+        <i class="icon-gou"></i>
+        分享之乐
+      </p>
+      <p class="item f24 pull-right">
+        <i class="icon-gou"></i>
+        重新利用
+      </p>
+    </div>
+    <a href="/" class="banner-open-shop">
+      <img src="../static/img/demo/zzu2.jpg" alt="">
+    </a>
+    <!--<div class="splitbold"></div>-->
+    <div class="sales-wrap-2">
+      <!--<div class="nav-time-wrap">-->
+          <!---->
+      <!--</div>-->
+      <!--<a href="/" class="banner-300">-->
+        <!--<img src="../static/img/demo/5.jpg" alt="">-->
+      <!--</a>-->
+      <div id="aaa"  class="goods-list-wrap">
+        <!--<a href="src" class="goods-item block">-->
+          <!--<img src="../static/img/demo/goods11.png" alt="">-->
+          <!--<div class="goodes-item-info">-->
+            <!--<p class="title f24 lineclamp2">-->
+              <!--保税区直发 Dr.Jart+ 蒂佳婷黑竹炭泡泡清洁面膜（银灰色) 5片/盒是客户端发哦圣诞节佛唉SD佛阿三发哦死的飞机-->
+            <!--</p>-->
+            <!--<div class="bottom-row clearfix">-->
+              <!--<p class="price f32 red-font pull-left"><span>¥</span><span>139</span></p>-->
+              <!--<p class="weui-btn weui-btn_mini weui-btn_warn pull-right">马上抢</p>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</a>-->
+      </div>
+      <div class="link-more-row text-center">
+        <a href="/" class="f28">点击查看更多<i class="icon-arrow-right-rad"></i></a>
+      </div>
+    </div>
+    <div class="splitbold"></div>
+    <div class="splitbold"></div>
+  </div>
+  <div class="weui-tabbar" style="position: fixed">
+    <a href="/school_war_exploded/html/index.html" class="weui-tabbar__item weui-bar__item--on">
+      <!--<span class="weui-badge" style="position: absolute;top: -.4em;right: 1em;">8</span>-->
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/buy.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">购物</p>
+    </a>
+    <a href="/school_war_exploded/html/coupon.html" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/new.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">电影推荐</p>
+    </a>
+    <a href="/school_war_exploded/html/discover.html" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/discover.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">发现</p>
+    </a>
+    <a href="/school_war_exploded/manager/owner" class="weui-tabbar__item">
+      <div class="weui-tabbar__icon">
+        <img src="/school_war_exploded/images/me.png" alt="">
+      </div>
+      <p class="weui-tabbar__label">我</p>
+    </a>
+  </div>
+  <script src="../static/js/lib/jquery-2.1.4.js"></script>
+  <script src="../static/js/lib/jquery-weui.min.js"></script>
+  <script src="../static/js/lib/swiper.min.js"></script>
+<script>
+  var html1 = '<a href="';
+  var html2 = '" class="goods-item block"><img src="../static/img/demo/goods11.png" alt="">'
+          +' <div class="goodes-item-info"><p class="title f24 lineclamp2">';
+
+  var html3='</p><div class="bottom-row clearfix"><p class="price f32 red-font pull-left"><span>¥</span><span>';
+
+  var html4='</span></p><p class="weui-btn weui-btn_mini weui-btn_warn pull-right">马上抢</p></div></div></a>';
+  $(function() {
+
+    //初始化商品
+  var goods={};
+  $.ajax({
+      url:"/school_war_exploded/goods/getGoods",
+      type:"POST",
+      dataType:"json",
+      async: false,
+      data:JSON.stringify(goods),
+      contentType:'application/json;charset=UTF-8',
+      success:function (data) {
+          if(data.msg == 1){
+            var arr=data.goods;
+            for(var i=0;i<data.size;i++){
+              $("#aaa").append(html1+"product.html?goodsId="+arr[i].goodsId+html2+arr[i].goodsDes+html3+arr[i].goodsPrice+html4);
+            }
+          }
+      }
+    });
+
+
+
+
+    $('.nav-bar .nav-item').on('click', function() {
+      if ($(this).hasClass('btn-nav-more')) return;
+      $('.nav-bar .nav-item').removeClass('active');
+      $(this).addClass('active');
+    });
+
+    var navSwiper = new Swiper('.hot-goods-container', {
+      slidesPerView: 3.45,
+      freeMode: true,
+      on: {
+        init: function() {
+          navSlideWidth = this.slides.eq(0).css('width'); //导航字数需要统一,每个导航宽度一致
+          navSum = this.slides[this.slides.length - 1].offsetLeft //最后一个slide的位置
+          clientWidth = parseInt(this.$wrapperEl.css('width')) //Nav的可视宽度
+          navWidth = 0
+          for (i = 0; i < this.slides.length; i++) {
+            navWidth += parseInt(this.slides.eq(i).css('width'))
+          }
+          // topBar = this.$el.parents('body').find('#top') //页头
+        },
+
+      },
+    });
+
+    var bannerSwiper = new Swiper('.banner-wrap', {
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'fraction',
+        renderFraction: function(currentClass, totalClass) {
+          return '<span class="' + currentClass + '"></span>' + '/' + '<span class="' + totalClass + '"></span>';
+        },
+      },
+    });
+
+    $('.icon-more').on('click', function() {
+      $('.nav-more').addClass('show');
+      $('.mod').show().addClass('show');
+    })
+    $('.icon-close-sm').on('click', function() {
+      $('.nav-more').removeClass('show');
+      $('.mod').removeClass('show');
+      $('.mod').on('transitionend', function() {
+        setTimeout(function() {
+          $('.mod').hide();
+        }, 0)
+      })
+    })
+  });
+
+  //点击分类
+  function digital(id) {
+    if(id == 1){
+      $("#n1").addClass("active");
+      $("#n2").removeClass("active");
+      $("#n3").removeClass("active");
+      $("#n4").removeClass("active");
+      $("#n5").removeClass("active");
+    }
+    if(id == 2){
+      $("#n2").addClass("active");
+      $("#n1").removeClass("active");
+      $("#n3").removeClass("active");
+      $("#n4").removeClass("active");
+      $("#n5").removeClass("active");
+    }
+    if(id == 3){
+      $("#n3").addClass("active");
+      $("#n1").removeClass("active");
+      $("#n2").removeClass("active");
+      $("#n4").removeClass("active");
+      $("#n5").removeClass("active");
+    }
+    if(id == 4){
+      $("#n4").addClass("active");
+      $("#n1").removeClass("active");
+      $("#n3").removeClass("active");
+      $("#n2").removeClass("active");
+      $("#n5").removeClass("active");
+    }
+    if(id == 5){
+      $("#n5").addClass("active");
+      $("#n1").removeClass("active");
+      $("#n3").removeClass("active");
+      $("#n4").removeClass("active");
+      $("#n2").removeClass("active");
+    }
+    var goods={"id":id};
+    $.ajax({
+      url:"/school_war_exploded/goods/digital",
+      type:"POST",
+      dataType:"json",
+      async: false,
+      data:JSON.stringify(goods),
+      contentType:'application/json;charset=UTF-8',
+      success:function (data) {
+        if(data.msg == 1) {
+          var arr = data.goodsC;
+          $("#aaa").empty();
+          for (var i = 0; i < data.size; i++) {
+            $("#aaa").append(html1 + "" + html2 + arr[i].goodsDes + html3 + arr[i].goodsPrice + html4);
+          }
+        }
+      }
+    });
+
+  }
+</script>
+</body>
+</html>
