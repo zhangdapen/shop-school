@@ -1,6 +1,5 @@
 package cn.zzu.service.user;
 
-import cn.zzu.entity.PermissionInfo;
 import cn.zzu.entity.UserAddr;
 import cn.zzu.entity.UserInfo;
 import cn.zzu.execption.MyExecption;
@@ -71,11 +70,10 @@ public interface UserService {
 
     /**
      * 成为管理员
-     * @param permissionInfo
      * @return
      * @throws MyExecption
      */
-    Map<String,Object> toRootUser(PermissionInfo permissionInfo) throws MyExecption;
+    Map<String,Object> toRootUser(Integer uid,String applicaDes) throws MyExecption;
 
     /**
      * 根据userId获取用户信息

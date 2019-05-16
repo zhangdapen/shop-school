@@ -1,18 +1,18 @@
 package cn.zzu.service.user.impl;
 
-import cn.zzu.entity.*;
-import cn.zzu.service.NewService;
-import cn.zzu.service.PermissionInfoService;
-import cn.zzu.service.UserAddrService;
-import cn.zzu.util.RandomUtils;
+import ch.qos.logback.classic.Logger;
+import cn.zzu.constant.ManagerConstant;
 import cn.zzu.core.TokenService;
+import cn.zzu.entity.*;
 import cn.zzu.execption.MyExecption;
+import cn.zzu.service.NewService;
+import cn.zzu.service.UserAddrService;
 import cn.zzu.service.UserInfoService;
+import cn.zzu.service.manager.impl.PermissionInfoServiceImpl;
 import cn.zzu.service.user.UserService;
+import cn.zzu.util.RandomUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.LoggerFactory;
-import ch.qos.logback.classic.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +31,7 @@ public class UserServiceimpl implements UserService{
     @Autowired
     private TokenService tokenService;
     @Autowired
-    private PermissionInfoService permissionInfoService;
+    private PermissionInfoServiceImpl permissionInfoServiceImpl;
     @Autowired
     private UserAddrService userAddrService;
     @Autowired
@@ -223,20 +223,19 @@ public class UserServiceimpl implements UserService{
 
     /**
      * 申请成为管理员
-     * @param permissionInfo
      * @return
      * @throws MyExecption
      */
     @Override
-    public Map<String, Object> toRootUser(PermissionInfo permissionInfo) throws MyExecption {
+    public Map<String, Object> toRootUser(Integer uid,String applicaDes) throws MyExecption {
         Map<String,Object> result = new HashMap<>();
         logger.debug("开始申请超级管理员权限");
-        int i = permissionInfoService.toRootUser(permissionInfo);
-        if(i < 1){
-            result.put("msg",0);
-            return result;
-        }
-        result.put("msg",1);
+        PermissionInfo permissionInfo = new PermissionInfo();
+        permissionInfo.setApplicaId(uid);
+        permissionInfo.setApplicaType(ManagerConstant.APPLICA_TYPE_ROOT_SCHOOL);
+        permissionInfo.setApplicaDes(applicaDes);
+        permissionInfo.setApplicaState(ManagerConstant.APPLICA_STATE_NEW);
+        permissionInfoServiceImpl.insertPermissionInfo(permissionInfo);
         return result;
     }
 

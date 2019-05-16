@@ -1,14 +1,15 @@
 package cn.zzu.controller;
 
 import ch.qos.logback.classic.Logger;
-import cn.zzu.entity.*;
+import cn.zzu.entity.News;
+import cn.zzu.entity.SchoolInfo;
+import cn.zzu.entity.UserAddr;
+import cn.zzu.entity.UserInfo;
 import cn.zzu.execption.MyExecption;
 import cn.zzu.service.UserInfoService;
 import cn.zzu.service.user.UserService;
 import cn.zzu.util.BeanUtil;
 import cn.zzu.util.JsonUtils;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -274,15 +273,12 @@ public class UserInfoController {
         }
         String userIds = params.get("userId").toString();
         Integer userId = Integer.valueOf(userIds);
+/*
         String applicaType=params.get("applicaType").toString();
+*/
         String applicaDes=params.get("applicaDes").toString();
-        PermissionInfo permissionInfo = new PermissionInfo();
-        permissionInfo.setApplicaId(userId);
-        permissionInfo.setApplicaType(applicaType);
-        permissionInfo.setApplicaDes(applicaDes);
-        permissionInfo.setCreateTime(new Date());
-        permissionInfo.setApplicaState("0");
-        Map<String, Object> stringObjectMap = userService.toRootUser(permissionInfo);
+
+        Map<String, Object> stringObjectMap = userService.toRootUser(userId,applicaDes);
         return JsonUtils.map2json(stringObjectMap);
     }
 

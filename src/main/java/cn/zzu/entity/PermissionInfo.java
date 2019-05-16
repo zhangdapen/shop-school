@@ -3,22 +3,24 @@ package cn.zzu.entity;
 import java.util.Date;
 
 public class PermissionInfo {
-    private Integer permissionId;
+    private Long id;
 
     private Integer applicaId;
 
-    private String applicaType;
+    private Integer applicaType;
 
     private String applicaDes;
 
-    private String applicaState;
+    private Integer applicaState;
+
+    private Integer applicaUid;
 
     private Date createTime;
 
     private Date updateTime;
 
-    public PermissionInfo(Integer permissionId, Integer applicaId, String applicaType, String applicaDes, String applicaState, Date createTime, Date updateTime) {
-        this.permissionId = permissionId;
+    public PermissionInfo(Long id, Integer applicaId, Integer applicaType, String applicaDes, Integer applicaState, Date createTime, Date updateTime) {
+        this.id = id;
         this.applicaId = applicaId;
         this.applicaType = applicaType;
         this.applicaDes = applicaDes;
@@ -31,12 +33,12 @@ public class PermissionInfo {
         super();
     }
 
-    public Integer getPermissionId() {
-        return permissionId;
+    public Long getId() {
+        return id;
     }
 
-    public void setPermissionId(Integer permissionId) {
-        this.permissionId = permissionId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getApplicaId() {
@@ -47,12 +49,12 @@ public class PermissionInfo {
         this.applicaId = applicaId;
     }
 
-    public String getApplicaType() {
+    public Integer getApplicaType() {
         return applicaType;
     }
 
-    public void setApplicaType(String applicaType) {
-        this.applicaType = applicaType == null ? null : applicaType.trim();
+    public void setApplicaType(Integer applicaType) {
+        this.applicaType = applicaType;
     }
 
     public String getApplicaDes() {
@@ -63,12 +65,12 @@ public class PermissionInfo {
         this.applicaDes = applicaDes == null ? null : applicaDes.trim();
     }
 
-    public String getApplicaState() {
+    public Integer getApplicaState() {
         return applicaState;
     }
 
-    public void setApplicaState(String applicaState) {
-        this.applicaState = applicaState == null ? null : applicaState.trim();
+    public void setApplicaState(Integer applicaState) {
+        this.applicaState = applicaState;
     }
 
     public Date getCreateTime() {
@@ -85,5 +87,13 @@ public class PermissionInfo {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getApplicaUid() {
+        return applicaUid;
+    }
+
+    public void setApplicaUid(Integer applicaUid) {
+        this.applicaUid = applicaUid;
     }
 }

@@ -1,16 +1,84 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.zzu.dao.PermissionInfoDao">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zzu.dao.PermissionInfoDao" >
 
-    <insert id="insertPermissionInfo" parameterType="cn.zzu.entity.PermissionInfo" useGeneratedKeys="true" keyProperty="permissionId">
-        insert into permission_info(applica_id,applica_type,applica_des,applica_state,create_time)
-        values (#{applicaId},#{applicaType},#{applicaDes},#{applicaState},#{createTime})
+    <resultMap id="permissionInfoResultMap" type="PermissionInfo">
+        <id property="id" column="id"/>
+        <result property="applicaId" column="applica_id"/>
+        <result property="applicaType" column="applica_type"/>
+        <result property="applicaDes" column="applica_des"/>
+        <result property="applicaState" column="applica_state"/>
+        <result property="applicaUid" column="applica_uid"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="PermissionInfo">
+        insert into permission_info
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="applicaId != null">applica_id,</if>
+            <if test="applicaType != null">applica_type,</if>
+            <if test="applicaDes != null">applica_des,</if>
+            <if test="applicaState != null">applica_state,</if>
+            <if test="applicaUid != null">applica_uid,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        values
+        <trim prefix="(" suffixOverrides="," suffix=")">
+            <if test="applicaId != null">#{applicaId},</if>
+            <if test="applicaType != null">#{applicaType},</if>
+            <if test="applicaDes != null">#{applicaDes},</if>
+            <if test="applicaState != null">#{applicaState},</if>
+            <if test="applicaUid != null">#{applicaUid},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
     </insert>
 
+    <update id="update" parameterType="PermissionInfo">
+        update permission_info
+        <set>
+            <if test="applicaId != null">applica_id=#{applicaId},</if>
+            <if test="applicaType != null">applica_type=#{applicaType},</if>
+            <if test="applicaDes != null">applica_des=#{applicaDes},</if>
+            <if test="applicaState != null">applica_state=#{applicaState},</if>
+            <if test="applicaUid != null">applica_uid=#{applicaUid},</if>
+            <if test="createTime != null">create_time=#{createTime},</if>
+            <if test="updateTime != null">update_time=#{updateTime}</if>
+        </set>
+        where id=#{id}
+    </update>
 
+    <select id="getPermissionInfoById" parameterType="long" resultMap="permissionInfoResultMap">
+        select * from permission_info
+        where ID=#{id}
+    </select>
 
+    <select id="countPermissionInfo" parameterType="map" resultType="int">
+        select count(*) from permission_info
+        <include refid="queryCondition"/>
+    </select>
 
+    <select id="getPermissionInfoList" parameterType="map" resultMap="permissionInfoResultMap">
+        select * from permission_info
+        <include refid="queryCondition"/>
+        <if test="start != null and limit != null">
+            limit #{start},#{limit}
+        </if>
+    </select>
 
-
+    <sql id="queryCondition">
+        <where>
+            <if test="id != null">permission_id=#{id}</if>
+            <if test="applicaId != null">and applica_id=#{applicaId}</if>
+            <if test="applicaType != null">and applica_type=#{applicaType}</if>
+            <if test="applicaDes != null">and applica_des=#{applicaDes}</if>
+            <if test="applicaState != null">and applica_state=#{applicaState}</if>
+            <if test="applicaUid != null">and applica_uid=#{applicaUid}</if>
+            <if test="createTime != null">and create_time=#{createTime}</if>
+            <if test="updateTime != null">and update_time=#{updateTime}</if>
+        </where>
+    </sql>
 
 </mapper>
