@@ -18,16 +18,11 @@
     <a href="index.html" class="block pull-left">
       <i class="icon-back"></i>
     </a>
-    <a href="javascript:;" class="block pull-right open-popup" data-target="#sharePopup1">
-      <i class="icon-share"></i>
-    </a>
   </div>
 	<div class="main-page">
     <div class="swiper-container goods-swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1n3rZHFXXXXX9XFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
-        <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i4/TB10rkPGVXXXXXGapXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
-        <div class="swiper-slide"><img src="//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i1/TB1kQI3HpXXXXbSXFXXXXXXXXXX_!!0-item_pic.jpg_320x320q60.jpg" alt=""></div>
+      <div id="sss" class="swiper-wrapper">
+
       </div>
       <div class="swiper-pagination"></div>
       </div>
@@ -220,6 +215,9 @@
     };
 
   	$(function() {
+
+      var htm1='<div class="swiper-slide"><img src="';
+      var htm2='" alt=""></div>';
   	  //初始化页面
       var goodsId=getParams("goodsId");
       var goods={"goodsId":goodsId};
@@ -236,6 +234,7 @@
             $("#price").text(data.goodsInfo.goodsPrice);
             $("#desc").text(data.goodsInfo.goodsDes);
             id=data.goodsInfo.goodsId;
+            $("#sss").append(htm1+"http://www.schoolsmile.xyz:8080/image/goods/"+data.goodsInfo.goodsImage+htm2);
           }
         }
       });

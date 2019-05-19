@@ -7,36 +7,49 @@
     </insert>
 
     <insert id="insertGoodsInfo" parameterType="cn.zzu.entity.GoodsInfo" useGeneratedKeys="true" keyProperty="goodsId">
-        insert into goods_info(goods_name,goods_des,goods_image,user_id,goods_price,category_id,school_id,goods_state,create_time)
-        values (#{goodsName},#{goodsDes},#{goodsImage},#{userId},#{goodsPrice},#{categoryId},#{schoolId},#{goodsState},#{createTime})
+        insert into goods_info(goods_name,goods_des,goods_image,user_id,goods_price,category_id,school_id,goods_state,goods_type,create_time)
+        values (#{goodsName},#{goodsDes},#{goodsImage},#{userId},#{goodsPrice},#{categoryId},#{schoolId},#{goodsState},#{goodsType},#{createTime})
     </insert>
 
     <select id="selectGoodsInfoPrice" resultType="Double">
         select goods_price
         from goods_info
-        where goods_id=#{goodsId}
+        where goods_id=#{goodsId} and goods_type=1
     </select>
 
     <select id="getGoodsInfoById" resultType="cn.zzu.entity.GoodsInfo">
         select *
         from goods_info
-        where goods_id=#{goodsId}
+        where goods_id=#{goodsId} and goods_type=1
     </select>
 
     <select id="getGoodsInfo" resultType="cn.zzu.entity.GoodsInfo">
         select *
         from goods_info
+        where goods_type=1
     </select>
 
     <select id="getGoodsInfoByCategory" resultType="cn.zzu.entity.GoodsInfo">
         select *
         from goods_info
-        where category_id=#{categoryId}
+        where category_id=#{categoryId} and goods_type=1
     </select>
 
     <select id="getGoodsInfoByGoodsId" resultType="cn.zzu.entity.GoodsInfo">
         select *
         from goods_info
-        where goods_id=#{goodsId}
+        where goods_id=#{goodsId} and goods_type=1
     </select>
+
+    <select id="getGoodsNoPass" resultType="cn.zzu.entity.GoodsInfo">
+        select *
+        from goods_info
+        where  goods_type=0
+    </select>
+
+    <update id="passGoodsById" parameterType="Integer">
+        update goods_info
+        set goods_type=1
+        where goods_id=#{goodsId}
+    </update>
 </mapper>

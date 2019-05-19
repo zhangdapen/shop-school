@@ -77,7 +77,8 @@
 		//根据id获取购物车信息
 		var htm='<li id="';
 		var htmi='"class="cartcontent-item"><div class="choosecart"><div class="chekboxinput"><input type="checkbox" id="checkbox-1-0" class="regular-checkbox" /><label for="checkbox-1-0"></label></div></div><div class="goodcart clearfix">'
-				+'<div class="imgbox"><img src="../static/img/demo/goods12.png" alt="" /></div><div class="goodcart-info">'
+				+'<div class="imgbox"><img src="';
+		var ht=	'" alt="" /></div><div class="goodcart-info">'
 				+'<h4 class="f24 lineclamp2"><span class="red-font">限时特惠</span>'
 		        +'<span id="des1">';
 		var  htm2='</span></h4>'
@@ -104,7 +105,7 @@
 					 var cars =data.car;
 					 var goods=data.goods;
 					 for(var i=0;i<data.goods.length;i++){
-						 $("#aaa").append(htm+i+htmi+goods[i].goodsDes+htm2+"¥"+goods[i].goodsPrice+htm3);
+						 $("#aaa").append(htm+i+htmi+"http://www.schoolsmile.xyz:8080/image/goods/"+goods[i].goodsImage+ht+goods[i].goodsDes+htm2+"¥"+goods[i].goodsPrice+htm3);
 					 }
 				}
 			}

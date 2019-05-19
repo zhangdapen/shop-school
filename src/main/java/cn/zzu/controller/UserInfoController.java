@@ -3,6 +3,7 @@ package cn.zzu.controller;
 import ch.qos.logback.classic.Logger;
 import cn.zzu.entity.*;
 import cn.zzu.execption.MyExecption;
+import cn.zzu.service.InfoService;
 import cn.zzu.service.UserInfoService;
 import cn.zzu.service.user.UserService;
 import cn.zzu.util.BeanUtil;
@@ -45,6 +46,8 @@ public class UserInfoController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private InfoService infoService;
 
     /**
      * 登录   controller实现
@@ -257,6 +260,26 @@ public class UserInfoController {
         return JsonUtils.map2json(stringObjectMap);
     }
 
+
+    @RequestMapping(value = "/setPhone",method = RequestMethod.POST)
+    @ResponseBody
+    public String setPhone(@RequestBody Map<String,Object> params) throws MyExecption {
+        logger.debug("前台传来的修改数据"+params);
+        Map<String,Object> result = new HashMap<>();
+        if(params == null){
+            result.put("msg",0);
+            return JsonUtils.map2json(result);
+        }
+        String phone = params.get("phone").toString();
+        String userIds = params.get("userId").toString();
+        Integer userId = Integer.valueOf(userIds);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserPhone(phone);
+        userInfo.setUserId(userId);
+        Map<String, Object> stringObjectMap = userService.changeInfo(userInfo);
+        return JsonUtils.map2json(stringObjectMap);
+    }
+
     /**
      * 申请成为管理员
      * @param params
@@ -274,15 +297,16 @@ public class UserInfoController {
         }
         String userIds = params.get("userId").toString();
         Integer userId = Integer.valueOf(userIds);
-        String applicaType=params.get("applicaType").toString();
-        String applicaDes=params.get("applicaDes").toString();
-        PermissionInfo permissionInfo = new PermissionInfo();
-        permissionInfo.setApplicaId(userId);
-        permissionInfo.setApplicaType(applicaType);
-        permissionInfo.setApplicaDes(applicaDes);
-        permissionInfo.setCreateTime(new Date());
-        permissionInfo.setApplicaState("0");
-        Map<String, Object> stringObjectMap = userService.toRootUser(permissionInfo);
+        Map<String, Object> stringObjectMap = userInfoService.toRoot(userId);
+//        String applicaType=params.get("applicaType").toString();
+//        String applicaDes=params.get("applicaDes").toString();
+//        PermissionInfo permissionInfo = new PermissionInfo();
+//        permissionInfo.setApplicaId(userId);
+//        permissionInfo.setApplicaType(applicaType);
+//        permissionInfo.setApplicaDes(applicaDes);
+//        permissionInfo.setCreateTime(new Date());
+//        permissionInfo.setApplicaState("0");
+//        Map<String, Object> stringObjectMap = userService.toRootUser(permissionInfo);
         return JsonUtils.map2json(stringObjectMap);
     }
 
@@ -352,5 +376,24 @@ public class UserInfoController {
         Map<String, Object> stringObjectMap = userService.setUserAddrByUserId(userAddr);
         return  JsonUtils.map2json(stringObjectMap);
     }
+
+    @RequestMapping(value = "/getInfo",method = RequestMethod.POST)
+    @ResponseBody
+    public String getInfo(@RequestBody Map<String,Object> params) throws MyExecption {
+        logger.debug("前台传来的id数据"+params);
+        Map<String,Object> result = new HashMap<>();
+        if (params == null){
+            result.put("msg",0);
+            return  JsonUtils.map2json(result);
+        }
+        String id = params.get("id").toString();
+        Integer userId = Integer.valueOf(id);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUserId(userId);
+        Map<String, Object> info = infoService.getInfo(userInfo);
+        return  JsonUtils.map2json(info);
+    }
+
+
 
 }

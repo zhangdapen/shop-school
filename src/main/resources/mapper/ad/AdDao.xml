@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.zzu.dao.AdDao">
+
+    <select id="getAd" resultType="cn.zzu.entity.Ad">
+        select *
+        from ad
+        where ad_state=1
+    </select>
+
+    <insert id="setAd" parameterType="cn.zzu.entity.Ad">
+        insert into ad(ad_iamge,ad_state,create_time)
+        values (#{adIamge},#{adState},#{createTime})
+    </insert>
+
+    <update id="deleteAdById" parameterType="Integer">
+        update ad
+        set ad_state=0
+        where ad_id=#{adId}
+    </update>
+</mapper>

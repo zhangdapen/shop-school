@@ -1,37 +1,86 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>后台管理系统</title>
-</head>
-<body>
-<form>
-    <div>
-        用户名:<input type="text" id="username"/>
-    </div>
-    <div>
-        密码:<input type="password" id="pass"/>
-    </div>
-    <button onclick="login()">登录</button>
-</form>
-<script>
-    function login(){
-        var username=$("#username").val();
-        var pass=$("#password").val();
-        var userInfo={"username":username,"pass":pass};
-        $.ajax({
-            url:"/school_war_exploded/admin/login",
-            type:"POST",
-            dataType:"json",
-            async: false,
-            data:JSON.stringify(userInfo),
-            contentType:'application/json;charset=UTF-8',
-            success:function (data) {
-                alert(data.msg);
-            }
-        });
-    }
-</script>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title></title>	
+		<link rel="stylesheet" href="../assets/css/core.css" />
+		<link rel="stylesheet" href="../assets/css/menu.css" />
+		<link rel="stylesheet" href="../assets/css/amazeui.css" />
+		<link rel="stylesheet" href="../assets/css/component.css" />
+		<link rel="stylesheet" href="../assets/css/page/form.css" />
+	</head>
+	<body>
+		<div class="account-pages">
+			<div class="wrapper-page">
+				<div class="text-center">
+	                <a href="index.html" class="logo"><span><span>后台管理系统</span></span></a>
+	            </div>
+	            
+	            <div class="m-t-40 card-box">
+	            	<div class="text-center">
+	                    <h4 class="text-uppercase font-bold m-b-0">登录</h4>
+	                </div>
+	                <div class="panel-body">
+	                	<form class="am-form">
+	                		<div class="am-g">
+	                			<div class="am-form-group">
+							      <input id="us" type="email" class="am-radius"  placeholder="用户名">
+							    </div>
+							
+							    <div class="am-form-group form-horizontal m-t-20">
+							      <input id="ps" type="password" class="am-radius"  placeholder="密码">
+							    </div>
+							    
+							    <!--<div class="am-form-group ">-->
+		                           	<!--<label style="font-weight: normal;color: #999;">-->
+								        <!--<input type="checkbox" class="remeber"> Remember me-->
+								    <!--</label>-->
+		                        <!--</div>-->
+		                        
+		                        <div class="am-form-group ">
+		                        	<button type="button" onclick="login()" class="am-btn am-btn-primary am-radius" style="width: 100%;height: 100%;">登录</button>
+		                        </div>
+		                        
+		                        <!--<div class="am-form-group ">-->
+		                        <!--<a href="page-recoverpw.html" class="text-muted"><i class="fa fa-lock m-r-5"></i> Forgot your password?</a>-->
+		                        <!--</div>-->
+	                		</div>
 
-</body>
+	                	</form>
+							
+	                </div>
+	            </div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../assets/js/jquery-2.1.0.js" ></script>
+	<script type="text/javascript" src="../assets/js/amazeui.min.js"></script>
+	<script type="text/javascript" src="../assets/js/app.js" ></script>
+	<script type="text/javascript" src="../assets/js/blockUI.js" ></script>
+	<script type="text/javascript" src="../assets/js/charts/echarts.min.js" ></script>
+	<script type="text/javascript" src="../assets/js/charts/indexChart.js" ></script>
+	<script>
+		function login() {
+			//登录功能
+			var username=$("#us").val();
+			var password= $("#ps").val();
+			var user={"username":username,"password":password};
+			$.ajax({
+				url:"/school_war_exploded/super/login",
+				type:"POST",
+				dataType:"json",
+				async: false,
+				data:JSON.stringify(user),
+				contentType:'application/json;charset=UTF-8',
+				success:function (data) {
+					if(data.msg==1){
+						window.location.href="/school_war_exploded/root/index.html";
+						return;
+					}
+					alert(data.msg);
+				}
+			});
+		};
+	</script>
 </html>

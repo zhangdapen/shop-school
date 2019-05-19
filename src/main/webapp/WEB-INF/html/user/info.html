@@ -20,11 +20,11 @@
                 <div class="weui-media-box__bd weui-cell__bd weui-cell_primary">
                         <p>头像</p>
                 </div>
-                <div class="weui-uploader__input-box">
-                    <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
-                </div>
+                <!--<div class="weui-uploader__input-box">-->
+                    <!--<input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">-->
+                <!--</div>-->
                 <div class="weui-media-box__hd">
-                    <img class="weui-media-box__thumb" src="/school_war_exploded/images/avatar2.jpg" alt="">
+                    <img id="pic" class="weui-media-box__thumb" src="/school_war_exploded/images/avatar2.jpg" alt="">
                 </div>
             </a>
         </div>
@@ -58,6 +58,14 @@
                         <div id="usertype" class="weui-panel__hd"></div>
                         <span class="weui-cell__ft"></span>
                     </a>
+                    <a id='ph' class="weui-cell weui-cell_access" href="javascript:;">
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <p>手机号码</p>
+                        </div>
+                        <div id="ph_type" class="weui-panel__hd"></div>
+                        <span class="weui-cell__ft"></span>
+                    </a>
+
         </div>
 <div class="weui-panel__hd"></div>
     </div>
@@ -75,6 +83,44 @@
 <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
 <script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
 <script>
+    function  getParams(name, href) {
+        var href = href || window.location.href,
+            value = '';
+
+        if (name) {
+            var reg = new RegExp(name + '=([^&]*)', 'g');
+            href.replace(reg, function($0, $1) {
+                value = decodeURI($1);
+            });
+        } else {
+            value = {};
+            var reg = /\b(\w+)=([^\/&]*)/g;
+            href.replace(reg, function($0, $1, $2) {
+                value[$1] = decodeURI($2);
+            });
+        }
+        return value;
+    };
+    $(document).ready(function () {
+        var user={};
+        $.ajax({
+            url:"/school_war_exploded/call/getSession",
+            type:"POST",
+            dataType:"json",
+            async: false,
+            data:JSON.stringify(user),
+            contentType:'application/json;charset=UTF-8',
+            success:function (data) {
+                var nickname=data.nickname;
+                var city=data.city;
+                var image=data.headimgurl;
+                var province=data.province;
+                $("#nickname").text(nickname);
+                $("#pic").attr("src",image);
+                $("#place").text(province+"省"+city+"市");
+            }
+        });
+    });
     //更改昵称
     //1.先将昵称写入到数据库,同时更新到页面中
     //2.但是刷新的时候,不会更新,只有再次登录的时候才会更新
@@ -115,7 +161,7 @@
     $(document).on("click", "#show-custom", function() {
         $.confirm("您确定要申请为管理员吗?", "是否权限申请?", function() {
             var userId=$("#userId").html();
-            var applicaType="用户";
+            var applicaType=1;
             var applicaDes="我要成为管理员"
             var userInfo={"userId":userId,"applicaType":applicaType,"applicaDes":applicaDes}
             $.ajax({
@@ -191,29 +237,92 @@
     //页面加载的时候,获取用户的信息
     //在登录的时候,把用户信息,地址信息,学校信息添加到session中去
     //通过admin/info这个地址,获取到session信息
+    // $(document).ready(function() {
+    //     var userId=$("#userId").html();
+    //     var userInfo={"userId":userId};
+    //     $.ajax({
+    //         url:"/school_war_exploded/admin/info",
+    //         type:"POST",
+    //         dataType:"json",
+    //         async: false,
+    //         data:JSON.stringify(userInfo),
+    //         contentType:'application/json;charset=UTF-8',
+    //         success:function (data) {
+    //             $("#nickname").text(data.user.userNickname);
+    //             $("#userId").text(data.user.userId);
+    //             $("#school").text(data.schoolInfo.schoolName);
+    //             var arr=data.userAddr;
+    //             $("#place").text(arr[0].addrDesc);
+    //             if(data.user.userType == 1){
+    //                 $("#usertype").text("普通用户");
+    //             }
+    //             if(data.user.userType == 0){
+    //                 $("#usertype").text("超级用户");
+    //             }
+    //         }
+    //     });
+    // });
+
+    //获取信息
     $(document).ready(function() {
-        var userId=$("#userId").html();
-        var userInfo={"userId":userId};
+        var id =getParams("id");
+        var userInfo={"id":id};
         $.ajax({
-            url:"/school_war_exploded/admin/info",
+            url:"/school_war_exploded/admin/getInfo",
             type:"POST",
             dataType:"json",
             async: false,
             data:JSON.stringify(userInfo),
             contentType:'application/json;charset=UTF-8',
             success:function (data) {
-                $("#nickname").text(data.user.userNickname);
-                $("#userId").text(data.user.userId);
-                $("#school").text(data.schoolInfo.schoolName);
-                var arr=data.userAddr;
-                $("#place").text(arr[0].addrDesc);
-                if(data.user.userType == 1){
-                    $("#usertype").text("普通用户");
-                }
-                if(data.user.userType == 0){
-                    $("#usertype").text("超级用户");
+                if(data.msg==1){
+                    $("#nickname").text(data.user.userNickname);
+                    $("#userId").text(data.user.userId);
+                    $("#school").text(data.school.schoolName);
+                    $("#ph_type").text(data.user.userPhone);
+                    var arr=data.addr;
+                    $("#place").text(arr[0].addrDesc);
+                    if(data.user.userType == 1){
+                        $("#usertype").text("普通用户");
+                    }
+                    if(data.user.userType == 0){
+                        $("#usertype").text("超级用户");
+                    }
                 }
             }
+        });
+    });
+
+
+    //添加手机号码
+    $(document).on("click", "#ph", function() {
+        $.prompt({
+            text: "请输入手机号码，非常重要",
+            title: "输入手机号码",
+            onOK: function(text) {
+                $.alert("您的手机号码是:"+text, "号码设定成功");
+                var phone=text;
+                var userId=$("#userId").html();
+                var userInfo={"phone":phone,"userId":userId};
+                $.ajax({
+                    url:"/school_war_exploded/admin/setPhone",
+                    type:"POST",
+                    dataType:"json",
+                    async: false,
+                    data:JSON.stringify(userInfo),
+                    contentType:'application/json;charset=UTF-8',
+                    success:function (data) {
+                        if(data.msg == 1){
+                            $.alert("您的手机号码是:"+text, "号码设定成功");
+                            $("#ph_type").text(text);
+                        }
+                    }
+                });
+            },
+            onCancel: function() {
+                console.log("取消了");
+            },
+            input: $("#ph_type").html()
         });
     });
 

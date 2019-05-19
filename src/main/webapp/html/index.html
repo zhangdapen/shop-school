@@ -52,13 +52,13 @@
   </div>
   <div class="main-page">
     <div class="swiper-container banner-wrap">
-      <div class="swiper-wrapper items-wrap">
-        <div class="swiper-slide item">
-          <img src="../static/img/demo/1.jpg"></div>
-        <div class="swiper-slide item">
-          <img src="../static/img/demo/2.jpg"></div>
-        <div class="swiper-slide item">
-          <img src="../static/img/demo/3.jpg"></div>
+      <div id="eee" class="swiper-wrapper items-wrap">
+        <!--<div class="swiper-slide item">-->
+          <!--<img src="../static/img/demo/1.jpg"></div>-->
+        <!--<div class="swiper-slide item">-->
+          <!--<img src="../static/img/demo/2.jpg"></div>-->
+        <!--<div class="swiper-slide item">-->
+          <!--<img src="../static/img/demo/3.jpg"></div>-->
       </div>
       <div class="swiper-pagination"></div>
     </div>
@@ -76,9 +76,9 @@
         重新利用
       </p>
     </div>
-    <a href="/" class="banner-open-shop">
-      <img src="../static/img/demo/zzu2.jpg" alt="">
-    </a>
+    <!--<a href="/" class="banner-open-shop">-->
+      <!--<img src="../static/img/demo/zzu2.jpg" alt="">-->
+    <!--</a>-->
     <!--<div class="splitbold"></div>-->
     <div class="sales-wrap-2">
       <!--<div class="nav-time-wrap">-->
@@ -101,9 +101,9 @@
           <!--</div>-->
         <!--</a>-->
       </div>
-      <div class="link-more-row text-center">
-        <a href="/" class="f28">点击查看更多<i class="icon-arrow-right-rad"></i></a>
-      </div>
+      <!--<div class="link-more-row text-center">-->
+        <!--<a href="/" class="f28">点击查看更多<i class="icon-arrow-right-rad"></i></a>-->
+      <!--</div>-->
     </div>
     <div class="splitbold"></div>
     <div class="splitbold"></div>
@@ -116,7 +116,7 @@
       </div>
       <p class="weui-tabbar__label">购物</p>
     </a>
-    <a href="/school_war_exploded/html/coupon.html" class="weui-tabbar__item">
+    <a href="/school_war_exploded/html/tuijian.html" class="weui-tabbar__item">
       <div class="weui-tabbar__icon">
         <img src="/school_war_exploded/images/new.png" alt="">
       </div>
@@ -140,14 +140,32 @@
   <script src="../static/js/lib/swiper.min.js"></script>
 <script>
   var html1 = '<a href="';
-  var html2 = '" class="goods-item block"><img src="../static/img/demo/goods11.png" alt="">'
-          +' <div class="goodes-item-info"><p class="title f24 lineclamp2">';
-
+  var html2 = '" class="goods-item block"><img src="';
+  var html5='" alt=""><div class="goodes-item-info"><p class="title f24 lineclamp2">';
   var html3='</p><div class="bottom-row clearfix"><p class="price f32 red-font pull-left"><span>¥</span><span>';
 
   var html4='</span></p><p class="weui-btn weui-btn_mini weui-btn_warn pull-right">马上抢</p></div></div></a>';
   $(function() {
-
+    var ht1='<div class="swiper-slide item"><img src="';
+    var ht2='"></div>';
+    //初始化广告
+    var ad={};
+    $.ajax({
+      url:"/school_war_exploded/ad/getAd",
+      type:"POST",
+      dataType:"json",
+      async: false,
+      data:JSON.stringify(ad),
+      contentType:'application/json;charset=UTF-8',
+      success:function (data) {
+        if(data.msg == 1){
+          var arr =data.ad;
+          for(var i=0;i<data.ad.length;i++) {
+            $("#eee").append(ht1 + 'http://www.schoolsmile.xyz:8080/image/goods/'+arr[i].adIamge+ht2);
+          }
+        }
+      }
+    });
     //初始化商品
   var goods={};
   $.ajax({
@@ -161,7 +179,7 @@
           if(data.msg == 1){
             var arr=data.goods;
             for(var i=0;i<data.size;i++){
-              $("#aaa").append(html1+"product.html?goodsId="+arr[i].goodsId+html2+arr[i].goodsDes+html3+arr[i].goodsPrice+html4);
+              $("#aaa").append(html1+"product.html?goodsId="+arr[i].goodsId+html2+"http://www.schoolsmile.xyz:8080/image/goods/"+arr[i].goodsImage+html5+arr[i].goodsDes+html3+arr[i].goodsPrice+html4);
             }
           }
       }
@@ -270,7 +288,7 @@
           var arr = data.goodsC;
           $("#aaa").empty();
           for (var i = 0; i < data.size; i++) {
-            $("#aaa").append(html1 + "" + html2 + arr[i].goodsDes + html3 + arr[i].goodsPrice + html4);
+            $("#aaa").append(html1  + html2 +"http://www.schoolsmile.xyz:8080/image/goods/"+arr[i].goodsImage +html5+arr[i].goodsDes + html3 + arr[i].goodsPrice + html4);
           }
         }
       }

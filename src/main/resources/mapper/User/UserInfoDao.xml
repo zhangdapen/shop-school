@@ -29,6 +29,7 @@
             <if test="salt!=null">salt=#{salt},</if>
             <if test="createdAt!=null">created_at=#{createdAt},</if>
             <if test="updatedAt!=null">updated_at=#{updatedAt},</if>
+            <if test="userPhone!=null">user_phone=#{userPhone},</if>
         </trim>
         WHERE user_id=#{userId}
     </update>
@@ -74,5 +75,26 @@
         where user_id =#{userId}
     </select>
 
+    <select id="getUserInfo"  resultType="cn.zzu.entity.UserInfo">
+        select *
+        from user_info
+    </select>
 
+    <update id="passUserById" parameterType="Integer">
+        update user_info
+        set user_type=0,user_state=0
+        where user_id=#{userId}
+    </update>
+
+    <update id="toRoot" parameterType="Integer">
+        update user_info
+        set user_state=1
+        where user_id=#{userId}
+    </update>
+
+    <select id="getNoPass"  resultType="cn.zzu.entity.UserInfo">
+        select *
+        from user_info
+        where user_type=1
+    </select>
 </mapper>

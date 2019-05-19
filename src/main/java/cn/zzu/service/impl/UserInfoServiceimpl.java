@@ -15,7 +15,9 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * UserInfo的service实现类
@@ -152,6 +154,63 @@ public class UserInfoServiceimpl implements UserInfoService {
     @Override
     public UserInfo getUserinfoByUserId(Integer userId) {
         return userInfoDao.getUserInfoByUserId(userId);
+    }
+
+    @Override
+    public Map<String, Object> getUserInfo() {
+        List<UserInfo> userInfo = userInfoDao.getUserInfo();
+        Map<String,Object> result = new HashMap<>();
+        if(userInfo.size() == 0){
+            result.put("msg",0);
+            return result;
+        }
+        result.put("size",userInfo.size());
+        result.put("userInfo",userInfo);
+        result.put("msg",1);
+        return result;
+    }
+
+    /**
+     * 指定userId成为管理员
+     * @param userId
+     * @return
+     */
+    @Override
+    public Map<String, Object> passUserById(Integer userId) {
+        int i = userInfoDao.passUserById(userId);
+        Map<String,Object> result = new HashMap<>();
+        if(i <=0){
+            result.put("msg",0);
+            return result;
+        }
+        result.put("msg",i);
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> toRoot(Integer userId) {
+        int i = userInfoDao.toRoot(userId);
+        Map<String,Object> result = new HashMap<>();
+        if(i <= 0){
+            result.put("msg",0);
+            return result;
+        }
+        result.put("msg",1);
+        return result;
+    }
+
+    @Override
+    public Map<String, Object> getNoPass() {
+        List<UserInfo> noPass = userInfoDao.getNoPass();
+        Map<String,Object> result = new HashMap<>();
+        if(noPass.size()<=0){
+            result.put("msg",0);
+            return result;
+        }
+        result.put("msg",1);
+        result.put("size",noPass.size());
+        result.put("user",noPass);
+        return result;
     }
 
 

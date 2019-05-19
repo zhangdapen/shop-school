@@ -10,36 +10,59 @@
 </head>
 <body ontouchstart>
 
-<div class="weui-tab">
-    <div class="weui-navbar">
-        <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
-            宝贝
-        </a>
-        <a class="weui-navbar__item" href="#tab2">
-            帖子
-        </a>
-    </div>
-    <div class="weui-tab__bd">
-        <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
-            <h1>页面一</h1>
-        </div>
-        <div id="tab2" class="weui-tab__bd-item">
-            <div class="weui-form-preview">
-                <div class="weui-form-preview__bd">
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label">创建时间</label>
-                        <span id="createtime" class="weui-form-preview__value"></span>
-                    </div>
-                    <div class="weui-form-preview__item">
-                        <label class="weui-form-preview__label">内容</label>
-                        <span id="newsdesc" class="weui-form-preview__value"></span>
-                    </div>
-                </div>
-                <div class="weui-form-preview__ft">
-                    <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">删除</a>
-                </div>
+
+<div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+
+                    <form action="/school_war_exploded/goods/toupload" method="post" class="am-form am-form-horizontal" enctype="multipart/form-data">
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label  class="weui-label">商品名称</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input required" name="goodsName" type="text" placeholder="请输入商品名称">
+                            </div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label  class="weui-label">商品价格</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input required" name="price" type="text" placeholder="请输入商品价格">
+                            </div>
+                        </div>
+                        <div class="weui-cell">
+                            <div class="weui-cell__hd"><label  class="weui-label">商品描述</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input required" name="fileDesc" type="text" placeholder="请输入商品描述">
+                                <input id="userId" class="weui-input required" name="userId" type="hidden" value="">
+
+                            </div>
+                        </div>
+                        <div class="weui-cell weui-cell_select">
+                            <div class="weui-cell__bd">
+                                <select class="weui-select" name="category">
+                                    <option selected="" value="1">数码</option>
+                                    <option value="2">图书</option>
+                                    <option value="3">服装</option>
+                                    <option value="4">化妆品</option>
+                                    <option value="5">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--<div class="weui-uploader__hd">-->
+                            <!--<p class="weui-uploader__title">商品图片上传</p>-->
+                        <!--</div>-->
+                        <div class="weui-uploader__bd">
+                            <div class="weui-uploader__input-box">
+                                <input id="uploaderInput" name="file" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                            </div>
+                        </div>
+                        <div class="weui-cells">
+                            <!--登录 -->
+                            <input type="submit" onclick="up()" id="login" class="weui-btn weui-btn_primary"></input>
+                        </div>
+                    </form>
+
             </div>
-            <br>
         </div>
     </div>
 </div>
@@ -47,27 +70,45 @@
 <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
 <script>
+    function  getParams(name, href) {
+        var href = href || window.location.href,
+            value = '';
+
+        if (name) {
+            var reg = new RegExp(name + '=([^&]*)', 'g');
+            href.replace(reg, function($0, $1) {
+                value = decodeURI($1);
+            });
+        } else {
+            value = {};
+            var reg = /\b(\w+)=([^\/&]*)/g;
+            href.replace(reg, function($0, $1, $2) {
+                value[$1] = decodeURI($2);
+            });
+        }
+        return value;
+    };
+
     $(document).ready(function () {
+        var userId=getParams("id");
+        $("#userId").attr("value",userId);
+    });
+
+    function up() {
         var userInfo={};
         $.ajax({
-            url:"/school_war_exploded/admin/info",
+            url:"/school_war_exploded/goods/up",
             type:"POST",
             dataType:"json",
             async: false,
             data:JSON.stringify(userInfo),
             contentType:'application/json;charset=UTF-8',
             success:function (data) {
-                var arr=data.news;
-                alert(data.size);
-                if(data.size == 0){
-                    $("#tab2").text("您还没有发布宝贝哦");
+                if(data.msg==1){
+                    $.toast("等待管理员审核");
                 }
-                alert(arr[0].newsDes);
-                $("#createtime").text(arr[0].createTime);
-                $("#newsdesc").text(arr[0].newsDes);
-
             }
         });
-    });
+    }
 </script>
 </html>

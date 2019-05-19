@@ -33,7 +33,7 @@
       </div>
       <p class="weui-tabbar__label">购物</p>
     </a>
-    <a href="/school_war_exploded/html/coupon.html" class="weui-tabbar__item">
+    <a href="/school_war_exploded/html/tuijian.html" class="weui-tabbar__item">
       <div class="weui-tabbar__icon">
         <img src="/school_war_exploded/images/new.png" alt="">
       </div>
@@ -111,8 +111,9 @@
         success:function (data) {
           if(data.msg == 1){
             var arr =data.news;
+            var nickname=data.nick;
             for(var i=0;i<data.news.length;i++){
-              $("#aaa").append(html1+arr[i].userId+html2+arr[i].createTime+html3+arr[i].newsDes+html5);
+              $("#aaa").append(html1+nickname[i]+html2+arr[i].createTime+html3+arr[i].newsDes+html5);
             }
           }
         }

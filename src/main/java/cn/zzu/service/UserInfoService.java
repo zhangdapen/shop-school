@@ -6,6 +6,7 @@ import cn.zzu.entity.UserAddr;
 import cn.zzu.entity.UserInfo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserInfoService {
 
@@ -82,4 +83,32 @@ public interface UserInfoService {
      * @return
      */
     UserInfo getUserinfoByUserId(Integer userId);
+
+
+    /**
+     * 获取所有用户信息
+     * @return
+     */
+    Map<String,Object> getUserInfo();
+
+    /**
+     * 指定userId成为管理员
+     * @param userId
+     * @return
+     */
+    Map<String,Object> passUserById(Integer userId);
+
+    /**
+     * 申请成为管理员
+     * @param userId
+     * @return
+     */
+    Map<String,Object> toRoot(Integer userId);
+
+
+    /**
+     * 获取申请管理员信息
+     * @return
+     */
+    Map<String,Object> getNoPass();
 }

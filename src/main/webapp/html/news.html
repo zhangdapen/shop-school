@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <script src="../static/js/lib/flexible.js"></script>
+  <link rel="stylesheet" href="../static/css/swiper.min.css">
+  <link rel="stylesheet" href="../static/css/weui.min.css">
+  <link rel="stylesheet" href="../static/css/jquery-weui.min.css">
+  <link rel="stylesheet" href="../static/css/icon.css">
+  <link rel="stylesheet" href="../static/css/base.css">
+  <link rel="stylesheet" href="../static/css/topic.css">
+  <title>news</title>
+</head>
+<body>
+<div class="header">
+  <!--<a href="/" class="block btn-back">-->
+  <!--<i class="icon-back"></i>-->
+  <!--</a>-->
+  新闻推荐
+</div>
+
+<div id="movie" class="main-page">
+</div>
+<script src="../static/js/lib/jquery-2.1.4.js"></script>
+<script src="../static/js/lib/jquery-weui.min.js"></script>
+<script src="../static/js/lib/swiper.min.js"></script>
+<script>
+
+  $(function() {
+    var artiList;
+    $.ajax({
+      url: "https://3g.163.com/touch/reconstruct/article/list/BA10TA81wangning/0-10.html",
+      dataType: 'jsonp',
+      processData: false,
+      type: 'get',
+      success: function (res) {
+      }
+    });
+  });
+</script>
+</body>
+</html>

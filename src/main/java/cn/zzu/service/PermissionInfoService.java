@@ -12,4 +12,6 @@ public interface PermissionInfoService {
      * @return
      */
     int toRootUser(PermissionInfo permissionInfo);
+
+
 }

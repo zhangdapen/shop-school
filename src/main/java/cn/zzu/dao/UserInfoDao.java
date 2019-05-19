@@ -76,4 +76,28 @@ public interface UserInfoDao {
      * @return
      */
     UserInfo getUserInfoByUserId(Integer userId);
+
+    /**
+     * 获取所有用户信息
+     * @return
+     */
+    List<UserInfo> getUserInfo();
+
+    /**
+     * 指定userid成为管理员
+     * @param userId
+     * @return
+     */
+    int passUserById(Integer userId);
+
+    /**
+     * 申请成为管理员
+     */
+    int toRoot(Integer userId);
+
+    /**
+     * 获取申请成为管理员用户信息
+     * @return
+     */
+    List<UserInfo> getNoPass();
 }

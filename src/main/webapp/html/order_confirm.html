@@ -151,7 +151,8 @@
 
 
 
-      var hml='<div class="product-item clearfix"><div class="imgbox"><img src="../static/img/demo/goods1.png" alt="">'
+      var hml='<div class="product-item clearfix"><div class="imgbox"><img src="';
+      var ht= '" alt="">'
               +'</div><div class="info-row pull-left"><p id="des1" class="name fbold lineclamp2 f24">';
       var hml1='</p></div><div class="num-row pull-right"><p id="pric1" class="price fbolder f28 color3">';
 
@@ -171,7 +172,7 @@
           if(data.msg == 1){
             var arr=data.goodsInfos
             for(var i=0;i<arr.length;i++){
-              $("#aaaa").append(hml+arr[i].goodsDes+hml1+"¥"+arr[i].goodsPrice);
+              $("#aaaa").append(hml+"http://www.schoolsmile.xyz:8080/image/goods/"+arr[i].goodsImage+ht+arr[i].goodsDes+hml1+"¥"+arr[i].goodsPrice);
               $("#count").text(data.orderInfo.orderAmount);
             }
           }

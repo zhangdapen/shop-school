@@ -21,11 +21,13 @@ public class GoodsInfo {
 
     private Integer goodsState;
 
+    private Integer goodsType;
+
     private Date createTime;
 
     private Date updateTime;
 
-    public GoodsInfo(Integer goodsId, String goodsName, String goodsDes, String goodsImage, Integer userId, Double goodsPrice, Integer categoryId, Integer schoolId, Integer goodsState, Date createTime, Date updateTime) {
+    public GoodsInfo(Integer goodsId, String goodsName, String goodsDes, String goodsImage, Integer userId, Double goodsPrice, Integer categoryId, Integer schoolId, Integer goodsState, Integer goodsType, Date createTime, Date updateTime) {
         this.goodsId = goodsId;
         this.goodsName = goodsName;
         this.goodsDes = goodsDes;
@@ -35,12 +37,20 @@ public class GoodsInfo {
         this.categoryId = categoryId;
         this.schoolId = schoolId;
         this.goodsState = goodsState;
+        this.goodsType = goodsType;
         this.createTime = createTime;
         this.updateTime = updateTime;
     }
 
     public GoodsInfo() {
-        super();
+    }
+
+    public Integer getGoodsType() {
+        return goodsType;
+    }
+
+    public void setGoodsType(Integer goodsType) {
+        this.goodsType = goodsType;
     }
 
     public Integer getGoodsId() {

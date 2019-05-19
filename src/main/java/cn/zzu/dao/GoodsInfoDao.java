@@ -60,4 +60,17 @@ public interface GoodsInfoDao {
      * @return
      */
     GoodsInfo getGoodsInfoByGoodsId(Integer goodsId);
+
+    /**
+     * 获取未审核商品
+     * @return
+     */
+    List<GoodsInfo> getGoodsNoPass();
+
+    /**
+     * 指定商品提供审核
+     * @param goodsId
+     * @return
+     */
+    int passGoodsById(Integer goodsId);
 }

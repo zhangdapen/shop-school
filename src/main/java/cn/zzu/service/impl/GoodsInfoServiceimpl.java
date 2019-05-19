@@ -112,4 +112,42 @@ public class GoodsInfoServiceimpl implements GoodsInfoService {
         result.put("msg",1);
         return result;
     }
+
+
+    /**
+     * 获取未审核商品
+     * @return
+     */
+    @Override
+    public Map<String, Object> getGoodsNoPass() {
+        List<GoodsInfo> goodsNoPass = goodsInfoDao.getGoodsNoPass();
+        Map<String,Object> result = new HashMap<>();
+
+        if(goodsNoPass.size()==0){
+            result.put("msg",0);
+            return result;
+        }
+        result.put("msg",1);
+        result.put("goods",goodsNoPass);
+        result.put("size",goodsNoPass.size());
+        return result;
+    }
+
+
+    /**
+     * 指定商品通过审核
+     * @param goodsId
+     * @return
+     */
+    @Override
+    public Map<String, Object> passGoodsById(Integer goodsId) {
+        int i = goodsInfoDao.passGoodsById(goodsId);
+        Map<String,Object> result = new HashMap<>();
+        if(i <= 0){
+            result.put("msg",0);
+            return result;
+        }
+        result.put("msg",i);
+        return result;
+    }
 }

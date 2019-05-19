@@ -51,4 +51,20 @@ public interface GoodsInfoService {
      * @return
      */
     Map<String,Object> getGoodsInfoByGoodsId(Integer goodsId);
+
+    /**
+     * 获取未审核的商品
+     *
+     * @return
+     */
+    Map<String,Object> getGoodsNoPass();
+
+    /**
+     * 指定goodsId通过审核
+     * @param goodsId
+     * @return
+     */
+    Map<String,Object> passGoodsById(Integer goodsId);
+
+
 }

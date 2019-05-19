@@ -17,9 +17,9 @@
     </div>
     <div class="weui-panel weui-panel_access">
         <div class="weui-panel__bd">
-            <a  class="weui-media-box weui-media-box_appmsg" href="/school_war_exploded/manager/info">
+            <a  id="skip" class="weui-media-box weui-media-box_appmsg" href="/school_war_exploded/manager/info">
                 <div class="weui-media-box__hd">
-                    <img class="weui-media-box__thumb" src="/school_war_exploded/images/avatar2.jpg" alt="">
+                    <img  id="tou" class="weui-media-box__thumb" src="/school_war_exploded/images/avatar2.jpg" alt="">
                 </div>
                 <div class="weui-media-box__bd">
                     <p id="nickname" class="weui-media-box__title"></p>
@@ -83,16 +83,27 @@
     </div>
     <div class="weui-panel__hd"></div>
     <div>
-        <a class="weui-cell weui-cell_access" href="/school_war_exploded/manager/release">
+        <a id="zzz" class="weui-cell weui-cell_access" href="/school_war_exploded/manager/release">
             <div class="weui-cell__hd">
                 <img src="/school_war_exploded/images/pub.png" alt="" style="width:20px;margin-right:5px;display:block">
             </div>
             <div class="weui-cell__bd weui-cell_primary">
-                <p>我的发布</p>
+                <p>发布商品</p>
             </div>
             <span class="weui-cell__ft"></span>
         </a>
     </div>
+<div>
+    <a class="weui-cell weui-cell_access" href="/school_war_exploded/manager/release">
+        <div class="weui-cell__hd">
+            <img src="/school_war_exploded/images/pub.png" alt="" style="width:20px;margin-right:5px;display:block">
+        </div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <p>发布帖子</p>
+        </div>
+        <span class="weui-cell__ft"></span>
+    </a>
+</div>
 </div>
 <div class="weui-tabbar" style="position: fixed">
     <a href="/school_war_exploded/html/index.html" class="weui-tabbar__item weui-bar__item--on">
@@ -102,7 +113,7 @@
         </div>
         <p class="weui-tabbar__label">购物</p>
     </a>
-    <a href="/school_war_exploded/html/coupon.html" class="weui-tabbar__item">
+    <a href="/school_war_exploded/html/tuijian.html" class="weui-tabbar__item">
         <div class="weui-tabbar__icon">
             <img src="/school_war_exploded/images/new.png" alt="">
         </div>
@@ -126,6 +137,7 @@
 <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
 <script>
     $(document).ready(function() {
+        var idd;
         var userId="";
         var userInfo={"userId":userId};
         $.ajax({
@@ -138,10 +150,12 @@
             success:function (data) {
                 $("#nickname").text("昵称:"+data.user.userNickname);
                 $("#userId").text("微信号:"+data.user.userId);
+                idd=data.user.userId;
             }
         });
         var id=$("#userId").html();
         var user={"userId":id};
+        $("#zzz").attr("href","/school_war_exploded/manager/release?id="+idd);
         $.ajax({
             url:"/school_war_exploded/admin/getUserInfo",
             type:"POST",
@@ -153,7 +167,54 @@
                 $("#nickname").text("昵称:"+data.user.userNickname);
             }
         });
+        var u="/school_war_exploded/manager/info?id="+idd;
+        $("#skip").attr("href",u);
+    });
+    function  getParams(name, href) {
+        var href = href || window.location.href,
+            value = '';
+
+        if (name) {
+            var reg = new RegExp(name + '=([^&]*)', 'g');
+            href.replace(reg, function($0, $1) {
+                value = decodeURI($1);
+            });
+        } else {
+            value = {};
+            var reg = /\b(\w+)=([^\/&]*)/g;
+            href.replace(reg, function($0, $1, $2) {
+                value[$1] = decodeURI($2);
+            });
+        }
+        return value;
+    };
+    $(document).ready(function () {
+        var user={};
+        $.ajax({
+            url:"/school_war_exploded/call/getSession",
+            type:"POST",
+            dataType:"json",
+            async: false,
+            data:JSON.stringify(user),
+            contentType:'application/json;charset=UTF-8',
+            success:function (data) {
+                var nickname=data.nickname;
+                var city=data.city;
+                var image=data.headimgurl;
+                $("#nickname").text("昵称:"+nickname);
+                $("#tou").attr("src",image);
+                $("#userId").text("地区:"+city);
+                var u="/school_war_exploded/manager/info?image="+image;
+                $("#skip").attr("href",u);
+            }
+        });
     });
 
+    // var nickname=getParams("nickname");
+    // var image=getParams("image");
+    // var city=getParams("city");
+    // $("#nickname").text("昵称:"+nickname);
+    // $("#tou").attr("src",image);
+    // $("#userId").text("地区:"+city);
 </script>
 </html>
